@@ -27,7 +27,7 @@ internal object SpeechHttp {
 
     suspend fun json(request: Request): JSONObject = read(request) { response ->
         val source = response.body.source()
-        if (source.request(MAX_JSON_BYTES + 1)) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "语音服务响应过大")
+        if (source.request(MAX_JSON_BYTES + 1)) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "Përgjigjja e shërbimit zanor është tepër e madhe")
         JSONObject(source.readUtf8())
     }
 
@@ -58,9 +58,9 @@ internal object SpeechHttp {
     fun checkStatus(status: Int) {
         if (status in 200..299) return
         throw when (status) {
-            401, 403 -> SpeechFailure(SpeechErrorCode.AUTHENTICATION, "语音服务认证失败，请检查凭据和服务权限")
-            429 -> SpeechFailure(SpeechErrorCode.RATE_LIMITED, "语音服务请求过于频繁，请稍后重试")
-            else -> SpeechFailure(SpeechErrorCode.SERVER, "语音服务请求失败（HTTP $status）")
+            401, 403 -> SpeechFailure(SpeechErrorCode.AUTHENTICATION, "Autentikimi i shërbimit zanor dështoi. Kontrollo kredencialet dhe lejet")
+            429 -> SpeechFailure(SpeechErrorCode.RATE_LIMITED, "Shumë kërkesa zanore. Provo më vonë")
+            else -> SpeechFailure(SpeechErrorCode.SERVER, "Kërkesa zanore dështoi (HTTP $status)")
         }
     }
 
