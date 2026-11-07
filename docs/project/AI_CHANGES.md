@@ -27,3 +27,8 @@
 - U hoqën 27 etiketa kineze hardcoded nga `CharacterEditorScreen.kt`, duke përfshirë formularin, dialogët dhe përshëndetjet.
 - U shtuan burime `stringResource` për EN, SQ, zh-Hans dhe zh-Hant; përshëndetjet me numër përdorin `%1$d`.
 - U plotësuan etiketat teknike `Skills` dhe `API Key` në dy variantet kineze për të ruajtur testet dhe përputhjen e resource-ve.
+
+## 2026-11-07 — Hollësitë e personazhit
+- U lokalizuan etiketat, paralajmërimet dhe dialogu i fshirjes në `CharacterDetailScreen`.
+- U përdor `Context.getString` në callback për titullin e përshëndetjes, sepse callback nuk është `@Composable`.
+- Emri rezervë i skedarit të eksportuar merret nga burimi lokal; nuk ndryshohet formati i karakterit.

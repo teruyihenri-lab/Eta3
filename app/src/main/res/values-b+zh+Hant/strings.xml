@@ -1418,4 +1418,21 @@
   <string name="character_processing">正在處理…</string>
   <string name="route_skills">Skills</string>
   <string name="speech_api_key">API Key</string>
+  <string name="character_detail_loading">正在讀取角色…</string>
+  <string name="character_detail_load_failed">無法讀取角色，請返回後重試</string>
+  <string name="character_user_name">使用者</string>
+  <string name="character_use_persona">使用我的人設</string>
+  <string name="character_no_nickname">尚未設定稱呼</string>
+  <string name="character_edit_persona">編輯我的人設</string>
+  <string name="character_management">管理</string>
+  <string name="character_story_memory_summary">此角色各次對話共用的故事與關係記錄</string>
+  <string name="character_duplicate">複製角色</string>
+  <string name="character_export_png">匯出 PNG 角色卡</string>
+  <string name="character_export_json">匯出 JSON 角色卡</string>
+  <string name="character_compatibility_title">相容性說明</string>
+  <string name="character_compatibility_count">%1$d 項內容按相容範圍處理</string>
+  <string name="character_delete">刪除角色</string>
+  <string name="character_delete_summary">「%1$s」將從角色庫移除，角色圖片與劇情記憶也會刪除；已有對話保留。此操作無法復原。</string>
+  <string name="character_confirm_delete">刪除</string>
+  <string name="character_export_default_name">角色</string>
 </resources>

@@ -12,3 +12,5 @@
 7. Vazhdo heqjen e vargjeve hardcoded kineze në ekranet `CharacterEditorScreen`, `CharacterDetailScreen`, `CharacterHero`, `CharacterWorldbookEditor`, `AgentMemoryScreen` dhe `AgentUserPromptScreen`.
 
 8. Auditimi i ardhshëm: `CharacterDetailScreen.kt`, `CharacterHero.kt`, `CharacterWorldbookEditor.kt` dhe ekranet e kujtesës.
+
+9. Lokalizo `CharacterHero`, `CharacterWorldbookEditor`, `AgentMemoryScreen` dhe tekstet e tjera hardcoded.

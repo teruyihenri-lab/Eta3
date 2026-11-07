@@ -1464,4 +1464,21 @@
   <string name="character_version">Versioni i personazhit</string>
   <string name="character_scripts_warning">Skriptet dhe zgjerimet e palëve të treta në kartën e personazhit nuk ekzekutohen. Të dhënat e tyre ruhen në kartën e eksportuar.</string>
   <string name="character_processing">Po përpunohet…</string>
+  <string name="character_detail_loading">Po ngarkohet personazhi…</string>
+  <string name="character_detail_load_failed">Personazhi nuk u ngarkua. Kthehu dhe provo përsëri.</string>
+  <string name="character_user_name">Përdoruesi</string>
+  <string name="character_use_persona">Përdor identitetin tim</string>
+  <string name="character_no_nickname">Nuk është caktuar emër</string>
+  <string name="character_edit_persona">Ndrysho identitetin tim</string>
+  <string name="character_management">Menaxhimi</string>
+  <string name="character_story_memory_summary">Shënime historie dhe marrëdhëniesh të përbashkëta për bisedat e këtij personazhi</string>
+  <string name="character_duplicate">Dupliko personazhin</string>
+  <string name="character_export_png">Eksporto kartën PNG të personazhit</string>
+  <string name="character_export_json">Eksporto kartën JSON të personazhit</string>
+  <string name="character_compatibility_title">Shënime për përputhshmërinë</string>
+  <string name="character_compatibility_count">%1$d elemente trajtohen sipas kufijve të përputhshmërisë</string>
+  <string name="character_delete">Fshi personazhin</string>
+  <string name="character_delete_summary">«%1$s» do të hiqet nga biblioteka e personazheve, bashkë me imazhin dhe kujtesën e historisë. Bisedat ekzistuese ruhen. Veprimi nuk mund të zhbëhet.</string>
+  <string name="character_confirm_delete">Fshi</string>
+  <string name="character_export_default_name">Personazh</string>
 </resources>

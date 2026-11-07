@@ -1466,4 +1466,21 @@
   <string name="character_version">Character version</string>
   <string name="character_scripts_warning">Third-party scripts and extensions in the character card will not run. Their data stays in the exported card.</string>
   <string name="character_processing">Processing…</string>
+  <string name="character_detail_loading">Loading character…</string>
+  <string name="character_detail_load_failed">Could not load the character. Go back and try again.</string>
+  <string name="character_user_name">User</string>
+  <string name="character_use_persona">Use my persona</string>
+  <string name="character_no_nickname">No name set</string>
+  <string name="character_edit_persona">Edit my persona</string>
+  <string name="character_management">Manage</string>
+  <string name="character_story_memory_summary">Story and relationship notes shared by this character\'s conversations</string>
+  <string name="character_duplicate">Duplicate character</string>
+  <string name="character_export_png">Export PNG character card</string>
+  <string name="character_export_json">Export JSON character card</string>
+  <string name="character_compatibility_title">Compatibility notes</string>
+  <string name="character_compatibility_count">%1$d items handled within compatibility limits</string>
+  <string name="character_delete">Delete character</string>
+  <string name="character_delete_summary">“%1$s” will be removed from the character library, including its image and story memory. Existing conversations remain. This cannot be undone.</string>
+  <string name="character_confirm_delete">Delete</string>
+  <string name="character_export_default_name">Character</string>
 </resources>
