@@ -61,7 +61,7 @@ internal class SpeechInputController(
     fun start(settings: SpeechSettings? = null, credentials: SpeechCredentials? = null, holdToTalk: Boolean = false) {
         cancel()
         val session = generation
-        mutableState.value = SpeechInputState(phase = EtaSpeechPhase.STARTING, progress = "正在连接")
+        mutableState.value = SpeechInputState(phase = EtaSpeechPhase.STARTING, progress = context.getString(R.string.speech_progress_connecting))
         job = scope.launch(Dispatchers.Main.immediate) {
             try {
                 lease = SpeechAudioLease(context) { cancel() }.also { it.acquire(playback = false) }
@@ -92,13 +92,13 @@ internal class SpeechInputController(
                                 recording = launch {
                                     try {
                                         audio.record(
-                                            onReady = { update { it.copy(phase = EtaSpeechPhase.LISTENING, progress = "正在聆听，点击完成结束") } },
+                                            onReady = { update { it.copy(phase = EtaSpeechPhase.LISTENING, progress = context.getString(R.string.speech_progress_listening_finish)) } },
                                             onLevel = { level -> update { it.copy(level = level) } },
                                         )
                                     } finally {
                                         if (generation == session) releaseCapture()
                                     }
-                                    update { it.copy(phase = EtaSpeechPhase.RECOGNIZING, level = 0f, progress = "正在识别") }
+                                    update { it.copy(phase = EtaSpeechPhase.RECOGNIZING, level = 0f, progress = context.getString(R.string.speech_progress_recognizing)) }
                                 }
                             }
                             Unit
@@ -120,7 +120,7 @@ internal class SpeechInputController(
                             recording?.cancel()
                         }
                     }
-                    if (text.isBlank()) throw SpeechFailure(SpeechErrorCode.NO_SPEECH, "没有识别到语音，请重试")
+                    if (text.isBlank()) throw SpeechFailure(SpeechErrorCode.NO_SPEECH, context.getString(R.string.speech_progress_nothing_heard))
                     val final = refined(session, text)
                     if (generation == session) {
                         cancel()
@@ -161,7 +161,7 @@ internal class SpeechInputController(
     private suspend fun refined(session: Long, text: String): String {
         if (!refineTranscript || generation != session) return text
         mutableState.value = mutableState.value.copy(
-            phase = EtaSpeechPhase.RECOGNIZING, preview = text, progress = "正在校对", level = 0f,
+            phase = EtaSpeechPhase.RECOGNIZING, preview = text, progress = context.getString(R.string.speech_progress_refining), level = 0f,
         )
         return try {
             refiner.refine(text)
@@ -178,8 +178,8 @@ internal class SpeechInputController(
             if (generation == session) mutableState.value = transform(mutableState.value)
         }
         system = EtaSpeechInput(context,
-            onListening = { update { it.copy(phase = EtaSpeechPhase.LISTENING, progress = "正在聆听") } },
-            onRecognizing = { update { it.copy(phase = EtaSpeechPhase.RECOGNIZING, progress = "正在识别") } },
+            onListening = { update { it.copy(phase = EtaSpeechPhase.LISTENING, progress = context.getString(R.string.speech_progress_listening)) } },
+            onRecognizing = { update { it.copy(phase = EtaSpeechPhase.RECOGNIZING, progress = context.getString(R.string.speech_progress_recognizing)) } },
             onLevel = { level -> update { it.copy(level = level) } },
             onPartial = { text -> update { it.copy(preview = text) } },
             onResult = { text ->
@@ -188,7 +188,7 @@ internal class SpeechInputController(
                     else {
                         pendingSystemResult = text
                         lease?.close(); lease = null
-                        update { it.copy(phase = EtaSpeechPhase.LISTENING, preview = text, progress = "识别完成，点击完成插入", level = 0f) }
+                        update { it.copy(phase = EtaSpeechPhase.LISTENING, preview = text, progress = context.getString(R.string.speech_progress_result_ready), level = 0f) }
                     }
                 }
             },
@@ -217,7 +217,7 @@ internal class SpeechInputController(
         if (mutableState.value.phase == EtaSpeechPhase.STARTING) { cancel(); return }
         recorder?.finish()
         system?.finish()
-        mutableState.value = mutableState.value.copy(phase = EtaSpeechPhase.RECOGNIZING, progress = "正在识别", level = 0f)
+        mutableState.value = mutableState.value.copy(phase = EtaSpeechPhase.RECOGNIZING, progress = context.getString(R.string.speech_progress_recognizing), level = 0f)
     }
 
     fun downloadModel() { system?.downloadModel() }

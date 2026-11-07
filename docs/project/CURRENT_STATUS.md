@@ -47,3 +47,7 @@
 - Përveç burimeve origjinale të plota, u lokalizuan tekstet e cilësimeve, sugjerimet zanore dhe njoftimet e shërbimit zanor.
 - Auditimi paraprak i Kotlin raportoi 691 rreshta me literale kineze në UI/zë (përfshirë komente dhe mesazhe teknike), prandaj **aplikacioni nuk është ende krejtësisht shqip**.
 - Auditimi është orientues; duhet rishikuar çdo rast real i dukshëm dhe provuar në telefon.
+
+## Statuset e diktimit zanor
+- Mesazhet e lidhjes, dëgjimit, njohjes, korrigjimit dhe përfundimit në `SpeechInputController.kt` tani lokalizohen sipas gjuhës Android.
+- Mbeten mesazhe kineze të tjera në `agent/voice/` dhe `ui/app/` për t'u audituar.

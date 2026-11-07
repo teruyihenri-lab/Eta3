@@ -1452,4 +1452,11 @@
   <string name="speech_foreground_channel">Zëri i asistentit</string>
   <string name="speech_foreground_hint">Punon vetëm kur dritarja lundruese e asistentit është e dukshme</string>
   <string name="speech_foreground_permission">Sistemi e bllokoi audion për këtë dritare. Kontrollo lejet e mikrofonit dhe cilësimin e asistentit dixhital të parazgjedhur.</string>
+  <string name="speech_progress_connecting">Po lidhet…</string>
+  <string name="speech_progress_listening_finish">Po dëgjoj… Prek Përfundo kur të mbarosh</string>
+  <string name="speech_progress_recognizing">Po njihet e folura…</string>
+  <string name="speech_progress_nothing_heard">Nuk u njoh asnjë fjalë. Provo përsëri.</string>
+  <string name="speech_progress_refining">Po korrigjohet transkriptimi…</string>
+  <string name="speech_progress_listening">Po dëgjoj…</string>
+  <string name="speech_progress_result_ready">Njohja përfundoi. Prek Përfundo për të futur tekstin.</string>
 </resources>

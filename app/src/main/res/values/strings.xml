@@ -1456,4 +1456,11 @@
   <string name="speech_foreground_channel">Assistant voice</string>
   <string name="speech_foreground_hint">Runs only when the assistant overlay is visible</string>
   <string name="speech_foreground_permission">The system blocked audio access for this overlay. Check microphone permissions and the default digital assistant setting.</string>
+  <string name="speech_progress_connecting">Connecting…</string>
+  <string name="speech_progress_listening_finish">Listening… Tap Done to finish</string>
+  <string name="speech_progress_recognizing">Recognizing speech…</string>
+  <string name="speech_progress_nothing_heard">No speech recognized. Try again.</string>
+  <string name="speech_progress_refining">Correcting transcript…</string>
+  <string name="speech_progress_listening">Listening…</string>
+  <string name="speech_progress_result_ready">Recognition complete. Tap Done to insert text.</string>
 </resources>

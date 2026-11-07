@@ -39,3 +39,7 @@
 - Prioritet: `SpeechInputController.kt`, `StreamingSpeechSynthesis.kt`, `CharacterLibraryStore.kt`, `AgentAppState.kt` dhe mesazhet e shërbimeve zanore.
 - Ndaj komentet dhe literalet e protokolleve nga tekstet që sheh përdoruesi.
 - Konfirmo build/testet në PR #3 dhe korrigjo gabimet e gjetura.
+
+## Vazhdimi i zërit
+- Audito `SpeechProtocol.kt`, `SpeechHttp.kt`, `SpeechRecorder.kt`, `StreamingSpeechSynthesis.kt` dhe gabimet e tjera që shfaqen te përdoruesi.
+- Verifiko testet e build-it dhe përkthimin e njoftimeve të zërit në telefon.

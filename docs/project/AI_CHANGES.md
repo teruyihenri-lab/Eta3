@@ -40,3 +40,7 @@
 - Lokalizuar tri sugjerime të asistentit zanor, titujt e njoftimeve zanore, kanali, veprimi Ndalo dhe mesazhi i lejeve.
 - Shtuar 13 burime të reja për anglishten dhe shqipen, pa ndryshuar IDs ose protokollet.
 - Puna me tekstet hardcoded vazhdon; kontrollet Android në CI duhet të përfundojnë.
+
+## 2026-11-07 — Statuset e njohjes zanore
+- U zhvendosën shtatë mesazhe kineze të progresit dhe gabimit nga `SpeechInputController.kt` në burimet anglisht/shqip; ruhet logjika e kapjes dhe njohjes së zërit.
+- Nuk ndryshuan protokollet ASR, token-ët ose rruga e audios.
