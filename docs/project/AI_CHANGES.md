@@ -1,10 +1,10 @@
 # Ndryshimet e kryera nga AI
 
-> Eta3 · dokumentacioni në shqip · krijuar më 2026-11-07 · dega `localization/albanian-sq`
+> Eta3 · dokumentacioni në shqip · dega `localization/albanian-sq`
 
-## 2026-11-07 — Përditësimi i konfigurimit të gjuhës dhe testimit
-**Ndryshim:** shtova mbështetjen e locale `sq` në `app/build.gradle.kts` dhe `app/src/main/res/xml/locales_config.xml`, dhe krijova një bazë të parë për `app/src/main/res/values-sq/strings.xml`.
+## 2026-11-07 — Lokalizimi shqip dhe rikthimi i konfigurimit të build-it
+**Ndryshime:** u rikthye konfigurimi i plotë Android në `app/build.gradle.kts` dhe u shtua vetëm filtri `sq` krahas gjuhëve ekzistuese. U shtuan resurse shqipe për UI-në e bisedave, terminalit, statusit të ekzekutimit, aftësive Root, mjedisit Linux dhe detajeve të listave.
 
-**Kufiri:** ky është hap fillestar i lokalizimit; jo të gjitha string-et e UI-së janë përkthyer ende. Testet e përmjegjshme u rregulluan për të reflektuar tekstin e ri shqiptar, por nuk u ekzekutuan build/test lokalë në këtë sesion.
+**Kufijtë:** ky është progres i pjesshëm; `values-sq/strings.xml` ende nuk përmban të gjitha çelësat e burimit anglisht dhe tekstet hardcoded nuk janë audituar plotësisht. Nuk u ndryshua sjellja e Runtime-it.
 
-**Verifikimi:** kontrolli i skedarëve dhe rregullimi i përputhshmërisë së locale-ve; nuk ka prova të ekzekutimit të Gradle në këtë mjedis.
+**Verifikimi:** ndryshimet u shtynë në këtë degë. Build-i dhe testet Gradle nuk janë ekzekutuar nga mjedisi i këtij agjenti; nuk pretendohet se build-i kalon.
