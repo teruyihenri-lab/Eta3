@@ -323,7 +323,7 @@ private fun modeSummary(state: AgentUserPromptUiState): String = when {
 private fun fileSummary(state: AgentUserPromptUiState): String {
     val name = state.sourceFileName
     if (name.isNullOrBlank()) {
-        return "未检测到：prompts/ 下没有非空的 .md"
+        return "Nuk u gjet tekst: nuk ka skedar .md jo bosh te prompts/"
     }
     val size = "${formatNumber(state.charCount)}  karaktere"
     return if (state.truncated) {
