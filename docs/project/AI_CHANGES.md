@@ -107,3 +107,9 @@
 - Përkthyer 23 përshkrime të AgentBrowserToolCatalog dhe 8 tekste të AgentWebToolCatalog në shqip; ruhen emrat dhe skemat JSON të komandave.
 - Siguria e interpretimit ruhet: tekstet e faqeve web mbeten të dhëna jo udhëzime, dhe veprimet e përgjimit nuk janë hequr.
 - Nevojitet sërish CI, sepse ndryshimet në përshkrimet e mjeteve mund të prekin testet me pritshmëri teksti.
+
+## 2026-11-07 — Përkthimi i katalogëve të kontrollit të telefonit
+- Përkthyer 14 përshkrime të kontekstit dhe ekranit, 20 përshkrime gjestesh dhe 20 përshkrime të hyrjes së tekstit/sistemit. Përsëritjet e njëjta u zëvendësuan në mënyrë konsistente.
+- Ruajtur emrat e mjeteve, strukturat JSON, action, index, observation_id, koordinatat dhe vlerat numerike.
+- Përditësuar kontrollet tekstuale në AgentToolCatalogTest që të verifikojnë udhëzimet shqip për të njëjtin vëzhgim, ruajtjen e pemës UI dhe drejtimet scroll.
+- Ndërtimi dhe rezultatet e testeve pas këtij ndryshimi ende duhen konfirmuar.

@@ -88,9 +88,9 @@ class AgentToolCatalogTest {
 
             assertEquals("string", properties.getJSONObject("observation_id").getString("type"))
             assertTrue("observation_id must be required for $name", "observation_id" in parameters.requiredNames())
-            assertTrue(function.getString("description").contains("同一次"))
+            assertTrue(function.getString("description").contains("i njëjti vëzhgim"))
             assertTrue(function.getString("description").contains("observe_screen"))
-            assertTrue(function.getString("description").contains("重新观察"))
+            assertTrue(function.getString("description").contains("vëzhgo përsëri"))
         }
     }
 
@@ -107,10 +107,10 @@ class AgentToolCatalogTest {
         assertEquals(60, properties.getJSONObject("max_nodes").getInt("default"))
         assertEquals(1, properties.getJSONObject("max_nodes").getInt("minimum"))
         assertEquals(120, properties.getJSONObject("max_nodes").getInt("maximum"))
-        assertTrue(function.getString("description").contains("默认只返回"))
+        assertTrue(function.getString("description").contains("Si parazgjedhje kthen"))
         assertTrue(function.getString("description").contains("include_screenshot=true"))
-        assertTrue(function.getString("description").contains("保持 include_ui_tree=true"))
-        assertTrue(function.getString("description").contains("禁止把新截图与旧节点混用"))
+        assertTrue(function.getString("description").contains("mbaj include_ui_tree=true"))
+        assertTrue(function.getString("description").contains("mos përziej pamjen e re me nyjet e vjetra"))
     }
 
     @Test
@@ -128,8 +128,8 @@ class AgentToolCatalogTest {
                 .stringValues()
 
             assertEquals(expectedDirections, directions)
-            assertTrue(function.getString("description").contains("down 显示下方内容"))
-            assertTrue(function.getString("description").contains("up 显示上方内容"))
+            assertTrue(function.getString("description").contains("down shfaq përmbajtjen më poshtë"))
+            assertTrue(function.getString("description").contains("up shfaq përmbajtjen më sipër"))
         }
     }
 
