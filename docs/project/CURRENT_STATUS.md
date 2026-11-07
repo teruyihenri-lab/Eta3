@@ -2,10 +2,11 @@
 
 > Eta3 · dokumentacioni në shqip · dega `localization/albanian-sq`
 
-## Gjendja e punës
+## Verifikimi i 2026-11-07
 - Repository: `teruyihenri-lab/Eta3`; dega bazë: `main`.
-- Aplikacion Android në Kotlin / Jetpack Compose; `applicationId` mbetet `io.github.mangi.eta`.
-- Konfigurimi i plotë i Android Gradle është i pranishëm dhe filtri `sq` është shtuar pa hequr konfigurimet ekzistuese.
-- Resurset `values-sq` janë krijuar për një pjesë të ndërfaqes, njoftimeve, terminalit, Linux-it, Root-it dhe mjeteve.
-- Lokalizimi **nuk është i plotë**: mbeten çelësa në burimet bazë, disa resurse dhe tekstet hardcoded.
-- Build/test Gradle dhe verifikim në pajisje: **nuk janë ekzekutuar nga ky mjedis**.
+- Aplikacion Android në Kotlin / Jetpack Compose.
+- `applicationId`: `io.github.mangi.eta`; versioni aktual i lexuar nga `app/build.gradle.kts`: `3.3.1`, `versionCode=2026101401`.
+- Gjuhët e deklaruara: `en`, `sq`, `zh-Hans`, `zh-Hant`.
+- `app/src/main/res/values-sq` përmban pjesë të resurseve të lokalizuara, por një pjesë e madhe e teksteve të dukshme ende mbetet pa verifikim të plotë.
+- `localeFilters` dhe `locale-config` janë të aktivizuara për `sq`.
+- Build, nënshkrim dhe testime APK në pajisje: **nuk janë kryer**.

@@ -3,6 +3,7 @@
 > Eta3 · dega `localization/albanian-sq`
 
 ## Regjistri i verifikimit
-- Përditësimet e resurseve dhe konfigurimit të locale janë ruajtur në GitHub.
-- Gradle unit tests, lint, assemble APK dhe testim në pajisje: **nuk janë ekzekutuar në këtë mjedis**.
-- Nuk ka pretendim që build-i është i suksesshëm. Duhet ekzekutuar `./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug` me JDK 25 dhe Android SDK.
+- `sq` është shtuar si locale e mbështetur në `androidResources` dhe `locale-config`.
+- Pjesa e parë e lokalizimit është aktivizuar, por nuk ka prova të verifikuara për build/tests në Android.
+- Build/testet Gradle: **nuk janë ekzekutuar** në këtë mjedis.
+- Duhet të ekzekutohet `./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug` me JDK 25 dhe Android SDK për verifikim të plotë.

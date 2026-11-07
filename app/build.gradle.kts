@@ -22,10 +22,10 @@ java {
     }
 }
 
-// CI builds may add the commit SHA as SemVer build metadata; local and release builds omit it.
+// CI 对非发版构建传入提交号，按 SemVer 构建元数据追加为 +<sha>，不影响版本先后；本地与发版构建不传
 val buildMetadata = providers.gradleProperty("eta.buildMetadata").orNull?.takeIf { it.isNotBlank() }
 require(buildMetadata == null || buildMetadata.matches(Regex("[0-9A-Za-z.-]+"))) {
-    "eta.buildMetadata may contain only letters, numbers, dots, and hyphens"
+    "eta.buildMetadata 只能包含字母、数字、点和连字符"
 }
 val buildMetadataSuffix = buildMetadata?.let { "+$it" }.orEmpty()
 
@@ -38,7 +38,7 @@ android {
         applicationId = "io.github.mangi.eta"
         minSdk = 33
         targetSdk = 37
-        // versionCode format: yyyyMMdd plus a two-digit daily sequence (starting at 01).
+        // versionCode 规则：yyyyMMdd + 两位当日序号（01 起），发版时随 versionName 一起手动递增。
         versionCode = 2026101401
         versionName = "3.3.1"
     }
@@ -56,7 +56,7 @@ android {
 
     buildTypes {
         debug {
-            // Include the build type in the version name to distinguish debug APKs.
+            // 版本名带构建类型标记，设置页与 APK 文件名据此区分 Debug 包
             versionNameSuffix = "-debug" + buildMetadataSuffix
             isMinifyEnabled = false
             isPseudoLocalesEnabled = true
@@ -96,9 +96,9 @@ android {
             keepDebugSymbols += "**/libeta_opencode2api.so"
         }
         resources {
-            // Preserve Xposed module declarations in release builds.
+            // 合并 Xposed 模块声明，避免 release 裁剪后模块入口失效
             merges += "META-INF/xposed/*"
-            // Exclude only conflicting signature/version metadata.
+            // 仅排除会引发打包冲突的签名/版本元数据，避免误伤 Compose 资源
             excludes += "META-INF/*.kotlin_module"
             excludes += "META-INF/INDEX.LIST"
             excludes += "META-INF/io.netty.versions.properties"
@@ -108,13 +108,13 @@ android {
     lint {
         abortOnError = true
         checkReleaseBuilds = false
-        // The date-based versionCode remains below Android's maximum through 2099.
+        // versionCode 采用日期编码，已发布值只能递增；上限 2100000000 足够覆盖到 2099 年。
         disable += "HighAppVersionCode"
     }
 
     testOptions {
         unitTests.isIncludeAndroidResources = true
-        // Robolectric on newer JDKs needs access to internal APIs; only test JVMs receive these flags.
+        // Robolectric 在高版本 JDK 下需要访问内部 API，参数只作用于测试 JVM。
         unitTests.all {
             it.jvmArgs(
                 "--add-opens=java.base/java.lang=ALL-UNNAMED",
@@ -134,7 +134,7 @@ android {
 
 androidComponents {
     onVariants { variant ->
-        // Keep APK names based on versionName, including the build-type suffix.
+        // 文件名只取 versionName：构建类型标记与 CI 构建元数据都由 versionNameSuffix 带出
         variant.outputs.forEach { output ->
             output.outputFileName.set(output.versionName.map { "Eta-v$it.apk" })
         }
@@ -147,7 +147,8 @@ dependencies {
     implementation(libs.commons.compress)
     implementation(libs.xz)
     compileOnly(libs.libxposed.api)
-    // RemotePreferences bridge for UI writes and Xposed hook reads.
+    // UI 侧 RemotePreferences 写入桥：通过 XposedService 将配置提交到 LSPosed 数据库；
+    // Hook 侧用 XposedInterface.getRemotePreferences 读取当前进程持有的配置缓存。
     implementation(libs.libxposed.service)
     implementation(libs.dexkit)
     implementation(libs.miuix.ui)
@@ -159,22 +160,25 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.activity.compose)
-    // GFM parser; chat rendering is implemented in ui/markdown.
+    // 只使用 GFM 解析器；聊天渲染层由 ui/markdown 自建，按块冻结并接入逐字显现。
     implementation(libs.intellij.markdown)
     implementation(libs.hidden.api.bypass)
 
-    // DataStore for structured provider/model settings and selected IDs.
+    // DataStore：Provider / Model 结构化 JSON 与当前选中 ID 等键值
     implementation(libs.datastore.preferences)
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
 
-    // OkHttp supports SSE.
+    // OkHttp：替代 HttpURLConnection，支持 SSE
     implementation(libs.okhttp)
     implementation(libs.okhttp.sse)
 
+    // Kotlinx Serialization：Provider 设置与运行时配置 JSON
     implementation(libs.kotlinx.serialization.json)
+
+    // Coroutines：显式引入，避免依赖传递版本不确定
     implementation(libs.kotlinx.coroutines.android)
 
     testImplementation(libs.junit)
