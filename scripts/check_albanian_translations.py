@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 
 BASE = Path("app/src/main/res/values/strings.xml")
 SQ = Path("app/src/main/res/values-sq/strings.xml")
-FORMAT = re.compile(r"%(?:\\d+\\$)?[-#+ 0,(]*\\d*(?:\\.\\d+)?[a-zA-Z%]")
+FORMAT = re.compile(r"%(?:\d+\$)?[-#+ 0,(]*\d*(?:\.\d+)?[a-zA-Z%]")
 
 def entries(filename):
     root = ET.parse(filename).getroot()
@@ -24,7 +24,7 @@ def entries(filename):
     return strings, plurals
 
 def placeholders(s):
-    return sorted(FORM.findall(s))
+    return sorted(FORMAT.findall(s))
 
 def main():
     base, base_plural = entries(BASE)
