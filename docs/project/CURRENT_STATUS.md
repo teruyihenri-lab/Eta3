@@ -15,3 +15,91 @@
 - Dokumentacioni: përgatitur në këtë degë; duhet rishikuar dhe bashkuar në `main`.
 - Përkthimi i plotë në shqip: **i pambaruara**, nuk është kontrolluar ekran më ekran.
 - Build, nënshkrim dhe test APK në pajisje: **nuk janë kryer**.
+
+## 2026-11-07 — Statusi i ri i lokalizimit
+- Dega e punës: `feature/albanian-localization`.
+- Gjuhët e deklaruara në këtë degë: `en`, `sq`, `zh-Hans`, `zh-Hant`.
+- Burime `string`: **297 / 1331** të përkthyeshme në shqip (22.3%).
+- Burime `plurals`: **20 / 20** grupe të përkthyera.
+- Android do të përdorë gjuhën bazë për tekstet shqip që mungojnë; prandaj ndërfaqja **nuk është ende tërësisht shqip**.
+- Testet dhe build-i: jo të ekzekutuara; APK i gatshëm: jo.
+- Dokumentacioni me 79 skedarë është tashmë në `main`.
+
+## Gjendja pas zgjerimit të përkthimeve
+- Në degën `feature/albanian-localization`: **485/1331** vargje të përkthyeshme (36.4%) dhe **20/20** grupe shumësash.
+- Mbeten **846 vargje `string`** dhe auditimi i teksteve të shkruara në Kotlin.
+- Ky ndryshim nuk është përkthim i përfunduar dhe nuk ka APK të verifikuar.
+
+## Statusi më i ri — 2026-11-07
+- Dega: `feature/albanian-localization` · Pull Request: **#3**.
+- Burime `string` të përkthyeshme: **1331/1331 (100% e çelësave)**.
+- Grupe shumësash: **20/20 (100%)**.
+- Kjo **nuk është dëshmi** se çdo tekst i dukshëm është shqip: mbetet auditimi i hardcoded Kotlin, përmbajtjeve dinamike dhe testeve.
+- Kontrolli statik i vendmbajtësve në kod u krye; PR CI/build Android duhet të konfirmohet para bashkimit.
+- Nuk ka APK të nënshkruar/testuar në telefon të dorëzuar nga kjo seancë.
+
+## Përmirësim i lokalizimit Kotlin
+- Burimet bazë dhe shqipe përmbajnë tani edhe 27 etiketa OpenCode të strukturuara.
+- Në `ModelProviderDetailScreen.kt` mbeten vetëm komente kineze, jo tekstet UI kineze që u identifikuan në atë skedar.
+- Ende nuk është kryer auditimi i plotë i të gjithë kodit.
+
+## Auditimi i kodeve të palokalizuara — 2026-11-07
+- Përveç burimeve origjinale të plota, u lokalizuan tekstet e cilësimeve, sugjerimet zanore dhe njoftimet e shërbimit zanor.
+- Auditimi paraprak i Kotlin raportoi 691 rreshta me literale kineze në UI/zë (përfshirë komente dhe mesazhe teknike), prandaj **aplikacioni nuk është ende krejtësisht shqip**.
+- Auditimi është orientues; duhet rishikuar çdo rast real i dukshëm dhe provuar në telefon.
+
+## Statuset e diktimit zanor
+- Mesazhet e lidhjes, dëgjimit, njohjes, korrigjimit dhe përfundimit në `SpeechInputController.kt` tani lokalizohen sipas gjuhës Android.
+- Mbeten mesazhe kineze të tjera në `agent/voice/` dhe `ui/app/` për t'u audituar.
+
+## Kontrolli i ndërtimit — 2026-11-07
+- Logu i `:app:testDebugUnitTest` zbuloi një dështim të vërtetë në `AgentToolCatalogTest.kt:65` për një pritshmëri të vjetruar.
+- Testi u përditësua për të verifikuar funksionet reale të shfletuesit. Ky ndryshim nuk është ende provë e suksesit të të gjithë suite-it të testeve.
+- Përkthimi i plotë i Kotlin dhe testimi në telefon mbeten të hapura.
+
+## 2026-11-07 — Gabim XML përqindjeje i korrigjuar në degën e punës
+- `values-sq/strings.xml`: shtuar `formatted="false"` te `appearance_interface_scale_summary` për tekstin `80%–110%`.
+- Kontrolli i përkthimeve tani kap edhe atributet e formatimit që mungojnë.
+- Duhet verifikuar me GitHub Actions nëse `mergeDebugResources`, lint, testet dhe `assembleDebug` kalojnë.
+
+## 2026-11-07 — Riparime nga raporti i GitHub Actions
+- Nga kontrolli i mëparshëm: 150 gabime MissingTranslation, 7 teste të dështuara dhe 1 i anashkaluar; prova e plotë: `PR Check` #42401565088.
+- U publikuan riparimet për burimet XML dhe problemet e identifikuara në testet e modeleve, memories, ikonave dhe memory heap.
+- **Nuk deklarohet sukses** pa dalë GitHub Actions në commit-in e ri.
+- Auditimi dhe korrigjimi i përmbajtjes hardcoded Kotlin mbetet i hapur.
+
+## 2026-11-07 — Riparim i regresionit të modeleve
+- Riparuar në degën `feature/albanian-localization` normalizimi që hiqte `-v3` nga `deepseek-v3-0324`.
+- Testi i plotë Android nuk është konfirmuar ende; ky ndryshim kërkon një ekzekutim të ri të CI.
+
+## 2026-11-07 — Status i lokalizimit të zgjeruar
+- Burimet Android në `values-sq` përputhen plotësisht me `values` sipas CI; shumë mesazhe të hardcoded UI/Zë u përkthyen në këtë degë.
+- Kontrolli i ri tani inspekton të gjitha skedarët Kotlin: numri i literaleve të dyshimta nuk është ende certifikim i numrit të vargjeve të dukshme te përdoruesi.
+- APK Debug do të ngarkohet nga PR Check vetëm pas `BUILD SUCCESSFUL`.
+
+## 2026-11-07 — Gabim kompilimi gjatë lokalizimit
+- Logu i CI: `RootShellDeviceController.kt:329`, `Unresolved reference MAX_INPUT_TEXT_CHARSkaraktere`.
+- Shkaku: pas përkthimit, interpolimi Kotlin `$MAX_INPUT_TEXT_CHARS` u bashkua me `karaktere` dhe u interpretua si identifikues i vetëm.
+- Korrigjimi: përdor `${MAX_INPUT_TEXT_CHARS} karaktere`, pa ndryshuar limitin e hyrjes.
+- Build-i i ri duhet të konfirmojë korrigjimin; nuk është ende përfundim testimi.
+
+## Artefakti Debug nga CI
+- Pas çdo PR Check të suksesshëm, GitHub Actions duhet të publikojë `eta3-debug-apk`. Verifiko lidhjen e artifact-it kur ekzekutimi përfundon.
+- Lokalizimi i Kotlin nuk është 100%: raporti i fundit i auditimit në gjithë kodin identifikoi 2481 rreshta kinezisht dhe 108 anglisht kandidatë, duke përfshirë mesazhe teknike.
+
+## 2026-11-07 — Interpolimet Kotlin në komandat e tekstit
+- CI #42409706310 dështoi me tre referenca të pazgjidhura: `MAX_REPLACE_TEXT_CHARSkaraktere` në rreshtin 351 dhe `MAX_CLIPBOARD_TEXT_CHARSkaraktere` në rreshtat 620/672.
+- U korrigjuan të tri vargjet në `${MAX_...} karaktere`, pa ndryshuar limitet ose sjelljen.
+- Shtuar `scripts/check_kotlin_interpolation.py` te workflow i përkthimeve për të kapur modele të dyshimta përpara kompilimit.
+- Ndërtimi pas korrigjimeve kërkon ende sukses të konfirmuar nga CI.
+
+## Lokalizimi i skemave të mjeteve Web/Browser
+- Përshkrimet e browser_use, web_search dhe fetch_url janë tashmë shqip.
+- Identifikuesit e komandave, emrat e parametrave dhe skemat e JSON mbeten të pandryshuara.
+- Ende ka shumë mesazhe të tjera kineze në komponentët e brendshëm; nuk mund të quhet përkthim 100% i kodit.
+
+## 2026-11-07 — Përkthimi i katalogëve të kontrollit të telefonit
+- Përkthyer 14 përshkrime të kontekstit dhe ekranit, 15 tekste unike të gjesteve dhe 19 tekste të hyrjes së tekstit/sistemit (48 fraza unike gjithsej). Përsëritjet e njëjta u zëvendësuan në mënyrë konsistente.
+- Ruajtur emrat e mjeteve, strukturat JSON, action, index, observation_id, koordinatat dhe vlerat numerike.
+- Përditësuar kontrollet tekstuale në AgentToolCatalogTest që të verifikojnë udhëzimet shqip për të njëjtin vëzhgim, ruajtjen e pemës UI dhe drejtimet scroll.
+- Ndërtimi dhe rezultatet e testeve pas këtij ndryshimi ende duhen konfirmuar.

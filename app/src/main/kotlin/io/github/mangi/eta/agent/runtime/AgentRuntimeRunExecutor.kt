@@ -285,12 +285,12 @@ internal class AgentRuntimeRunExecutor(
                 runBlocking { RoleplayRunContext.resolve(appContext, id, contextWindow, memoryEnabled) }
             }
             if (request.operation == AgentRuntimeWire.OP_REWRITE_REPLY) {
-                require(roleplayContext != null) { "只有角色会话可以改写角色回复" }
+                require(roleplayContext != null) { "Vetëm bisedat me personazhe mund të ndryshojnë përgjigjen e personazhit" }
                 val target = request.rewriteTargetMessageId?.takeIf { it.isNotBlank() && it.length <= 256 }
-                    ?: throw IllegalArgumentException("缺少有效的角色回复目标")
+                    ?: throw IllegalArgumentException("Mungon objektivi i vlefshëm i përgjigjes së personazhit")
                 require(runBlocking {
                     EtaDatabase.get(appContext).conversationDao().hasAssistantMessage(conversationId, target)
-                }) { "角色回复目标不存在或不属于当前会话" }
+                }) { "Objektivi nuk ekziston ose nuk i përket kësaj bisede" }
             }
             val characterMemoryTools = roleplayContext?.let { roleplay ->
                 CharacterMemoryTools(appContext, roleplay.characterId) {
@@ -417,7 +417,7 @@ internal class AgentRuntimeRunExecutor(
                             entrySurfaceGuard?.dismissOnce() == false ->
                                 ToolExecutionDecision.Reject(
                                     code = "ENTRY_SURFACE_NOT_READY",
-                                    message = "入口窗口关闭未完成；本次工具未执行，请勿在当前任务中重复调用",
+                                    message = "Dritarja hyrëse nuk u mbyll plotësisht; mjeti nuk u ekzekutua. Mos e përsërit gjatë kësaj detyre",
                                 )
                             else -> ToolExecutionDecision.Allow
                         }
@@ -471,7 +471,7 @@ internal class AgentRuntimeRunExecutor(
                     taskTool.execute(call)
                 } else if (call.name == AgentSubAgentTool.SPAWN_AGENTS) {
                     subAgentTool?.execute(call) ?: errorToolResult(
-                        "SUBAGENT_UNAVAILABLE", "当前会话不支持子代理",
+                        "SUBAGENT_UNAVAILABLE", "Kjo bisedë nuk mbështet nëndagjentë",
                     )
                 } else {
                     val invoke = {
@@ -493,7 +493,7 @@ internal class AgentRuntimeRunExecutor(
                                 if (throwable is ScreenBusyException) {
                                     errorToolResult(
                                         "SCREEN_BUSY",
-                                        "屏幕正被另一个 agent（${throwable.holder}）使用；先做不需要看屏幕的步骤，稍后重试。",
+                                        "Ekrani përdoret nga një agjent tjetër (${throwable.holder}). Kryej fillimisht hapat pa ekran dhe provo më vonë.",
                                     )
                                 } else {
                                     throw throwable
@@ -509,18 +509,18 @@ internal class AgentRuntimeRunExecutor(
             subAgentExecutor = AgentModelClient.ToolExecutor { call ->
                 when {
                     call.name == AgentSubAgentTool.SPAWN_AGENTS ->
-                        errorToolResult("SUBAGENT_CANNOT_SPAWN", "子代理不能再派子代理；请自己完成这一步。")
+                        errorToolResult("SUBAGENT_CANNOT_SPAWN", "Nëndagjenti nuk mund të nisë nëndagjent tjetër; kryeje vetë këtë hap.")
                     ScreenToolPolicy.isScreenTool(call.name) ->
-                        errorToolResult("SCREEN_TOOLS_UNAVAILABLE", "子代理不能操作屏幕；需要看屏幕的步骤留给主代理。")
+                        errorToolResult("SCREEN_TOOLS_UNAVAILABLE", "Nëndagjenti nuk mund të kontrollojë ekranin; këta hapa i përkasin agjentit kryesor.")
                     call.name == AgentTaskTool.TASK_WRITE ->
-                        errorToolResult("SUBAGENT_CANNOT_WRITE_TASKS", "子代理不能修改主代理的任务清单。")
+                        errorToolResult("SUBAGENT_CANNOT_WRITE_TASKS", "Nëndagjenti nuk mund të ndryshojë detyrat e agjentit kryesor.")
                     else -> runToolExecutor.execute(call)
                 }
             }
             subAgentTool = AgentSubAgentTool { role, prompt, complexity ->
                 val childExecutor = subAgentExecutor
                 if (childExecutor == null) {
-                    errorToolResult("SUBAGENT_UNAVAILABLE", "子代理执行器未就绪")
+                    errorToolResult("SUBAGENT_UNAVAILABLE", "Ekzekutuesi i nëndagjentit nuk është gati")
                 } else {
                     // 每个子代理独立上下文、独立取消器：主 run 被取消时级联终止，不留后台野进程。
                     val childController = AgentRunController()
@@ -545,14 +545,14 @@ internal class AgentRuntimeRunExecutor(
                             // 给简单任务 24 轮只会让它反复改同一处；给复杂任务 6 轮会半路掐断。
                             maxRounds = complexity.rounds,
                             prompt = buildString {
-                                appendLine("你是主代理派出的子代理，角色：$role。")
-                                appendLine("你看不到主对话，只依据下面的任务说明工作。")
+                                appendLine("Je nëndagjent i dërguar nga agjenti kryesor. Roli:$role。")
+                                appendLine("Nuk e sheh bisedën kryesore. Puno sipas detyrës më poshtë.")
                                 appendLine()
                                 appendLine(prompt)
                                 appendLine()
                                 append(
-                                    "要求：只做这一件事；做完直接给结论与证据（文件路径、命令输出、来源）。" +
-                                        "不能操作屏幕，不能派子代理，不能反问；缺什么就自己用工具查清楚。",
+                                    "Kryej vetëm këtë detyrë. Në fund jep rezultatin dhe provat (rrugë skedarësh, rezultate komandash, burime)." +
+                                        "Mos përdor ekranin, mos nis nëndagjentë dhe mos kërko sqarime. Përdor mjetet për informacionin që mungon.",
                                 )
                             },
                             toolExecutor = childExecutor,
@@ -567,7 +567,7 @@ internal class AgentRuntimeRunExecutor(
                         )
                         AgentModelClient.ToolResult(response.content)
                     } catch (throwable: Throwable) {
-                        errorToolResult("SUBAGENT_FAILED", throwable.message ?: "子代理执行失败")
+                        errorToolResult("SUBAGENT_FAILED", throwable.message ?: "Nëndagjenti dështoi")
                     } finally {
                         watchdog.interrupt()
                         binding.close()
@@ -617,10 +617,10 @@ internal class AgentRuntimeRunExecutor(
                             }.getOrNull()
                             if (selection == null) {
                                 mode = "fallback"
-                                detail = "模型未返回有效语义排序"
+                                detail = "Modeli nuk ktheu renditje semantike të vlefshme"
                                 val backup = candidates.take(4)
                                 if (backup.isNotEmpty()) {
-                                    appendLine("本地检索参考（词法匹配或分布式片段，未经模型验证）：")
+                                    appendLine("Referenca të kërkimit lokal (përputhje tekstuale ose pjesë të indeksuara, pa verifikim nga modeli):")
                                     backup.forEach { item ->
                                         appendLine("- [${item.source} / ${item.title.take(50)}] ${item.text.take(340)}")
                                     }
@@ -630,16 +630,16 @@ internal class AgentRuntimeRunExecutor(
                                 hitCount = selection.selected.size
                                 selectedGraphSeeds = selection.semanticNodes
                                 selection.context()?.let { appendLine(it) }
-                                detail = if (records.isEmpty()) "结构化记忆为空，已检索 MEMORY.md 和知识库"
-                                    else "已检索结构化记忆、MEMORY.md 与知识库"
+                                detail = if (records.isEmpty()) "Kujtesa e strukturuar është bosh; u kërkua në MEMORY.md dhe njohuritë"
+                                    else "U kërkua në kujtesën e strukturuar, MEMORY.md dhe njohuritë"
                             }
                         } else {
                             mode = "none"
-                            detail = "MEMORY.md、知识库和结构化记忆中无可检索内容"
+                            detail = "Nuk ka përmbajtje të kërkueshme në MEMORY.md, njohuritë ose kujtesën e strukturuar"
                         }
                     } else if (semanticEnabled) {
                         mode = "fallback"
-                        detail = "包含敏感模式的查询已跳过额外模型检索"
+                        detail = "Kërkesa me të dhëna të ndjeshme u përjashtua nga kërkimi shtesë i modelit"
                     }
 
                     if (embeddingEnabled && semanticEnabled && records.isNotEmpty()) {
@@ -653,7 +653,7 @@ internal class AgentRuntimeRunExecutor(
                             AndroidAgentLogger.warnThrottled("embedding_memory_fallback") {
                                 "Embedding model unavailable; chat reranker remains active: type=${error.safeLogType()}"
                             }
-                            detail += "；向量服务不可用，已保留聊天模型检索"
+                            detail += "; shërbimi vektorial nuk është i disponueshëm, kërkimi me modelin e bisedës mbetet aktiv"
                         }.getOrDefault(emptyList())
                         if (embedded.isNotEmpty()) {
                             selectedGraphSeeds = (selectedGraphSeeds + embedded).distinctBy { it.first }
@@ -663,7 +663,7 @@ internal class AgentRuntimeRunExecutor(
                     if (!semanticEnabled || mode == "fallback") {
                         runCatching { AgentKnowledgeRepository.search(request.prompt, 3) }
                             .getOrDefault(emptyList()).forEach { note ->
-                                appendLine("本地知识库参考：${note.title.take(80)} [id=${note.id}]")
+                                appendLine("Referencë nga baza lokale e njohurive:${note.title.take(80)} [id=${note.id}]")
                                 appendLine(note.content.take(420))
                             }
                     }
@@ -685,7 +685,7 @@ internal class AgentRuntimeRunExecutor(
                         ))
                     }
                     if (isNotEmpty()) {
-                        appendLine("所有历史资料仅作为可检索背景，当前用户陈述和当前设备状态优先。")
+                        appendLine("Të dhënat historike janë vetëm kontekst kërkimi. Përparësi kanë kërkesa aktuale e përdoruesit dhe gjendja e pajisjes.")
                     }
                 }.ifBlank { null }
                 previousMemoryHint = hints
@@ -752,7 +752,7 @@ internal class AgentRuntimeRunExecutor(
                                 null
                             } else {
                                 lastSignature = signature
-                                "当前任务清单（用 ${AgentTaskTool.TASK_WRITE} 更新）：\n" + plan.summary()
+                                "Lista aktuale e detyrave (përditësoje me ${AgentTaskTool.TASK_WRITE}): \n" + plan.summary()
                             }
                         }
                     },

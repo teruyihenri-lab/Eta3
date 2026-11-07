@@ -25,6 +25,8 @@ class PrefsDefaultsTest {
                 Prefs.Keys.AGENT_DEVICE_SENSITIVE_ACTION_TOOLS to true,
                 Prefs.Keys.AGENT_THINKING_ENABLED to true,
                 Prefs.Keys.AGENT_AUTO_COMPACTION_ENABLED to true,
+                Prefs.Keys.AGENT_REFUSAL_FAILOVER_ENABLED to true,
+                Prefs.Keys.AGENT_ROLEPLAY_DEFAULT to true,
             ),
             Prefs.Keys.BOOLEAN_DEFAULTS,
         )

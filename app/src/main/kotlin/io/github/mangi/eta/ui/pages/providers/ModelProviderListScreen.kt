@@ -93,8 +93,8 @@ internal fun ModelProviderListScreen(
         item(key = "create_section") {
             ProviderSection(title = stringResource(R.string.ui_add_new_provider_74df54)) {
                 EtaArrowPreference(
-                    title = "从目录添加",
-                    summary = "浏览可用提供商并选择模型",
+                    title = "Shto nga katalogu",
+                    summary = "Shfleto ofruesit e disponueshëm dhe zgjidh modelet",
                     startAction = { EtaPreferenceIcon(Icons.Rounded.Storefront, tint = EtaPreferenceColors.Blue) },
                     onClick = { onNavigate(AppRoute.CommunityCatalog) },
                 )

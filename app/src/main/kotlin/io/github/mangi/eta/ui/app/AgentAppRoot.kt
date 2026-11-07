@@ -834,13 +834,13 @@ fun AgentAppRoot(
     characterStore.notice?.let { notice ->
         WindowDialog(
             show = true,
-            title = "角色",
+            title = "Personazhet",
             summary = notice,
             cornerRadius = DialogDefaults.CornerRadius,
             onDismissRequest = characterStore::dismissNotice,
         ) {
             top.yukonga.miuix.kmp.basic.TextButton(
-                text = "知道了", onClick = characterStore::dismissNotice, modifier = Modifier.fillMaxWidth(),
+                text = "E kuptova", onClick = characterStore::dismissNotice, modifier = Modifier.fillMaxWidth(),
             )
         }
     }

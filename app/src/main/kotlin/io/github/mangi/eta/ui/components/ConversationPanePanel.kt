@@ -497,19 +497,19 @@ private fun PaneDock(
     ) {
         DockEntry(
             icon = Icons.Rounded.Settings,
-            label = "设置",
+            label = "Cilësimet",
             onClick = onOpenSettings,
             modifier = Modifier.weight(1f),
         )
         DockEntry(
             icon = Icons.Rounded.Cloud,
-            label = "模型",
+            label = "Modelet",
             onClick = onOpenModelProviders,
             modifier = Modifier.weight(1f),
         )
         DockEntry(
             icon = Icons.Rounded.Dashboard,
-            label = "工具",
+            label = "Mjetet",
             onClick = onOpenTools,
             modifier = Modifier.weight(1f),
         )
@@ -521,13 +521,13 @@ private fun PaneDock(
         )
         DockEntry(
             icon = Icons.Rounded.Lock,
-            label = "权限",
+            label = "Lejet",
             onClick = onOpenPermissions,
             modifier = Modifier.weight(1f),
         )
         DockEntry(
             icon = Icons.Rounded.SportsBar,
-            label = "角色",
+            label = "Personazhet",
             onClick = onOpenCharacters,
             modifier = Modifier.weight(1f),
         )

@@ -30,7 +30,7 @@ internal suspend fun synthesizeSpeech(settings: SpeechSettings, credentials: Spe
         val source = response.body.source()
         while (!source.exhausted() && !decoder.finished) {
             val line = try { source.readUtf8LineStrict(SpeechHttp.MAX_JSON_BYTES) } catch (error: java.io.EOFException) {
-                if (source.buffer.size > SpeechHttp.MAX_JSON_BYTES) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "语音音频块过大")
+                if (source.buffer.size > SpeechHttp.MAX_JSON_BYTES) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "Pjesa e audios është tepër e madhe")
                 source.readUtf8()
             }
             decoder.line(line)
@@ -56,7 +56,7 @@ internal class SpeechAudioStreamDecoder(private val qwen: Boolean, onAudio: (Byt
         } else if (line.startsWith("data:")) {
             if (event.isNotEmpty()) event.append('\n')
             event.append(line.removePrefix("data:").removePrefix(" "))
-            if (event.length > SpeechHttp.MAX_JSON_BYTES) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "语音音频块过大")
+            if (event.length > SpeechHttp.MAX_JSON_BYTES) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "Pjesa e audios është tepër e madhe")
         }
     }
 
@@ -72,7 +72,7 @@ internal class SpeechAudioStreamDecoder(private val qwen: Boolean, onAudio: (Byt
         val encoded: String
         if (qwen) {
             if (message.optString("code").isNotBlank() || message.optInt("status_code", 200) != 200) {
-                throw SpeechFailure(SpeechErrorCode.SERVER, "千问语音合成失败，请检查配置")
+                throw SpeechFailure(SpeechErrorCode.SERVER, "Sinteza Qwen dështoi. Kontrollo konfigurimin")
             }
             val output = message.getJSONObject("output")
             encoded = output.optJSONObject("audio")?.optString("data").orEmpty()
@@ -81,7 +81,7 @@ internal class SpeechAudioStreamDecoder(private val qwen: Boolean, onAudio: (Byt
             when (message.getInt("code")) {
                 0 -> Unit
                 20000000 -> finished = true
-                else -> throw SpeechFailure(SpeechErrorCode.SERVER, "豆包语音合成失败（${message.getInt("code")}）")
+                else -> throw SpeechFailure(SpeechErrorCode.SERVER, "Sinteza Doubao dështoi (kodi ${message.getInt("code")})")
             }
             encoded = message.optString("data")
         }
@@ -89,7 +89,7 @@ internal class SpeechAudioStreamDecoder(private val qwen: Boolean, onAudio: (Byt
             val bytes = Base64.getDecoder().decode(encoded)
             audioBytes += bytes.size
             if (audioBytes > 24_000 * 2 * 180) {
-                throw SpeechFailure(SpeechErrorCode.PROTOCOL, "语音音频格式或长度无效")
+                throw SpeechFailure(SpeechErrorCode.PROTOCOL, "Formati ose gjatësia e audios është e pavlefshme")
             }
             pcm.write(bytes)
         }
@@ -97,7 +97,7 @@ internal class SpeechAudioStreamDecoder(private val qwen: Boolean, onAudio: (Byt
 
     fun end() {
         if (qwen && !finished) flush()
-        if (!finished || audioBytes == 0L) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "语音音频不完整，请重试")
+        if (!finished || audioBytes == 0L) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "Audioja zanore është e paplotë. Provo përsëri")
         pcm.end()
     }
 }

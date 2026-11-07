@@ -389,11 +389,11 @@ private fun titleForRoute(route: AppRoute?): String = when (route) {
     is AppRoute.Terminal -> stringResource(R.string.route_terminal)
     is AppRoute.Tools -> stringResource(R.string.route_tools)
     is AppRoute.Skills -> stringResource(R.string.route_skills)
-    is AppRoute.Characters -> "角色"
-    is AppRoute.CharacterDetail -> "角色详情"
-    is AppRoute.CharacterEditor -> "编辑角色"
-    is AppRoute.CharacterPersona -> "我的人设"
-    is AppRoute.CharacterMemory -> "剧情记忆"
+    is AppRoute.Characters -> "Personazhet"
+    is AppRoute.CharacterDetail -> "Hollësitë e personazhit"
+    is AppRoute.CharacterEditor -> "Ndrysho personazhin"
+    is AppRoute.CharacterPersona -> "Profili im"
+    is AppRoute.CharacterMemory -> "Kujtesa e historisë"
     is AppRoute.Permissions -> stringResource(R.string.route_permissions)
     is AppRoute.SystemEnhance -> stringResource(R.string.route_system_enhancements)
     is AppRoute.Settings -> stringResource(R.string.route_settings)
@@ -404,14 +404,14 @@ private fun titleForRoute(route: AppRoute?): String = when (route) {
     is AppRoute.AppearanceSettings -> stringResource(R.string.appearance_title)
     is AppRoute.DataBackup -> stringResource(R.string.data_backup_title)
     is AppRoute.Memory -> stringResource(R.string.route_memory)
-    is AppRoute.UserPrompt -> "作战协议"
+    is AppRoute.UserPrompt -> "Protokolli i punës"
     is AppRoute.LinuxEnvironment -> stringResource(R.string.route_linux_environment)
     is AppRoute.Workspace -> stringResource(R.string.capability_workspace)
     is AppRoute.SharedFolders -> stringResource(R.string.route_shared_folders)
     is AppRoute.LinuxFiles -> stringResource(R.string.route_linux_files)
     is AppRoute.ModelProviders -> stringResource(R.string.route_model_providers)
-    is AppRoute.CommunityCatalog -> "从目录添加"
-    is AppRoute.CommunityCatalogProvider -> "选择模型"
+    is AppRoute.CommunityCatalog -> "Shto nga katalogu"
+    is AppRoute.CommunityCatalogProvider -> "Zgjidh modelin"
     is AppRoute.McpServers -> stringResource(R.string.route_mcp_servers)
     is AppRoute.McpServerDetail -> stringResource(R.string.route_mcp_server_detail)
     is AppRoute.ModelProviderDetail -> stringResource(R.string.route_provider_details)

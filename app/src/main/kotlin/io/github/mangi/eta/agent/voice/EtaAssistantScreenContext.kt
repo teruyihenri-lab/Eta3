@@ -52,8 +52,8 @@ internal class EtaAssistantScreenContext(
             val text = try {
                 EtaAssistContentReader.read(context, state)
             } catch (exception: Exception) {
-                AndroidAgentLogger.warn("助理应用上下文解析失败: type=${exception.javaClass.simpleName}")
-                "应用内容读取失败"
+                AndroidAgentLogger.warn("Analiza e kontekstit të asistentit dështoi: type=${exception.javaClass.simpleName}")
+                "Përmbajtja e aplikacionit nuk u lexua"
             }
             synchronized(this@EtaAssistantScreenContext) {
                 if (closed) return@synchronized
@@ -77,7 +77,7 @@ internal class EtaAssistantScreenContext(
             val capturedImage = try {
                 bitmap?.let { AgentImageCodec.fromScreenContextBitmap(it, source = "assistant_screen_context") }
             } catch (exception: Exception) {
-                AndroidAgentLogger.warn("助理截图编码失败: type=${exception.javaClass.simpleName}")
+                AndroidAgentLogger.warn("Kodimi i pamjes së ekranit dështoi: type=${exception.javaClass.simpleName}")
                 null
             }
             synchronized(this@EtaAssistantScreenContext) {
@@ -97,13 +97,13 @@ internal class EtaAssistantScreenContext(
         return synchronized(this) {
             if (closed) return@synchronized Snapshot()
             val text = buildString {
-                appendLine("采集时间（Unix 毫秒）：$capturedAt；这是助理唤醒时的画面，不代表操作后的实时状态。")
+                appendLine("Koha e regjistrimit (Unix ms):$capturedAt；Kjo është pamja në aktivizimin e asistentit; nuk tregon gjendjen pas veprimeve.")
                 if (foregroundApps.isNotEmpty()) {
-                    appendLine("前台应用：" + foregroundApps.take(MAX_ACTIVITIES)
+                    appendLine("Aplikacionet në plan të parë:" + foregroundApps.take(MAX_ACTIVITIES)
                         .joinToString { it.flattenToShortString().take(512) })
                 }
-                appendLine(if (image != null) "本次已附屏幕截图。" else "系统未提供可用截图。")
-                if (activities.isEmpty()) appendLine("系统尚未提供应用内容。")
+                appendLine(if (image != null) "Pamja e ekranit është bashkëngjitur." else "Sistemi nuk dha pamje ekrani.")
+                if (activities.isEmpty()) appendLine("Sistemi nuk ka dhënë përmbajtje aplikacioni.")
                 activities.entries.sortedWith(compareByDescending<Map.Entry<Int, Pair<Boolean, String>>> { it.value.first }
                     .thenBy { it.key }).take(MAX_ACTIVITIES).forEach { appendLine(it.value.second) }
             }

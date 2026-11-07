@@ -97,7 +97,7 @@ private enum class MemoryViewMode { Preview, Edit }
 
 /**
  * 记忆页：顶部是开关与预算，下方 MEMORY.md 以“文档”形式占满剩余高度。
- * 默认渲染 Markdown 便于阅读，切到编辑后是无边框的整页编辑区；只有存在未保存修改时才浮出保存栏。
+ * 默认渲染 Markdown 便于阅读，切到编辑后是无边框的整页编辑区；只有存在未Ruaj修改时才浮出Ruaj栏。
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -138,14 +138,14 @@ internal fun AgentMemoryScreen(
                             } ?: "imported.md"
                         require(filename.endsWith(".md", true) || filename.endsWith(".markdown", true) ||
                             filename.endsWith(".txt", true)) {
-                            "仅支持 Markdown 和纯文本文件；PDF/Word 需要专用文档解析功能"
+                            "Mbështeten vetëm Markdown dhe skedarët tekst; PDF/Word kërkojnë analizues të veçantë"
                         }
                         val bytes = resolver.openInputStream(uri)?.use { it.readNBytes(52_000) }
-                            ?: error("文件无法读取")
-                        require(bytes.size < 52_000 && 0.toByte() !in bytes) { "文件过大或不是纯文本" }
+                            ?: error("Skedari nuk mund të lexohet")
+                        require(bytes.size < 52_000 && 0.toByte() !in bytes) { "Skedari është tepër i madh ose nuk përmban tekst të thjeshtë" }
                         val content = bytes.toString(Charsets.UTF_8).removePrefix("\uFEFF")
                         require(content.isNotBlank() && content.length <= 12_000) {
-                            "单条知识最多 12000 字符"
+                            "Çdo njohuri mund të ketë deri në 12 000 karaktere"
                         }
                         filename.substringBeforeLast('.').take(160) to content
                     }
@@ -158,7 +158,7 @@ internal fun AgentMemoryScreen(
                             source = "Android document import", tags = emptyList(),
                         ))
                     },
-                    onFailure = { knowledgeImportError = it.message ?: "导入失败" },
+                    onFailure = { knowledgeImportError = it.message ?: "Importimi dështoi" },
                 )
             }
         }
@@ -282,7 +282,7 @@ internal fun AgentMemoryScreen(
 
     EtaWindowDialog(
         show = showSyncDialog,
-        title = "WebDAV 加密同步",
+        title = "Sinkronizim i enkriptuar WebDAV",
         onDismissRequest = { if (!state.syncBusy) showSyncDialog = false },
     ) {
         Column(Modifier.fillMaxWidth().heightIn(max = 520.dp)) {
@@ -291,13 +291,13 @@ internal fun AgentMemoryScreen(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Text(
-                    "填写已有 WebDAV 目录地址（必须 HTTPS），Eta 会在其下建立 eta-sync-v1。不同设备输入相同的加密口令。",
+                    "Shkruaj adresën HTTPS të një dosjeje WebDAV. Eta krijon eta-sync-v1 brenda saj. Përdor të njëjtën frazëkalim në çdo pajisje.",
                     style = MiuixTheme.textStyles.body2,
                 )
                 TextField(
                     value = syncEndpoint,
                     onValueChange = { syncEndpoint = it },
-                    label = "WebDAV 目录 URL",
+                    label = "Adresa URL e dosjes WebDAV",
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
                     modifier = Modifier.fillMaxWidth(),
@@ -305,14 +305,14 @@ internal fun AgentMemoryScreen(
                 TextField(
                     value = syncUsername,
                     onValueChange = { syncUsername = it },
-                    label = "用户名（可空）",
+                    label = "Emri i përdoruesit (opsional)",
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
                 TextField(
                     value = syncPassword,
                     onValueChange = { syncPassword = it },
-                    label = if (state.syncHasPassword) "WebDAV 密码（留空沿用已保存）" else "WebDAV 密码",
+                    label = if (state.syncHasPassword) "Fjalëkalimi WebDAV (bosh për të ruajtur aktualin)" else "Fjalëkalimi WebDAV",
                     visualTransformation = PasswordVisualTransformation(),
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
@@ -320,7 +320,7 @@ internal fun AgentMemoryScreen(
                 TextField(
                     value = syncPassphrase,
                     onValueChange = { syncPassphrase = it },
-                    label = if (state.syncHasPassphrase) "加密口令（留空沿用已保存）" else "加密口令（至少 12 字符）",
+                    label = if (state.syncHasPassphrase) "Fraza e enkriptimit (bosh për të ruajtur aktualen)" else "Fraza e enkriptimit (të paktën 12 karaktere)",
                     visualTransformation = PasswordVisualTransformation(),
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
@@ -328,7 +328,7 @@ internal fun AgentMemoryScreen(
             }
             MiuixDialogActions(
                 modifier = Modifier.padding(top = 12.dp),
-                confirmText = "保存连接",
+                confirmText = "Ruaj lidhjen",
                 confirmEnabled = syncEndpoint.isNotBlank() && !state.syncBusy &&
                     (state.syncHasPassphrase || syncPassphrase.length >= 12),
                 onCancel = { showSyncDialog = false },
@@ -346,12 +346,12 @@ internal fun AgentMemoryScreen(
 
     EtaWindowDialog(
         show = showDisconnectDialog,
-        title = "断开 WebDAV 同步",
-        summary = "移除本机地址和密钥，不删除本地知识与远端加密文件。",
+        title = "Shkëput sinkronizimin WebDAV",
+        summary = "Hiq adresën dhe çelësin nga kjo pajisje; mos fshi njohuritë lokale ose skedarët e enkriptuar në server.",
         onDismissRequest = { showDisconnectDialog = false },
     ) {
         MiuixDialogActions(
-            confirmText = "断开",
+            confirmText = "Shkëput",
             destructive = true,
             onCancel = { showDisconnectDialog = false },
             onConfirm = {
@@ -363,17 +363,17 @@ internal fun AgentMemoryScreen(
 
     EtaWindowDialog(
         show = showMemoryConflictDialog,
-        title = "确认解决记忆冲突",
+        title = "Konfirmo zgjidhjen e konfliktit të kujtesës",
         onDismissRequest = { showMemoryConflictDialog = false },
     ) {
         Column(Modifier.fillMaxWidth().heightIn(max = 510.dp)) {
             Text(
-                "请先审查远端记忆，与本机 MEMORY.md 合并并保存。确认后会重新检查远端是否改变，再使用本机版本解决冲突；知识库和任务经验仍会合并。",
+                "Shqyrto kujtesën në server, bashkoje me MEMORY.md lokal dhe ruaje. Pas konfirmimit kontrollohet përsëri serveri dhe përdoret versioni lokal; njohuritë dhe përvojat bashkohen.",
                 style = MiuixTheme.textStyles.body2,
             )
             state.syncRemoteConflictContent?.let { remoteText ->
                 Text(
-                    "远端 MEMORY.md（预览）：",
+                    "MEMORY.md në server (parapamje):",
                     modifier = Modifier.padding(top = 10.dp),
                     style = MiuixTheme.textStyles.body1,
                 )
@@ -388,7 +388,7 @@ internal fun AgentMemoryScreen(
                     )
                 }
                 EtaTextButton(
-                    text = "复制远端记忆全文",
+                    text = "Kopjo kujtesën e plotë nga serveri",
                     onClick = {
                         val clipboard = appContext.getSystemService(Context.CLIPBOARD_SERVICE)
                             as ClipboardManager
@@ -399,7 +399,7 @@ internal fun AgentMemoryScreen(
             }
             MiuixDialogActions(
                 modifier = Modifier.padding(top = 10.dp),
-                confirmText = "已审查，使用本机版本",
+                confirmText = "U shqyrtua; përdor versionin lokal",
                 confirmEnabled = state.syncRemoteConflictContent != null &&
                     !state.hasUnsavedChanges && !state.syncBusy,
                 onCancel = { showMemoryConflictDialog = false },
@@ -413,14 +413,14 @@ internal fun AgentMemoryScreen(
 
     EtaWindowDialog(
         show = showKnowledgeList,
-        title = "本地知识库",
+        title = "Baza lokale e njohurive",
         onDismissRequest = { showKnowledgeList = false },
     ) {
         Column(Modifier.fillMaxWidth().heightIn(max = 520.dp)) {
             TextField(
                 value = searchText,
                 onValueChange = { searchText = it },
-                label = "搜索标题、来源或标签",
+                label = "Kërko titull, burim ose etiketë",
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -446,7 +446,7 @@ internal fun AgentMemoryScreen(
                     color = MiuixTheme.colorScheme.error)
             }
             EtaTextButton(
-                text = "导入 Markdown / TXT",
+                text = "Importo Markdown / TXT",
                 onClick = {
                     knowledgeImportError = null
                     knowledgeImporter.launch(arrayOf("text/*", "application/octet-stream"))
@@ -455,7 +455,7 @@ internal fun AgentMemoryScreen(
             )
             MiuixDialogActions(
                 modifier = Modifier.padding(top = 12.dp),
-                confirmText = "新建知识",
+                confirmText = "Krijo njohuri",
                 onCancel = { showKnowledgeList = false },
                 onConfirm = { openKnowledgeEditor(null) },
             )
@@ -464,12 +464,12 @@ internal fun AgentMemoryScreen(
 
     EtaWindowDialog(
         show = showRetainedList,
-        title = "结构化长期记忆",
+        title = "Kujtesë afatgjatë e strukturuar",
         onDismissRequest = { showRetainedList = false },
     ) {
         Column(Modifier.fillMaxWidth().heightIn(max = 520.dp)) {
             Text(
-                "分层存储由模型提取的用户陈述，证据未经独立核实；关联仅为未确认建议。",
+                "Ruajtje me nivele e të dhënave të nxjerra nga modeli; provat nuk janë verifikuar në mënyrë të pavarur dhe lidhjet janë sugjerime.",
                 style = MiuixTheme.textStyles.body2,
             )
             Column(
@@ -478,8 +478,8 @@ internal fun AgentMemoryScreen(
                 state.retainedNodes.forEach { node ->
                     EtaPreference(
                         title = node.text.take(85),
-                        summary = (if (node.active) "有效" else "已被后续陈述替代") +
-                            " · ${node.layer} · ${node.category} · 关联建议 ${node.links.size} 条",
+                        summary = (if (node.active) "Aktiv" else "U zëvendësua nga të dhëna më të reja") +
+                            " · ${node.layer} · ${node.category} · Sugjerime lidhjesh:${node.links.size}  elemente",
                         onClick = {
                             selectedRetainedId = node.id
                             showRetainedList = false
@@ -489,7 +489,7 @@ internal fun AgentMemoryScreen(
                 }
             }
             MiuixDialogActions(
-                confirmText = "清空结构化记忆",
+                confirmText = "Pastro kujtesën e strukturuar",
                 confirmEnabled = state.retainedNodes.isNotEmpty(),
                 destructive = true,
                 onCancel = { showRetainedList = false },
@@ -504,7 +504,7 @@ internal fun AgentMemoryScreen(
     state.retainedNodes.find { it.id == selectedRetainedId }?.let { node ->
         EtaWindowDialog(
             show = selectedRetainedId != null && selectedRetainedLink == null,
-            title = "记忆节点详情",
+            title = "Hollësitë e nyjës së kujtesës",
             onDismissRequest = { selectedRetainedId = null; showRetainedList = true },
         ) {
             Column(Modifier.fillMaxWidth().heightIn(max = 480.dp)) {
@@ -514,24 +514,24 @@ internal fun AgentMemoryScreen(
                 ) {
                     Text(node.text, style = MiuixTheme.textStyles.body1)
                     Text(
-                        "状态：${if (node.active) "有效" else "历史版本（已失效）"}\n" +
-                            "层级：${node.layer} / ${node.category}\n" +
-                            "范围：${node.scope}\n主体：${node.subject}\n" +
-                            "用户证据：${node.evidence}\n" +
-                            "实体：${node.entities.joinToString("、")}\n" +
-                            "关联边：${node.links.size} 条（已确认关系允许两跳扩展，" +
-                            "未审核建议仅探索一跳）",
+                        "Gjendja:${if (node.active) "Aktiv" else "Version historik (joaktiv)"}\n" +
+                            "Niveli:${node.layer} / ${node.category}\n" +
+                            "Fusha:${node.scope}\nSubjekti:${node.subject}\n" +
+                            "Dëshmi e përdoruesit:${node.evidence}\n" +
+                            "Entitetet:${node.entities.joinToString("、")}\n" +
+                            "Lidhjet:${node.links.size}  elemente (Lidhjet e konfirmuara lejojnë zgjerim deri në dy hapa;" +
+                            "sugjerimet e pashqyrtuara vetëm një hap)",
                         style = MiuixTheme.textStyles.body2,
                     )
                     node.links.forEach { link ->
                         val related = state.retainedNodes.find { it.id == link.targetId }
                         EtaPreference(
-                            title = "${link.type} → ${related?.text?.take(45) ?: "关联节点已失效"}",
+                            title = "${link.type} → ${related?.text?.take(45) ?: "Nyja e lidhur nuk është më aktive"}",
                             summary = "${when(link.status) {
-                                "confirmed" -> "已确认"
-                                "rejected" -> "已拒绝"
-                                else -> "待审核"
-                            }} · 置信度 ${"%.2f".format(link.confidence)} · ${link.reason.take(75)}",
+                                "confirmed" -> "U konfirmua"
+                                "rejected" -> "U refuzua"
+                                else -> "Në shqyrtim"
+                            }} · Besueshmëria:${"%.2f".format(link.confidence)} · ${link.reason.take(75)}",
                             onClick = { selectedRetainedLink = link },
                         )
                         EtaPreferenceDivider(hasLeading = false)
@@ -539,7 +539,7 @@ internal fun AgentMemoryScreen(
                 }
                 MiuixDialogActions(
                     modifier = Modifier.padding(top = 12.dp),
-                    confirmText = "删除此条记忆",
+                    confirmText = "Fshi këtë kujtim",
                     destructive = true,
                     onCancel = { selectedRetainedId = null; showRetainedList = true },
                     onConfirm = {
@@ -555,15 +555,15 @@ internal fun AgentMemoryScreen(
     selectedRetainedLink?.let { relation ->
         EtaWindowDialog(
             show = true,
-            title = "审核网状记忆关联",
-            summary = "${relation.type} / 模型置信度 ${"%.2f".format(relation.confidence)}\n" +
-                "理由：${relation.reason.ifBlank { "由早期 Retain 自动提出；暂无解释" }}\n" +
-                "目标：${state.retainedNodes.find { it.id == relation.targetId }?.text ?: "关联节点不可用"}",
+            title = "Shqyrto lidhjet e kujtesës",
+            summary = "${relation.type} / Besueshmëria e modelit:${"%.2f".format(relation.confidence)}\n" +
+                "Arsyeja:${relation.reason.ifBlank { "Sugjeruar automatikisht nga Retain; ende pa shpjegim" }}\n" +
+                "Objektivi:${state.retainedNodes.find { it.id == relation.targetId }?.text ?: "Nyja e lidhur nuk është e disponueshme"}",
             onDismissRequest = { selectedRetainedLink = null },
         ) {
             Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 EtaTextButton(
-                    text = "确认关联（可用于两跳扩展）",
+                    text = "Konfirmo lidhjen (deri në dy hapa)",
                     onClick = {
                         selectedRetainedId?.let { id ->
                             onAction(AgentMemoryAction.ReviewMemoryLink(
@@ -575,7 +575,7 @@ internal fun AgentMemoryScreen(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 EtaTextButton(
-                    text = "拒绝关联（之后不参与召回）",
+                    text = "Refuzo lidhjen (përjashto nga rikujtimi)",
                     onClick = {
                         selectedRetainedId?.let { id ->
                             onAction(AgentMemoryAction.ReviewMemoryLink(
@@ -592,25 +592,25 @@ internal fun AgentMemoryScreen(
 
     EtaWindowDialog(
         show = showSemanticModelDialog,
-        title = "嵌入模型设置",
+        title = "Cilësimet e modelit Embeddings",
         onDismissRequest = { showSemanticModelDialog = false },
     ) {
         Column(Modifier.fillMaxWidth()) {
             Text(
-                "只支持选定服务商的 HTTPS OpenAI 兼容 Embeddings 接口。" +
-                    "不使用聊天模型名；向量保存在本机。修改模型后需要重建索引。",
+                "Mbështetet vetëm API HTTPS Embeddings e përputhshme me OpenAI e ofruesit të zgjedhur." +
+                    "Mos përdor emrin e modelit të bisedës; vektorët ruhen lokalisht. Pas ndryshimit të modelit rindërto indeksin.",
                 style = MiuixTheme.textStyles.body2,
             )
             TextField(
                 value = semanticModelDraft,
                 onValueChange = { semanticModelDraft = it },
-                label = "Embedding 模型标识",
+                label = "Identifikuesi i modelit Embeddings",
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
             )
             MiuixDialogActions(
                 modifier = Modifier.padding(top = 10.dp),
-                confirmText = "保存模型",
+                confirmText = "Ruaj modelin",
                 confirmEnabled = semanticModelDraft.matches(Regex("[a-zA-Z0-9._:/-]{1,100}")),
                 onCancel = { showSemanticModelDialog = false },
                 onConfirm = {
@@ -623,12 +623,12 @@ internal fun AgentMemoryScreen(
 
     EtaWindowDialog(
         show = showRetainedClear,
-        title = "确认清空结构化记忆",
-        summary = "清空会同步到其他设备，但不会删除 MEMORY.md、任务经验或知识库。",
+        title = "Konfirmo pastrimin e kujtesës së strukturuar",
+        summary = "Pastrimi sinkronizohet në pajisjet e tjera, por nuk fshin MEMORY.md, përvojat e detyrave apo njohuritë.",
         onDismissRequest = { showRetainedClear = false },
     ) {
         MiuixDialogActions(
-            confirmText = "全部清空",
+            confirmText = "Pastro të gjitha",
             destructive = true,
             onCancel = { showRetainedClear = false; showRetainedList = true },
             onConfirm = {
@@ -640,7 +640,7 @@ internal fun AgentMemoryScreen(
 
     EtaWindowDialog(
         show = showKnowledgeEditor,
-        title = if (editDocument == null) "新增知识" else "编辑知识",
+        title = if (editDocument == null) "Shto njohuri" else "Ndrysho njohurinë",
         onDismissRequest = { showKnowledgeEditor = false },
     ) {
         Column(Modifier.fillMaxWidth().heightIn(max = 540.dp)) {
@@ -651,40 +651,40 @@ internal fun AgentMemoryScreen(
                 TextField(
                     value = knowledgeTitle,
                     onValueChange = { knowledgeTitle = it },
-                    label = "标题",
+                    label = "Titulli",
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
                 TextField(
                     value = knowledgeContent,
                     onValueChange = { knowledgeContent = it },
-                    label = "Markdown 内容",
+                    label = "Përmbajtja Markdown",
                     minLines = 5,
                     modifier = Modifier.fillMaxWidth(),
                 )
                 TextField(
                     value = knowledgeSource,
                     onValueChange = { knowledgeSource = it },
-                    label = "来源（网址、文件或用户提供）",
+                    label = "Burimi (URL, skedar ose përdorues)",
                     modifier = Modifier.fillMaxWidth(),
                 )
                 TextField(
                     value = knowledgeTags,
                     onValueChange = { knowledgeTags = it },
-                    label = "标签（逗号分隔）",
+                    label = "Etiketat (të ndara me presje)",
                     modifier = Modifier.fillMaxWidth(),
                 )
                 if (editDocument != null) {
                     EtaPreference(
-                        title = "删除此条知识",
-                        summary = "删除操作会同步到其他设备",
+                        title = "Fshi këtë njohuri",
+                        summary = "Fshirja sinkronizohet me pajisjet e tjera",
                         onClick = { showKnowledgeDelete = true },
                     )
                 }
             }
             MiuixDialogActions(
                 modifier = Modifier.padding(top = 12.dp),
-                confirmText = "保存",
+                confirmText = "Ruaj",
                 confirmEnabled = knowledgeTitle.isNotBlank() &&
                     knowledgeContent.isNotBlank() && knowledgeContent.length <= 12_000,
                 onCancel = { showKnowledgeEditor = false },
@@ -707,12 +707,12 @@ internal fun AgentMemoryScreen(
 
     EtaWindowDialog(
         show = showKnowledgeDelete,
-        title = "删除知识条目",
-        summary = "确认后会标记删除，之后同步到其他设备。",
+        title = "Fshi njohurinë",
+        summary = "Pas konfirmimit shënohet për fshirje dhe sinkronizohet me pajisjet e tjera.",
         onDismissRequest = { showKnowledgeDelete = false },
     ) {
         MiuixDialogActions(
-            confirmText = "删除",
+            confirmText = "Fshi",
             destructive = true,
             onCancel = { showKnowledgeDelete = false },
             onConfirm = {
@@ -768,55 +768,55 @@ private fun MemorySettingsGroup(
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaSwitchPreference(
-            title = "自动积累任务经验",
-            summary = "仅记录任务类别、工具名称和错误码；不存聊天原文、截图或工具参数，默认关闭。",
+            title = "Ruajtja automatike e përvojave të detyrave",
+            summary = "Ruaj vetëm llojet e detyrave, emrat e mjeteve dhe kodet e gabimeve; jo bisedat, pamjet e ekranit apo argumentet. Çaktivizuar si parazgjedhje.",
             checked = state.autoExperienceEnabled,
             enabled = state.enabled && !state.isLoading,
             onCheckedChange = { onAction(AgentMemoryAction.ToggleAutoExperience(it)) },
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaSwitchPreference(
-            title = "智能记住 · Retain",
-            summary = "独立调用当前模型提取有证据的长期记忆；增加模型调用耗时与费用，默认关闭。",
+            title = "Kujtesë inteligjente · Retain",
+            summary = "Përdor veçmas modelin aktual për kujtime afatgjata me prova. Rrit kohën dhe koston; çaktivizuar si parazgjedhje.",
             checked = state.smartRetainEnabled,
             enabled = state.enabled && !state.isLoading,
             onCheckedChange = { onAction(AgentMemoryAction.ToggleSmartRetain(it)) },
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaPreference(
-            title = "结构化记忆（${state.retainedNodes.size} 条）",
-            summary = "查看语义事实、任务经历、步骤和模型关联建议，支持逐条删除",
+            title = "Kujtesa e strukturuar (${state.retainedNodes.size}  elemente )",
+            summary = "Shfaq fakte semantike, përvoja, hapa dhe sugjerime lidhjesh; mund t'i fshish individualisht",
             enabled = !state.isLoading,
             onClick = onOpenRetained,
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaSwitchPreference(
-            title = "聊天模型语义检索",
-            summary = "直接使用已配置的聊天模型语义排序；包括 MEMORY.md、知识库和 Retain 节点，无需单独 Embeddings 模型",
+            title = "Kërkimi semantik me modelin e bisedës",
+            summary = "Përdor modelin aktual për renditje semantike në MEMORY.md, njohuri dhe nyjet Retain, pa model të veçantë Embeddings",
             checked = state.semanticMemoryEnabled,
             enabled = state.enabled && !state.isLoading,
             onCheckedChange = { onAction(AgentMemoryAction.ToggleSemanticRecall(it)) },
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaPreference(
-            title = "语义检索状态",
+            title = "Gjendja e kërkimit semantik",
             summary = state.semanticRetrievalReport ?: (
-                "MEMORY.md 可检索片段 ${state.semanticCoreChunks} 条，结构化记忆 " +
-                    "${state.retainedNodes.count { it.active }} 条；还没有检索记录"
+                "Pjesë të kërkueshme të MEMORY.md:${state.semanticCoreChunks}  elemente，Kujtesë e strukturuar:" +
+                    "${state.retainedNodes.count { it.active }}  elemente；Ende nuk ka kërkime"
                 ),
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaPreference(
-            title = if (state.chatRetrievalTestBusy) "正在测试聊天模型…" else "测试当前聊天模型检索",
+            title = if (state.chatRetrievalTestBusy) "Po testohet modeli i bisedës…" else "Testo kërkimin me modelin aktual",
             summary = state.chatRetrievalTestStatus
-                ?: "直接向当前聊天模型请求语义排序，不用配置 Embeddings 模型",
+                ?: "Kërko renditje semantike nga modeli aktual pa konfiguruar Embeddings",
             enabled = state.semanticMemoryEnabled && !state.chatRetrievalTestBusy,
             onClick = { onAction(AgentMemoryAction.TestChatSemanticRetrieval) },
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaSwitchPreference(
-            title = "高级：独立 Embeddings 辅助",
-            summary = "默认关闭；仅当当前 Provider 确实提供 Embeddings API 时开启，额外产生模型请求",
+            title = "Të avancuara: Embeddings i veçantë",
+            summary = "Çaktivizuar si parazgjedhje; aktivizo vetëm nëse ofruesi mbështet Embeddings. Kërkon thirrje shtesë.",
             checked = state.semanticUseEmbeddings,
             enabled = state.semanticMemoryEnabled && state.enabled && !state.isLoading,
             onCheckedChange = { onAction(AgentMemoryAction.ToggleEmbeddingAccelerator(it)) },
@@ -824,25 +824,25 @@ private fun MemorySettingsGroup(
         if (state.semanticUseEmbeddings) {
             EtaPreferenceDivider(hasLeading = false)
             EtaPreference(
-                title = "嵌入模型：${state.semanticModel}",
-                summary = "单独指定支持 Embeddings 的模型，与聊天模型并不相同",
+                title = "Modeli Embeddings:${state.semanticModel}",
+                summary = "Zgjidh një model Embeddings të veçantë nga modeli i bisedës",
                 onClick = onConfigureSemanticModel,
             )
             EtaPreferenceDivider(hasLeading = false)
             EtaPreference(
-                title = if (state.embeddingTestBusy) "正在测试接口…" else "测试 Embeddings 接口",
-                summary = state.embeddingTestStatus ?: "点击实际请求当前 Provider 的 Embeddings API，返回向量维度或错误",
+                title = if (state.embeddingTestBusy) "Po testohet API-ja…" else "Testo API-n Embeddings",
+                summary = state.embeddingTestStatus ?: "Testo API-n Embeddings të ofruesit aktual për të marrë dimensionin e vektorit ose gabimin",
                 enabled = !state.embeddingTestBusy,
                 onClick = { onAction(AgentMemoryAction.TestEmbeddingProvider) },
             )
             EtaPreferenceDivider(hasLeading = false)
             EtaPreference(
-                title = if (state.semanticIndexBusy) "正在生成向量…" else "建立 / 修复本地向量索引",
+                title = if (state.semanticIndexBusy) "Po krijohen vektorët…" else "Krijo / riparo indeksin vektorial lokal",
                 summary = state.semanticIndexStatus ?: (
-                    "结构化记忆 ${state.retainedNodes.count { it.active }} 条；已建立 ${state.semanticIndexedNodes} 条。" +
+                    "Kujtesë e strukturuar:${state.retainedNodes.count { it.active }}  elemente；Janë krijuar:${state.semanticIndexedNodes}  elemente。" +
                         if (state.retainedNodes.none { it.active }) {
-                            "当前无需建立索引，聊天模型仍可检索 MEMORY.md"
-                        } else "点击建立索引"
+                            "Indeksi nuk nevojitet tani; modeli mund të kërkojë në MEMORY.md"
+                        } else "Prek për të krijuar indeksin"
                     ),
                 enabled = state.semanticMemoryEnabled && !state.semanticIndexBusy &&
                     state.retainedNodes.any { it.active },
@@ -851,44 +851,44 @@ private fun MemorySettingsGroup(
         }
         EtaPreferenceDivider(hasLeading = false)
         EtaSwitchPreference(
-            title = "网状关联召回",
-            summary = "模型生成候选关联；人工确认的边最多扩展两跳，未审核边仅做一跳探索",
+            title = "Rikujtimi i lidhjeve të kujtesës",
+            summary = "Modeli sugjeron lidhje; lidhjet e konfirmuara zgjerohen deri në dy hapa, të pashqyrtuarat vetëm një",
             checked = state.graphMemoryEnabled,
             enabled = state.enabled && !state.isLoading,
             onCheckedChange = { onAction(AgentMemoryAction.ToggleGraphRecall(it)) },
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaPreference(
-            title = if (state.graphClassifierBusy) "正在分析关联…" else "模型整理已有记忆关联",
-            summary = state.graphClassifierStatus ?: "重新分类最近最多 12 条记忆（额外模型调用，需人工审核）",
+            title = if (state.graphClassifierBusy) "Po analizohen lidhjet…" else "Analizo lidhjet ekzistuese të kujtesës",
+            summary = state.graphClassifierStatus ?: "Riklasifiko deri në 12 kujtime të fundit (thirrje shtesë modeli dhe shqyrtim manual)",
             enabled = state.graphMemoryEnabled && !state.graphClassifierBusy && state.retainedNodes.isNotEmpty(),
             onClick = { onAction(AgentMemoryAction.ClassifyExistingRelations) },
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaPreference(
-            title = "知识库（${state.knowledgeDocuments.size} 条）",
-            summary = "搜索、查看和编辑本机保存的知识条目",
+            title = "Baza e njohurive (${state.knowledgeDocuments.size}  elemente )",
+            summary = "Kërko, shfaq dhe ndrysho njohuritë e ruajtura lokalisht",
             enabled = !state.isLoading,
             onClick = onOpenKnowledge,
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaPreference(
-            title = "WebDAV 加密同步",
-            summary = state.syncEndpoint.ifBlank { "未配置 · 可连接任意 HTTPS WebDAV 服务端" },
+            title = "Sinkronizim i enkriptuar WebDAV",
+            summary = state.syncEndpoint.ifBlank { "Nuk është konfiguruar · lidhet me çdo server HTTPS WebDAV" },
             enabled = !state.isLoading,
             onClick = onConfigureSync,
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaPreference(
-            title = if (state.syncBusy) "正在同步…" else "立即同步知识与记忆",
-            summary = state.syncStatus ?: "跨设备合并知识、核心记忆及自动任务经验",
+            title = if (state.syncBusy) "Po sinkronizohet…" else "Sinkronizo njohuritë dhe kujtesën",
+            summary = state.syncStatus ?: "Bashko njohuritë, kujtesën kryesore dhe përvojat në pajisje të ndryshme",
             enabled = state.syncHasPassphrase && !state.syncBusy,
             onClick = { onAction(AgentMemoryAction.RunWebDavSync) },
         )
         EtaPreferenceDivider(hasLeading = false)
         EtaSwitchPreference(
-            title = "后台自动同步",
-            summary = "由 Android 安排约每 15 分钟一次；确切时间受省电影响",
+            title = "Sinkronizimi automatik në sfond",
+            summary = "Android e planifikon afërsisht çdo 15 minuta; kursimi i baterisë mund ta ndryshojë",
             checked = state.syncAutoEnabled,
             enabled = state.syncHasPassphrase && !state.syncBusy,
             onCheckedChange = { onAction(AgentMemoryAction.ToggleWebDavAutoSync(it)) },
@@ -896,8 +896,8 @@ private fun MemorySettingsGroup(
         if (state.syncMemoryConflict) {
             EtaPreferenceDivider(hasLeading = false)
             EtaPreference(
-                title = "解决 MEMORY.md 多端冲突",
-                summary = "审查远端冲突副本并保存本机合并内容后，确认使用本机版本",
+                title = "Zgjidh konfliktin e MEMORY.md mes pajisjeve",
+                summary = "Shqyrto kopjen në konflikt, bashko përmbajtjen lokalisht dhe konfirmo versionin lokal",
                 enabled = !state.syncBusy,
                 onClick = onResolveMemoryConflict,
             )
@@ -905,16 +905,16 @@ private fun MemorySettingsGroup(
         if (state.syncEndpoint.isNotBlank()) {
             EtaPreferenceDivider(hasLeading = false)
             EtaPreference(
-                title = "断开 WebDAV 连接",
-                summary = "仅清除本机连接配置，不删除远端文件",
+                title = "Shkëput lidhjen WebDAV",
+                summary = "Hiq vetëm konfigurimin lokal; mos fshi skedarët në server",
                 enabled = !state.syncBusy,
                 onClick = onDisconnectSync,
             )
         }
         EtaPreferenceDivider(hasLeading = false)
         EtaPreference(
-            title = "已保存任务经验：${state.experienceCount} 条",
-            summary = "点击清空自动经验（不会清除 MEMORY.md）",
+            title = "Përvoja të ruajtura:${state.experienceCount}  elemente",
+            summary = "Prek për të pastruar përvojat automatike (MEMORY.md ruhet)",
             onClick = { onAction(AgentMemoryAction.ClearExperiences) },
         )
         EtaPreferenceDivider(hasLeading = false)
@@ -925,7 +925,7 @@ private fun MemorySettingsGroup(
     }
 }
 
-/** 文档卡片：标题栏承载文件名、体积与预览/编辑切换，正文区占满卡片剩余高度并独立滚动。 */
+/** 文档卡片：Titulli栏承载文件名、体积与预览/编辑切换，正文区占满卡片剩余高度并独立滚动。 */
 @Composable
 private fun MemoryDocumentCard(
     state: AgentMemoryUiState,
@@ -1069,7 +1069,7 @@ private fun MemoryEditor(
 @Composable
 private fun MemoryTextStyle() = MiuixTheme.textStyles.body2.copy(lineHeight = 22.sp)
 
-/** 轻量分段切换：两个选项常驻可见，选中项用浮起的胶囊表示，比整行 TabRow 更贴合卡片标题栏。 */
+/** 轻量分段切换：两个选项常驻可见，选中项用浮起的胶囊表示，比整行 TabRow 更贴合卡片Titulli栏。 */
 @Composable
 private fun MemoryModeSwitch(
     mode: MemoryViewMode,
@@ -1108,7 +1108,7 @@ private fun MemoryModeSwitch(
     }
 }
 
-/** 有未保存修改或超限时才出现：左侧说明状态，右侧放弃与保存，避免常驻一个灰掉的保存按钮。 */
+/** 有未Ruaj修改或超限时才出现：左侧说明状态，右侧放弃与Ruaj，避免常驻一个灰掉的Ruaj按钮。 */
 @Composable
 private fun MemorySaveBar(
     state: AgentMemoryUiState,

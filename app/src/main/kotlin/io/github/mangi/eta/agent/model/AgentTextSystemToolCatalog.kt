@@ -10,10 +10,10 @@ internal object AgentTextSystemToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "type_text",
-                    description = "向输入框写入文本，结果会读回校验。默认 mode=replace 把整个输入框替换为 text，text 为空即清空；" +
-                        "mode=append 在当前光标处插入。指定 index 时写入该 editable 节点，不必先点击；不指定时写入当前输入焦点。" +
-                        "submit=true 写入后按输入法回车，用于搜索、发送；结果 submitted=false 时说明文本已写入但未提交，改为点击发送按钮，不要重复输入。" +
-                        "中文、emoji、长文本都直接传入，无需借助剪贴板。",
+                    description = "Shkruaj tekst në një fushë dhe verifiko rezultatin duke e rilexuar. Si parazgjedhje mode=replace zëvendëson gjithë përmbajtjen me text; text bosh e pastron." +
+                        "mode=append fut tekst në pozicionin e kursorit. Me index shkruan drejtpërdrejt në nyjën editable, pa e prekur; përndryshe përdor fushën aktive." +
+                        "Me submit=true shtyp Enter pas shkrimit për kërkim ose dërgim. Kur submitted=false, teksti është shkruar por nuk është dërguar; prek butonin e dërgimit dhe mos e përsërit shkrimin." +
+                        "Teksti në çdo gjuhë, emoji dhe tekstet e gjata futen drejtpërdrejt, pa përdorur clipboard.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -25,25 +25,25 @@ internal object AgentTextSystemToolCatalog {
                                     JSONObject()
                                         .put("type", "string")
                                         .put("enum", JSONArray().put("replace").put("append"))
-                                        .put("description", "replace 整体替换（默认），append 在光标处插入。"),
+                                        .put("description", "replace zëvendëson të gjithë tekstin (parazgjedhja); append fut tekst te kursori."),
                                 )
                                 .put(
                                     "index",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "可选，editable 节点 index；仅 replace 可用，必须同时传入同一次观察的 observation_id。"),
+                                        .put("description", "index opsional i nyjës editable; vetëm për replace dhe duhet shoqëruar me observation_id nga i njëjti vëzhgim."),
                                 )
                                 .put(
                                     "observation_id",
                                     JSONObject()
                                         .put("type", "string")
-                                        .put("description", "指定 index 时必传，与 index 来自同一次最近的观察。"),
+                                        .put("description", "Kërkohet kur jep index dhe duhet të vijë nga i njëjti vëzhgim më i fundit."),
                                 )
                                 .put(
                                     "submit",
                                     JSONObject()
                                         .put("type", "boolean")
-                                        .put("description", "写入后按输入法回车提交，默认 false。"),
+                                        .put("description", "Dërgo me Enter pas shkrimit; parazgjedhja false."),
                                 )
                         )
                         .put("required", JSONArray().put("text"))
@@ -52,7 +52,7 @@ internal object AgentTextSystemToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "set_clipboard",
-                    description = "把文本写入系统剪贴板。适合准备粘贴长文本、中文、emoji 或特殊字符。",
+                    description = "Kopjo tekst në clipboard-in e sistemit; përdoret për tekst të gjatë, shumëgjuhësh, emoji ose simbole të veçanta.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -69,7 +69,7 @@ internal object AgentTextSystemToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "get_clipboard",
-                    description = "读取系统剪贴板文本。Android 版本或后台限制可能导致读取失败。",
+                    description = "Lexo tekstin nga clipboard-i i sistemit; versioni Android ose kufizimet në sfond mund ta pengojnë.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put("properties", JSONObject())
@@ -78,7 +78,7 @@ internal object AgentTextSystemToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "press_key",
-                    description = "按系统按键或全局动作。BACK/HOME/RECENTS/NOTIFICATIONS/QUICK_SETTINGS 优先走无障碍全局动作；ENTER 优先走输入法回车。",
+                    description = "Ekzekuto taste të sistemit ose veprime globale. BACK/HOME/RECENTS/NOTIFICATIONS/QUICK_SETTINGS preferojnë veprimet globale të aksesueshmërisë; ENTER preferon tastierën.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -107,7 +107,7 @@ internal object AgentTextSystemToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "wait",
-                    description = "等待一段时间，让动画、网络加载或页面跳转完成。不要用它代替 wait_for_text/wait_for_package 的可验证等待。",
+                    description = "Prit për përfundimin e animacioneve, ngarkimit në rrjet ose kalimit të faqeve. Mos e zëvendëso me këtë pritjen e verifikueshme wait_for_text/wait_for_package.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -117,7 +117,7 @@ internal object AgentTextSystemToolCatalog {
                                     "duration_ms",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "等待时长，100 到 30000，默认 1000。")
+                                        .put("description", "Koha e pritjes, 100 deri në 30000 ms; parazgjedhja 1000.")
                                 )
                         )
                 )
@@ -125,7 +125,7 @@ internal object AgentTextSystemToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "wait_for_text",
-                    description = "等待当前屏幕出现指定文本或描述，适合点击后确认页面已到达、列表加载完成、弹窗出现。",
+                    description = "Prit derisa teksti ose përshkrimi i kërkuar të shfaqet në ekran, për të verifikuar hapjen e faqes, ngarkimin e listës ose dialogun.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -136,20 +136,20 @@ internal object AgentTextSystemToolCatalog {
                                     "timeout_ms",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "最长等待时间，500 到 60000，默认 10000。")
+                                        .put("description", "Koha maksimale e pritjes, 500 deri në 60000 ms; parazgjedhja 10000.")
                                 )
                                 .put(
                                     "include_desc",
                                     JSONObject()
                                         .put("type", "boolean")
-                                        .put("description", "是否匹配 content-desc，默认 true。")
+                                        .put("description", "Përfshi content-desc në përputhje; parazgjedhja true.")
                                 )
                                 .put(
                                     "match",
                                     JSONObject()
                                         .put("type", "string")
                                         .put("enum", JSONArray().put("contains").put("exact").put("prefix").put("regex"))
-                                        .put("description", "匹配方式，默认 contains。")
+                                        .put("description", "Mënyra e përputhjes; parazgjedhja contains.")
                                 )
                         )
                         .put("required", JSONArray().put("text"))
@@ -158,7 +158,7 @@ internal object AgentTextSystemToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "wait_for_package",
-                    description = "等待指定 Android package 到前台，适合 launch_app/open_uri 后确认目标应用已打开。",
+                    description = "Prit derisa paketa Android e kërkuar të jetë aktive, për të verifikuar launch_app/open_uri.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -169,7 +169,7 @@ internal object AgentTextSystemToolCatalog {
                                     "timeout_ms",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "最长等待时间，500 到 60000，默认 10000。")
+                                        .put("description", "Koha maksimale e pritjes, 500 deri në 60000 ms; parazgjedhja 10000.")
                                 )
                         )
                         .put("required", JSONArray().put("package_name"))
@@ -178,7 +178,7 @@ internal object AgentTextSystemToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "open_system_panel",
-                    description = "打开通知栏或快捷设置面板。",
+                    description = "Hap panelin e njoftimeve ose cilësimet e shpejta.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(

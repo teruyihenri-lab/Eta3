@@ -200,12 +200,12 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
                     runId = pending.incoming.request.runId,
                     ok = false,
                     content = "",
-                    error = "Agent Runtime 服务已停止",
+                    error = "Shërbimi i agjentit është ndalur",
                 ),
             )
         }
         pendingStartRequest = null
-        activeSession?.cancel("Agent Runtime 服务已停止")
+        activeSession?.cancel("Shërbimi i agjentit është ndalur")
         activeSession = null
         resultIo.shutdownNow()
         mainHandler.removeCallbacksAndMessages(null)
@@ -238,7 +238,7 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
                             runId = rejectedRunId,
                             ok = false,
                             content = "",
-                            error = "Agent Runtime 拒绝了非法来源的请求",
+                            error = "Agjenti refuzoi kërkesën nga një burim i paautorizuar",
                             contextSnapshotRef = rejectedRunId,
                         ),
                     )
@@ -251,7 +251,7 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
                     RunPhaseTrace.mark("runtime.start")
                     val data = msg.data
                     if (data == null) {
-                        finishWithFailure("Agent Runtime 请求缺少消息体", msg.replyTo)
+                        finishWithFailure("Kërkesës së agjentit i mungon përmbajtja", msg.replyTo)
                         return
                     }
                     val incoming = runCatching {
@@ -260,13 +260,13 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
                         AndroidAgentLogger.warnThrottled("runtime_invalid_start_request") {
                             "Agent runtime rejected invalid start request: type=${throwable.safeLogType()}"
                         }
-                        finishWithFailure("Agent Runtime 请求格式无效", msg.replyTo)
+                        finishWithFailure("Kërkesa e agjentit ka format të pavlefshëm", msg.replyTo)
                         return
                     }
                     val request = incoming.request
                     if (request.runId.isBlank() || (request.operation != AgentRuntimeWire.OP_COMPACT && request.prompt.isBlank() && incoming.images.isEmpty() && !incoming.hasDeferredPrompt)) {
                         incoming.close()
-                        finishWithFailure("Agent Runtime 请求缺少 runId 或用户输入", msg.replyTo)
+                        finishWithFailure("Kërkesës së agjentit i mungon runId ose teksti i përdoruesit", msg.replyTo)
                         return
                     }
                     ingestRunRequest(incoming, msg.replyTo)
@@ -330,7 +330,7 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
                     dispatchResultIo {
                         val target = AgentRuntimeResultStore.readOwned(this@AgentRuntimeService, runId, owner)
                         sendResultNow(replyTo, target?.result ?: AgentRuntimeWire.RunResult(
-                            runId, false, "", "完整运行结果不可用", contextSnapshotRef = runId,
+                            runId, false, "", "Rezultati i plotë nuk është i disponueshëm", contextSnapshotRef = runId,
                         ))
                     }
                 }
@@ -367,7 +367,7 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
                     runId = previous.incoming.request.runId,
                     ok = false,
                     content = "",
-                    error = "已被新的 Agent 任务替换",
+                    error = "U zëvendësua nga një detyrë më e re e agjentit",
                 ),
             )
         }
@@ -412,10 +412,10 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
                         finishWithFailure(
                             when (throwable) {
                                 is AgentRuntimeImageTransfer.ImageTransferException ->
-                                    throwable.message ?: "Agent Runtime 无法读取图片"
+                                    throwable.message ?: "Agjenti nuk mund ta lexojë imazhin"
                                 is RuntimeConfigUnavailableException ->
-                                    "请先在 Eta 中配置可用的模型"
-                                else -> "Agent Runtime 无法准备请求"
+                                    "Konfiguro fillimisht një model të disponueshëm në Eta"
+                                else -> "Agjenti nuk mund ta përgatisë kërkesën"
                             },
                             replyTo,
                         )
@@ -454,7 +454,7 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
         if (!executionHeld && !allowBoundFallback) {
             session.complete(AgentRuntimeWire.RunResult(
                 runId = request.runId, ok = false, content = "",
-                error = "无法启动后台执行服务，请返回 Eta 后重试",
+                error = "Shërbimi në sfond nuk mund të niset. Kthehu te Eta dhe provo përsëri",
             )) {}
             return
         }
@@ -513,9 +513,9 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
                             ok = false,
                             content = "",
                             error = if (failure is OutOfMemoryError) {
-                                "运行时内存不足：会话历史过大，请先压缩上下文后重试"
+                                "Kujtesë e pamjaftueshme: historia është tepër e madhe. Përmblidh kontekstin dhe provo përsëri"
                             } else {
-                                "运行中断（${failure.safeLogType()}），可在 设置 → 关于 → 导出运行日志 查看详情"
+                                "Ekzekutimi u ndërpre (${failure.safeLogType()}); shiko Cilësimet → Rreth → Eksporto regjistrat për hollësi"
                             },
                             contextSnapshotRef = request.runId,
                             operation = request.operation,
@@ -711,7 +711,7 @@ internal class AgentRuntimeService : Service(), LifecycleOwner, SavedStateRegist
             }
             // 不把传输失败伪装成已交付终态；引用使新客户端保留 outbox，等待完整恢复。
             val fallback = AgentRuntimeWire.RunResult(result.runId, false, "",
-                "完整结果传输失败，已保存的历史未删除。请重新打开会话恢复。",
+                "Transferimi i rezultatit të plotë dështoi. Historia e ruajtur nuk u fshi; rihap bisedën për rikuperim.",
                 contextSnapshotRef = result.runId, operation = result.operation)
             try {
                 target?.send(Message.obtain(null, AgentRuntimeWire.MSG_RESULT).apply {

@@ -10,7 +10,7 @@ internal object AgentGestureToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "tap",
-                    description = "点击坐标。能用节点时优先 tap_element；看截图定位时用 coordinate_space=normalized（0–999），坐标来自 ui_nodes 时用 screen。",
+                    description = "Prek një koordinatë. Kur ka nyje UI përdor fillimisht tap_element; për koordinata nga pamja përdor coordinate_space=normalized (0–999), kurse nga ui_nodes përdor screen.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -26,7 +26,7 @@ internal object AgentGestureToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "tap_area",
-                    description = "点击矩形区域中心。大按钮、大列表项和可见文字区域优先用这个工具；坐标系同 tap，必须显式填写 coordinate_space。",
+                    description = "Prek qendrën e një zone drejtkëndore. Përdore për butona të mëdhenj, elemente liste dhe tekst të dukshëm. Si te tap, jep shprehimisht coordinate_space.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -44,7 +44,7 @@ internal object AgentGestureToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "tap_element",
-                    description = "点击指定观察快照中的 UI 节点。index 与 observation_id 必须来自同一次最近的 observe_screen；若观察已过期，先重新观察。Runtime 会在执行前确认 Eta 无障碍服务已经连接。",
+                    description = "Prek nyjën UI të vëzhguar. index dhe observation_id duhet të vijnë nga i njëjti vëzhgim më i fundit observe_screen; nëse ka skaduar, vëzhgo përsëri. Runtime kontrollon lidhjen me shërbimin e aksesueshmërisë Eta.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -54,13 +54,13 @@ internal object AgentGestureToolCatalog {
                                     "index",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "同一次 observe_screen 返回的 UI 节点 index。")
+                                        .put("description", "index i nyjës UI nga i njëjti vëzhgim observe_screen.")
                                 )
                                 .put(
                                     "observation_id",
                                     JSONObject()
                                         .put("type", "string")
-                                        .put("description", "与 index 来自同一次最近 observe_screen 的 observation_id。")
+                                        .put("description", "observation_id që i përket index nga i njëjti vëzhgim më i fundit observe_screen.")
                                 )
                         )
                         .put("required", JSONArray().put("index").put("observation_id"))
@@ -69,7 +69,7 @@ internal object AgentGestureToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "long_press",
-                    description = "长按坐标。能用节点时优先 long_press_element；坐标系同 tap，必须显式填写 coordinate_space。",
+                    description = "Mbaj shtypur koordinatën. Kur ka nyje UI përdor long_press_element; si te tap, jep shprehimisht coordinate_space.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -81,7 +81,7 @@ internal object AgentGestureToolCatalog {
                                     "duration_ms",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "长按时长，300 到 3000，默认 800")
+                                        .put("description", "Kohëzgjatja e mbajtjes shtypur, 300 deri në 3000 ms; parazgjedhja 800")
                                 )
                                 .put("coordinate_space", AgentToolSchema.coordinateSpace())
                         )
@@ -91,7 +91,7 @@ internal object AgentGestureToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "long_press_element",
-                    description = "长按指定观察快照中的 UI 节点。index 与 observation_id 必须来自同一次最近的 observe_screen；若观察已过期，先重新观察。Runtime 会在执行前确认 Eta 无障碍服务已经连接。",
+                    description = "Mbaj shtypur nyjën UI të vëzhguar. index dhe observation_id duhet të vijnë nga i njëjti vëzhgim më i fundit observe_screen; nëse ka skaduar, vëzhgo përsëri. Runtime kontrollon lidhjen me aksesueshmërinë Eta.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -101,19 +101,19 @@ internal object AgentGestureToolCatalog {
                                     "index",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "同一次 observe_screen 返回的 UI 节点 index。")
+                                        .put("description", "index i nyjës UI nga i njëjti vëzhgim observe_screen.")
                                 )
                                 .put(
                                     "observation_id",
                                     JSONObject()
                                         .put("type", "string")
-                                        .put("description", "与 index 来自同一次最近 observe_screen 的 observation_id。")
+                                        .put("description", "observation_id që i përket index nga i njëjti vëzhgim më i fundit observe_screen.")
                                 )
                                 .put(
                                     "duration_ms",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "长按时长，300 到 3000，默认 800")
+                                        .put("description", "Kohëzgjatja e mbajtjes shtypur, 300 deri në 3000 ms; parazgjedhja 800")
                                 )
                         )
                         .put("required", JSONArray().put("index").put("observation_id"))
@@ -122,7 +122,7 @@ internal object AgentGestureToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "swipe",
-                    description = "从一个坐标拖到另一个坐标（手指方向），用于拖动滑块、轮播、地图等精确手势。浏览列表请用 scroll。坐标系同 tap，必须显式填写 coordinate_space。",
+                    description = "Rrëshqit nga një koordinatë në tjetrën, sipas drejtimit të gishtit. Përdore për rrëshqitës, karusele dhe harta; për lista përdor scroll. Jep shprehimisht coordinate_space.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -136,7 +136,7 @@ internal object AgentGestureToolCatalog {
                                     "duration_ms",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "滑动时长，100 到 2000，默认 500")
+                                        .put("description", "Kohëzgjatja e rrëshqitjes, 100 deri në 2000 ms; parazgjedhja 500")
                                 )
                                 .put("coordinate_space", AgentToolSchema.coordinateSpace())
                         )
@@ -146,7 +146,7 @@ internal object AgentGestureToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "scroll",
-                    description = "按内容浏览方向滚动当前屏幕的主列表：down 显示下方内容，up 显示上方内容，left/right 同理。结果里 moved=false 且 at_boundary=true 表示已到底，换方向或结束；页面有多个列表时用 scroll_element 指定目标。",
+                    description = "Lëviz listën kryesore sipas përmbajtjes: down shfaq përmbajtjen më poshtë, up shfaq përmbajtjen më sipër, njësoj për left/right. Kur moved=false dhe at_boundary=true është arritur kufiri; ndrysho drejtim ose ndalo. Për disa lista, përdor scroll_element.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -163,7 +163,7 @@ internal object AgentGestureToolCatalog {
                                     JSONObject()
                                         .put("type", "string")
                                         .put("enum", JSONArray().put("page").put("small"))
-                                        .put("description", "page 约翻一屏（默认），small 只露出少量新内容，用于把目标项微调进视野。"),
+                                        .put("description", "page lëviz afërsisht një ekran (parazgjedhja); small lëviz pak për ta sjellë objektivin në pamje."),
                                 )
                         )
                         .put("required", JSONArray().put("direction"))
@@ -172,7 +172,7 @@ internal object AgentGestureToolCatalog {
             .put(
                 AgentToolSchema.function(
                     name = "scroll_element",
-                    description = "按内容浏览方向滚动指定观察快照中的可滚动 UI 节点：down 显示下方内容，up 显示上方内容，left 显示左侧内容，right 显示右侧内容。index 与 observation_id 必须来自同一次最近的 observe_screen；若观察已过期，先重新观察。Runtime 会在执行前确认 Eta 无障碍服务已经连接。",
+                    description = "Lëviz nyjën UI të vëzhguar: down shfaq përmbajtjen më poshtë, up shfaq përmbajtjen më sipër, left majtas dhe right djathtas. index dhe observation_id duhet të vijnë nga i njëjti vëzhgim më i fundit observe_screen; nëse ka skaduar, vëzhgo përsëri. Runtime verifikon lidhjen me aksesueshmërinë Eta.",
                     parameters = JSONObject()
                         .put("type", "object")
                         .put(
@@ -182,27 +182,27 @@ internal object AgentGestureToolCatalog {
                                     "index",
                                     JSONObject()
                                         .put("type", "integer")
-                                        .put("description", "同一次 observe_screen 返回的可滚动 UI 节点 index。")
+                                        .put("description", "index i nyjës UI të lëvizshme nga i njëjti vëzhgim observe_screen.")
                                 )
                                 .put(
                                     "observation_id",
                                     JSONObject()
                                         .put("type", "string")
-                                        .put("description", "与 index 来自同一次最近 observe_screen 的 observation_id。")
+                                        .put("description", "observation_id që i përket index nga i njëjti vëzhgim më i fundit observe_screen.")
                                 )
                                 .put(
                                     "direction",
                                     JSONObject()
                                         .put("type", "string")
                                         .put("enum", JSONArray().put("up").put("down").put("left").put("right"))
-                                        .put("description", "内容浏览方向；down 显示下方内容，up 显示上方内容。")
+                                        .put("description", "Drejtimi i lëvizjes; down shfaq përmbajtjen më poshtë, up shfaq përmbajtjen më sipër.")
                                 )
                                 .put(
                                     "amount",
                                     JSONObject()
                                         .put("type", "string")
                                         .put("enum", JSONArray().put("page").put("small"))
-                                        .put("description", "page 约翻一屏（默认），small 只露出少量新内容，用于把目标项微调进视野。"),
+                                        .put("description", "page lëviz afërsisht një ekran (parazgjedhja); small lëviz pak për ta sjellë objektivin në pamje."),
                                 )
                         )
                         .put("required", JSONArray().put("index").put("observation_id").put("direction"))

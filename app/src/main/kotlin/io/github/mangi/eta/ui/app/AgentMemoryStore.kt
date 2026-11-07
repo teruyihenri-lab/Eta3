@@ -164,7 +164,7 @@ internal class AgentMemoryStore(
                     }
                 }.onFailure {
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = "无法保存自动经验记忆开关")
+                        memoryState = memoryState.copy(notice = "Aktivizimi i kujtesës automatike të përvojës nuk u ruajt")
                     }
                 }
         }
@@ -175,11 +175,11 @@ internal class AgentMemoryStore(
             runCatching { AgentExperienceRepository.clear() }
                 .onSuccess {
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(experienceCount = 0, notice = "任务经验已清空")
+                        memoryState = memoryState.copy(experienceCount = 0, notice = "Përvoja e detyrave u pastrua")
                     }
                 }.onFailure {
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = "无法清空任务经验")
+                        memoryState = memoryState.copy(notice = "Përvoja e detyrave nuk u pastrua")
                     }
                 }
         }
@@ -194,7 +194,7 @@ internal class AgentMemoryStore(
                     }
                 }.onFailure {
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = "无法保存智能记忆开关")
+                        memoryState = memoryState.copy(notice = "Aktivizimi i kujtesës inteligjente nuk u ruajt")
                     }
                 }
         }
@@ -210,7 +210,7 @@ internal class AgentMemoryStore(
                 },
                 onFailure = {
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = "无法更新语义召回开关")
+                        memoryState = memoryState.copy(notice = "Cilësimi i rikujtimit semantik nuk u përditësua")
                     }
                 },
             )
@@ -221,31 +221,31 @@ internal class AgentMemoryStore(
         if (memoryState.chatRetrievalTestBusy) return
         memoryState = memoryState.copy(
             chatRetrievalTestBusy = true,
-            chatRetrievalTestStatus = "正在调用当前聊天模型测试语义检索…",
+            chatRetrievalTestStatus = "Po testohet kërkimi semantik me modelin aktual…",
         )
         scope.launch(Dispatchers.IO) {
             val result = runCatching {
                 val config = RuntimeConfigRepository.currentRuntimeConfig()
-                    ?: error("请先选择可用的聊天模型")
+                    ?: error("Zgjidh fillimisht një model bisede të disponueshëm")
                 val core = AgentMemoryRepository.snapshot().content
                 val nodes = AgentRetainedMemoryRepository.active(400)
                 val docs = AgentKnowledgeRepository.snapshot().filter { !it.deleted }
-                val query = "我之前保存了哪些项目、长期偏好和重要资料"
+                val query = "Cilat projekte, preferenca afatgjata dhe dokumente të rëndësishme kam ruajtur më parë?"
                 val chunks = AgentChatMemoryCandidates.coreChunks(core).size
                 val candidates = AgentChatMemoryCandidates.select(query, core, docs, nodes)
-                if (candidates.isEmpty()) error("MEMORY.md、知识库和结构化记忆都是空的")
+                if (candidates.isEmpty()) error("MEMORY.md, baza e njohurive dhe kujtesa e strukturuar janë bosh")
                 val selection = AgentChatMemoryReranker().rerank(
                     query, candidates, config, AgentRunController(),
                 )
                 val health = AgentMemoryRetrievalReport(
                     "chat", candidates.size, selection.selected.size,
-                    chunks, nodes.size, "手动测试成功",
+                    chunks, nodes.size, "Testi manual kaloi",
                 )
                 AgentMemoryRetrievalHealthStore(appContext.filesDir).write(health)
-                val message = "当前聊天模型可用；筛选 ${candidates.size} 条候选、命中 ${selection.selected.size} 条。" +
+                val message = "Modeli aktual është i disponueshëm; u kontrolluan ${candidates.size} kandidatë dhe u gjetën ${selection.selected.size}." +
                     (if (selection.selected.isEmpty()) {
-                        "测试问题没有匹配结果，可换一个具体问题在会话中验证"
-                    } else " 来源：${selection.selected.map { it.source }.distinct().joinToString("、")}")
+                        "Pyetja e testit nuk dha rezultat. Provo një pyetje më konkrete gjatë bisedës"
+                    } else " Burimi: ${selection.selected.map { it.source }.distinct().joinToString(", ")}")
                 message to health.shortSummary()
             }
             withContext(Dispatchers.Main) {
@@ -253,7 +253,7 @@ internal class AgentMemoryStore(
                     chatRetrievalTestBusy = false,
                     chatRetrievalTestStatus = result.fold(
                         onSuccess = { it.first },
-                        onFailure = { "当前模型检索失败：${it.message ?: it.javaClass.simpleName}" },
+                        onFailure = { "Kërkimi me modelin aktual dështoi: ${it.message ?: it.javaClass.simpleName}" },
                     ),
                     semanticRetrievalReport = result.getOrNull()?.second
                         ?: memoryState.semanticRetrievalReport,
@@ -270,14 +270,14 @@ internal class AgentMemoryStore(
                         memoryState = memoryState.copy(
                             semanticUseEmbeddings = enabled,
                             embeddingTestStatus = if (enabled) {
-                                "尚未验证 Embeddings 接口，请先点击测试"
-                            } else "使用当前聊天模型检索；已关闭独立向量接口",
+                                "API-ja Embeddings nuk është verifikuar. Prek Testo"
+                            } else "Kërkimi përdor modelin aktual të bisedës; API-ja e veçantë e vektorëve është e çaktivizuar",
                         )
                     }
                 },
                 onFailure = {
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = "无法保存嵌入模型选项")
+                        memoryState = memoryState.copy(notice = "Cilësimi i modelit Embeddings nuk u ruajt")
                     }
                 },
             )
@@ -288,18 +288,18 @@ internal class AgentMemoryStore(
         if (memoryState.embeddingTestBusy) return
         memoryState = memoryState.copy(
             embeddingTestBusy = true,
-            embeddingTestStatus = "正在真实请求 Embeddings API…",
+            embeddingTestStatus = "Po testohet realisht API-ja Embeddings…",
         )
         scope.launch(Dispatchers.IO) {
             val outcome = runCatching {
                 val config = RuntimeConfigRepository.currentRuntimeConfig()
-                    ?: error("未配置当前模型 Provider")
+                    ?: error("Ofruesi i modelit aktual nuk është konfiguruar")
                 val endpoint = EtaEmbeddingEndpoint.fromConfig(
                     config, SettingsDataStore.semanticMemoryModel(),
                 )
                 val embedding = EtaOpenAiEmbeddingProvider(endpoint)
                     .embed(listOf("Eta embedding compatibility test"), AgentRunController())
-                "连接成功，向量维度 ${embedding.first().size}；当前 Provider 支持 ${endpoint.model}"
+                "Lidhja u krye; dimensioni i vektorit është ${embedding.first().size}; ofruesi mbështet ${endpoint.model}"
             }
             withContext(Dispatchers.Main) {
                 memoryState = memoryState.copy(
@@ -307,7 +307,7 @@ internal class AgentMemoryStore(
                     embeddingTestStatus = outcome.fold(
                         onSuccess = { it },
                         onFailure = {
-                            "不可用：${it.message ?: it.javaClass.simpleName}。默认聊天模型语义检索不受影响"
+                            "Nuk është e disponueshme: ${it.message ?: it.javaClass.simpleName}. Kërkimi me modelin e bisedës mbetet aktiv"
                         },
                     ),
                 )
@@ -322,14 +322,14 @@ internal class AgentMemoryStore(
                     withContext(Dispatchers.Main) {
                         memoryState = memoryState.copy(
                             semanticModel = model.trim(),
-                            semanticIndexStatus = "嵌入模型已更新，需要重新建立本地索引",
+                            semanticIndexStatus = "Modeli Embeddings ndryshoi; indeksi lokal duhet rindërtuar",
                         )
                     }
                 },
                 onFailure = { failure ->
                     withContext(Dispatchers.Main) {
                         memoryState = memoryState.copy(
-                            notice = failure.message ?: "模型名称格式无效",
+                            notice = failure.message ?: "Emri i modelit ka format të pavlefshëm",
                         )
                     }
                 },
@@ -342,17 +342,17 @@ internal class AgentMemoryStore(
             !memoryState.semanticUseEmbeddings) return
         if (memoryState.retainedNodes.none { it.active }) {
             memoryState = memoryState.copy(
-                semanticIndexStatus = "结构化记忆为 0，无法建立向量索引；仍可用当前聊天模型检索 MEMORY.md",
+                semanticIndexStatus = "Kujtesa e strukturuar është bosh; indeksi vektorial nuk mund të krijohet, por MEMORY.md mund të kërkohet me modelin aktual",
             )
             return
         }
         memoryState = memoryState.copy(
-            semanticIndexBusy = true, semanticIndexStatus = "正在生成本地语义向量…",
+            semanticIndexBusy = true, semanticIndexStatus = "Po krijohen vektorët semantikë lokalë…",
         )
         scope.launch(Dispatchers.IO) {
             val result = runCatching {
                 val model = RuntimeConfigRepository.currentRuntimeConfig()
-                    ?: error("请先在模型设置中配置支持 Embeddings 的服务商")
+                    ?: error("Konfiguro te cilësimet një ofrues që mbështet Embeddings")
                 val endpoint = EtaEmbeddingEndpoint.fromConfig(
                     model, SettingsDataStore.semanticMemoryModel(),
                 )
@@ -368,9 +368,9 @@ internal class AgentMemoryStore(
                     semanticIndexedNodes = result.getOrNull()?.first ?: memoryState.semanticIndexedNodes,
                     semanticIndexStatus = result.fold(
                         onSuccess = { (done, total) ->
-                            "已索引 ${done}/${total} 条记忆；${if (done < total) "可再次点击继续" else "索引完成"}，仅保存在本机"
+                            "U indeksuan ${done}/${total} kujtime; ${if (done < total) "preke përsëri për të vazhduar" else "indeksimi përfundoi"}. Ruhen vetëm në pajisje"
                         },
-                        onFailure = { "语义索引失败：${it.message ?: it.javaClass.simpleName}（词法检索可继续使用）" },
+                        onFailure = { "Indeksimi semantik dështoi: ${it.message ?: it.javaClass.simpleName} (kërkimi tekstual mbetet aktiv)" },
                     ),
                 )
             }
@@ -387,7 +387,7 @@ internal class AgentMemoryStore(
                 },
                 onFailure = {
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = "无法保存网状记忆开关")
+                        memoryState = memoryState.copy(notice = "Aktivizimi i kujtesës së ndërlidhur nuk u ruajt")
                     }
                 },
             )
@@ -398,12 +398,12 @@ internal class AgentMemoryStore(
         if (memoryState.graphClassifierBusy || !memoryState.graphMemoryEnabled) return
         memoryState = memoryState.copy(
             graphClassifierBusy = true,
-            graphClassifierStatus = "正在对最近的记忆进行模型关联分类…",
+            graphClassifierStatus = "Po klasifikohen lidhjet e kujtimeve të fundit…",
         )
         scope.launch(Dispatchers.IO) {
             val result = runCatching {
                 val config = RuntimeConfigRepository.currentRuntimeConfig()
-                    ?: error("请先配置可用的聊天模型")
+                    ?: error("Konfiguro fillimisht një model bisede")
                 val nodes = AgentRetainedMemoryRepository.active(400)
                 val sources = nodes.sortedByDescending { it.updatedAt }
                     .filter { it.links.none { relation -> relation.status == "confirmed" } }
@@ -426,9 +426,9 @@ internal class AgentMemoryStore(
                     retainedNodes = result.getOrNull()?.second ?: memoryState.retainedNodes,
                     graphClassifierStatus = result.fold(
                         onSuccess = { (count, _) ->
-                            "本次新增/更新 ${count} 条关联建议；需要人工审核"
+                            "U shtuan ose ndryshuan ${count} sugjerime lidhjesh; kërkohet shqyrtim manual"
                         },
-                        onFailure = { "关系分类失败：${it.message ?: it.javaClass.simpleName}" },
+                        onFailure = { "Klasifikimi i lidhjeve dështoi: ${it.message ?: it.javaClass.simpleName}" },
                     ),
                 )
             }
@@ -439,7 +439,7 @@ internal class AgentMemoryStore(
         scope.launch(Dispatchers.IO) {
             runCatching {
                 check(AgentRetainedMemoryRepository.reviewLink(sourceId, targetId, type, status)) {
-                    "关系不存在，或者相关记忆已失效"
+                    "Lidhja nuk ekziston ose kujtimi përkatës ka skaduar"
                 }
                 AgentRetainedMemoryRepository.visible(400)
             }.fold(
@@ -447,13 +447,13 @@ internal class AgentMemoryStore(
                     withContext(Dispatchers.Main) {
                         memoryState = memoryState.copy(
                             retainedNodes = nodes,
-                            notice = if (status == "confirmed") "已确认关联" else "已拒绝关联",
+                            notice = if (status == "confirmed") "Lidhja u konfirmua" else "Lidhja u refuzua",
                         )
                     }
                 },
                 onFailure = { failure ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = failure.message ?: "关联审核失败")
+                        memoryState = memoryState.copy(notice = failure.message ?: "Shqyrtimi i lidhjes dështoi")
                     }
                 },
             )
@@ -468,12 +468,12 @@ internal class AgentMemoryStore(
             }.fold(
                 onSuccess = { nodes ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(retainedNodes = nodes, notice = "记忆节点已删除")
+                        memoryState = memoryState.copy(retainedNodes = nodes, notice = "Nyja e kujtesës u fshi")
                     }
                 },
                 onFailure = { error ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = error.message ?: "删除记忆节点失败")
+                        memoryState = memoryState.copy(notice = error.message ?: "Fshirja e nyjës së kujtesës dështoi")
                     }
                 },
             )
@@ -488,12 +488,12 @@ internal class AgentMemoryStore(
             }.fold(
                 onSuccess = { nodes ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(retainedNodes = nodes, notice = "结构化记忆已清空")
+                        memoryState = memoryState.copy(retainedNodes = nodes, notice = "Kujtesa e strukturuar u pastrua")
                     }
                 },
                 onFailure = { error ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = error.message ?: "清空失败")
+                        memoryState = memoryState.copy(notice = error.message ?: "Pastrimi dështoi")
                     }
                 },
             )
@@ -513,7 +513,7 @@ internal class AgentMemoryStore(
                                 syncUsername = config.username,
                                 syncHasPassword = config.hasPassword,
                                 syncHasPassphrase = config.hasPassphrase,
-                                syncStatus = "WebDAV 配置已保存；点击立即同步",
+                                syncStatus = "Konfigurimi WebDAV u ruajt; prek Sinkronizo tani",
                             )
                         }
                     },
@@ -521,7 +521,7 @@ internal class AgentMemoryStore(
                         withContext(Dispatchers.Main) {
                             memoryState = memoryState.copy(
                                 syncBusy = false,
-                                notice = failure.message ?: "保存 WebDAV 配置失败",
+                                notice = failure.message ?: "Konfigurimi WebDAV nuk u ruajt",
                             )
                         }
                     },
@@ -532,10 +532,10 @@ internal class AgentMemoryStore(
     fun runWebDavSync(resolveReviewedMemoryConflict: Boolean = false) {
         if (memoryState.syncBusy || !memoryState.syncHasPassphrase) return
         if (memoryState.hasUnsavedChanges) {
-            memoryState = memoryState.copy(notice = "请先保存 MEMORY.md 的修改，再开始同步")
+            memoryState = memoryState.copy(notice = "Ruaj fillimisht ndryshimet e MEMORY.md përpara sinkronizimit")
             return
         }
-        memoryState = memoryState.copy(syncBusy = true, syncStatus = "正在同步…")
+        memoryState = memoryState.copy(syncBusy = true, syncStatus = "Po sinkronizohet…")
         scope.launch(Dispatchers.IO) {
             val outcome = runCatching {
                 EtaWebDavSyncRepository.sync(resolveReviewedMemoryConflict)
@@ -552,11 +552,11 @@ internal class AgentMemoryStore(
                 val status = outcome.fold(
                     onSuccess = { result ->
                         if (result.success) {
-                            "${result.message}：知识 ${result.knowledgeCount} 条，任务经验 ${result.experienceCount} 条，" +
-                                "结构化记忆 ${result.retainedCount} 条，知识冲突副本 ${result.knowledgeConflicts} 条"
+                            "${result.message}: ${result.knowledgeCount} njohuri, ${result.experienceCount} përvoja detyrash, " +
+                                "${result.retainedCount} kujtime të strukturuara, ${result.knowledgeConflicts} kopje konfliktesh"
                         } else result.message
                     },
-                    onFailure = { failure -> failure.message ?: "WebDAV 同步失败" },
+                    onFailure = { failure -> failure.message ?: "Sinkronizimi WebDAV dështoi" },
                 )
                 memoryState = memoryState.copy(
                     syncBusy = false,
@@ -593,7 +593,7 @@ internal class AgentMemoryStore(
                 onFailure = { failure ->
                     withContext(Dispatchers.Main) {
                         memoryState = memoryState.copy(
-                            notice = failure.message ?: "无法设置自动同步",
+                            notice = failure.message ?: "Sinkronizimi automatik nuk u konfigurua",
                         )
                     }
                 },
@@ -616,13 +616,13 @@ internal class AgentMemoryStore(
                             syncHasPassphrase = false, syncAutoEnabled = false,
                             syncMemoryConflict = false,
                             syncRemoteConflictContent = null,
-                            syncStatus = "WebDAV 连接信息已移除，本地内容保留",
+                            syncStatus = "Lidhja WebDAV u hoq; përmbajtja lokale u ruajt",
                         )
                     }
                 },
                 onFailure = { failure ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = failure.message ?: "无法移除 WebDAV 配置")
+                        memoryState = memoryState.copy(notice = failure.message ?: "Konfigurimi WebDAV nuk u hoq")
                     }
                 },
             )
@@ -640,12 +640,12 @@ internal class AgentMemoryStore(
             }.fold(
                 onSuccess = { records ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(knowledgeDocuments = records, notice = "知识条目已保存")
+                        memoryState = memoryState.copy(knowledgeDocuments = records, notice = "Njohuria u ruajt")
                     }
                 },
                 onFailure = { failure ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = failure.message ?: "知识条目保存失败")
+                        memoryState = memoryState.copy(notice = failure.message ?: "Njohuria nuk u ruajt")
                     }
                 },
             )
@@ -660,12 +660,12 @@ internal class AgentMemoryStore(
             }.fold(
                 onSuccess = { records ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(knowledgeDocuments = records, notice = "知识条目已删除")
+                        memoryState = memoryState.copy(knowledgeDocuments = records, notice = "Njohuria u fshi")
                     }
                 },
                 onFailure = { failure ->
                     withContext(Dispatchers.Main) {
-                        memoryState = memoryState.copy(notice = failure.message ?: "删除失败")
+                        memoryState = memoryState.copy(notice = failure.message ?: "Fshirja dështoi")
                     }
                 },
             )

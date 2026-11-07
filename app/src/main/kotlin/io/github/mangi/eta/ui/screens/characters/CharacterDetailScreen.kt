@@ -30,7 +30,7 @@ import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.theme.MiuixTheme
 
 
-internal fun greetingTitle(index: Int) = if (index == 0) "默认开场白" else "开场白 ${index + 1}"
+internal fun greetingTitle(index: Int) = if (index == 0) "Përshëndetja fillestare" else "Përshëndetja ${index + 1}"
 
 private data class CharacterTextPreview(val title: String, val text: String)
 
@@ -57,10 +57,10 @@ internal fun CharacterDetailScreen(
     val profile = store.selected?.takeIf { it.id == id }
     MiuixScaffoldPage(title = "", onBack = onBack, compactTitle = true) {
         if (profile == null) {
-            item { CharacterPageMessage(if (store.busy) "正在读取角色…" else "无法读取角色，请返回后重试") }
+            item { CharacterPageMessage(if (store.busy) "Po lexohet personazhi…" else "Personazhi nuk u lexua. Kthehu dhe provo përsëri") }
             return@MiuixScaffoldPage
         }
-        val userName = if (store.usePersona) store.persona.name.ifBlank { "用户" } else "用户"
+        val userName = if (store.usePersona) store.persona.name.ifBlank { "Përdoruesi" } else "Përdoruesi"
         item(key = "hero") {
             CharacterHero(
                 profile = profile,
@@ -70,7 +70,7 @@ internal fun CharacterDetailScreen(
                 onStart = { store.startConversation(id, onStart) },
                 onReadDescription = {
                     preview = CharacterTextPreview(
-                        "角色设定",
+                        "Profili i personazhit",
                         CharacterMacros.expand(profile.card.description, profile.card, userName),
                     )
                 },
@@ -80,16 +80,16 @@ internal fun CharacterDetailScreen(
         item(key = "persona") {
             EtaPreferenceGroup {
                 EtaSwitchPreference(
-                    title = "使用我的人设",
-                    summary = store.persona.name.ifBlank { "未设置称呼" },
+                    title = "Përdor profilin tim",
+                    summary = store.persona.name.ifBlank { "Nuk është vendosur emër" },
                     checked = store.usePersona,
                     onCheckedChange = { store.usePersona = it },
                 )
                 EtaPreferenceDivider(hasLeading = false)
-                EtaArrowPreference(title = "编辑我的人设", onClick = { onNavigate(AppRoute.CharacterPersona) })
+                EtaArrowPreference(title = "Ndrysho profilin tim", onClick = { onNavigate(AppRoute.CharacterPersona) })
             }
         }
-        item(key = "greetings-title") { EtaPreferenceGroupTitle("开场白") }
+        item(key = "greetings-title") { EtaPreferenceGroupTitle("Përshëndetja") }
         item(key = "greetings") {
             // 预览与开始对话后看到的文本一致：宏按当前是否使用人设展开。
             val greetings = remember(profile.card, userName) {
@@ -103,30 +103,30 @@ internal fun CharacterDetailScreen(
                 onRead = { index -> preview = CharacterTextPreview(greetingTitle(index), greetings[index]) },
             )
         }
-        item(key = "management-title") { EtaPreferenceGroupTitle("管理") }
+        item(key = "management-title") { EtaPreferenceGroupTitle("Menaxhimi") }
         item(key = "management") {
             EtaPreferenceGroup {
-                EtaArrowPreference(title = "编辑角色", enabled = !store.busy, onClick = {
+                EtaArrowPreference(title = "Ndrysho personazhin", enabled = !store.busy, onClick = {
                     store.discardEditor()
                     onNavigate(AppRoute.CharacterEditor(id))
                 })
                 EtaPreferenceDivider(hasLeading = false)
-                EtaArrowPreference(title = "剧情记忆", summary = "此角色各次对话共享的故事与关系记录", onClick = {
+                EtaArrowPreference(title = "Kujtesa e historisë", summary = "Historia dhe marrëdhëniet ruhen në të gjitha bisedat e këtij personazhi", onClick = {
                     onNavigate(AppRoute.CharacterMemory(id))
                 })
                 EtaPreferenceDivider(hasLeading = false)
-                EtaArrowPreference(title = "复制角色", enabled = !store.busy, onClick = {
+                EtaArrowPreference(title = "Kopjo personazhin", enabled = !store.busy, onClick = {
                     store.duplicate(id) { onNavigate(AppRoute.CharacterDetail(it)) }
                 })
                 EtaPreferenceDivider(hasLeading = false)
                 EtaArrowPreference(
-                    title = "导出 PNG 角色卡",
+                    title = "Eksporto kartën PNG",
                     enabled = !store.busy,
                     onClick = { pngExporter.launch(characterExportName(profile.card.name, "png")) },
                 )
                 EtaPreferenceDivider(hasLeading = false)
                 EtaArrowPreference(
-                    title = "导出 JSON 角色卡",
+                    title = "Eksporto kartën JSON",
                     enabled = !store.busy,
                     onClick = { jsonExporter.launch(characterExportName(profile.card.name, "json")) },
                 )
@@ -136,8 +136,8 @@ internal fun CharacterDetailScreen(
             item(key = "compatibility") {
                 EtaPreferenceGroup {
                     EtaArrowPreference(
-                        title = "兼容说明",
-                        summary = "${store.compatibilityWarnings.size} 项内容按兼容范围处理",
+                        title = "Shënime për përputhshmërinë",
+                        summary = "${store.compatibilityWarnings.size}  elemente trajtohen sipas përputhshmërisë",
                         onClick = { showCompatibility = !showCompatibility },
                     )
                     if (showCompatibility) {
@@ -153,11 +153,11 @@ internal fun CharacterDetailScreen(
                 }
             }
         }
-        // 破坏性操作单独成组并放在页面末尾，与日常管理操作拉开距离。
+        // 破坏性操作单独成组并放在页面末尾，与日常Menaxhimi操作拉开距离。
         item(key = "danger") {
             EtaPreferenceGroup {
                 EtaArrowPreference(
-                    title = "删除角色",
+                    title = "Fshi personazhin",
                     titleColor = BasicComponentColors(
                         color = MiuixTheme.colorScheme.error,
                         disabledColor = MiuixTheme.colorScheme.disabledOnSurface,
@@ -172,12 +172,12 @@ internal fun CharacterDetailScreen(
     if (showDeleteConfirm && profile != null) {
         EtaWindowDialog(
             show = true,
-            title = "删除角色",
-            summary = "「${profile.card.name}」将从角色库移除，角色图片与剧情记忆一并删除；已有对话保留。此操作无法撤销。",
+            title = "Fshi personazhin",
+            summary = "「${profile.card.name}」do të hiqet nga biblioteka. Fotografia dhe kujtesa e historisë fshihen; bisedat ruhen. Ky veprim nuk mund të zhbëhet.",
             onDismissRequest = { showDeleteConfirm = false },
         ) {
             MiuixDialogActions(
-                confirmText = "删除",
+                confirmText = "Fshi",
                 destructive = true,
                 confirmEnabled = !store.busy,
                 onCancel = { showDeleteConfirm = false },
@@ -200,6 +200,6 @@ internal fun CharacterDetailScreen(
 
 private fun characterExportName(name: String, extension: String): String {
     val basename = name.map { if (it.isISOControl() || it in "\\/:*?\"<>|") '_' else it }
-        .joinToString("").trim().trimEnd('.').take(64).ifBlank { "角色" }
+        .joinToString("").trim().trimEnd('.').take(64).ifBlank { "Personazhi" }
     return "$basename.$extension"
 }

@@ -38,7 +38,7 @@ internal object ConversationMarkdownExporter {
         val noticeModelRetry: String,
         val noticeRuntimeFailed: String,
         val noticeInterrupted: String,
-        val noticeContextCompaction: String = "上下文压缩",
+        val noticeContextCompaction: String = "Përmbledhja e kontekstit",
     ) {
         fun toolStatus(status: ToolActivityStatusUi): String = when (status) {
             ToolActivityStatusUi.Running -> toolStatusRunning

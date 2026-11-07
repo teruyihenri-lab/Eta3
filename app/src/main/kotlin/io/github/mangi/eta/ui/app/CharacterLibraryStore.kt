@@ -80,14 +80,14 @@ internal class CharacterLibraryStore(
             }.sortedWith(compareByDescending<CharacterProfile> { it.card.favorite }.thenByDescending { it.updatedAt })
         }
 
-    fun loadLibrary() = runOperation("角色库读取失败，请重试", queueIfBusy = true) {
+    fun loadLibrary() = runOperation("Biblioteka e personazheve nuk u lexua. Provo përsëri", queueIfBusy = true) {
         io { CharacterRepository.ensureDefaultCharacter() }
         characters = io { CharacterRepository.list() }
     }
 
     fun dismissNotice() { notice = null }
 
-    fun loadDetail(id: String) = runOperation("角色读取失败，请返回角色库重试", queueIfBusy = true) {
+    fun loadDetail(id: String) = runOperation("Personazhi nuk u lexua. Kthehu te biblioteka dhe provo përsëri", queueIfBusy = true) {
         val profile = io { CharacterRepository.get(id) } ?: error("CHARACTER_NOT_FOUND")
         val warnings = io { CharacterCardCompatibility.warnings(profile.card) }
         if (selected?.id != id) greetingIndex = 0
@@ -98,10 +98,10 @@ internal class CharacterLibraryStore(
 
     fun loadEditor(id: String?) {
         if (editorLoaded && editorKey == id) return
-        runOperation("角色读取失败，请重试", queueIfBusy = true) {
+        runOperation("Personazhi nuk u lexua. Provo përsëri", queueIfBusy = true) {
             val profile = id?.let { io { CharacterRepository.get(it) } ?: error("CHARACTER_NOT_FOUND") }
             selected = profile
-            draft = profile?.card ?: CharacterCardCodec.create("新角色")
+            draft = profile?.card ?: CharacterCardCodec.create("Personazh i ri")
             draftName = profile?.card?.name.orEmpty()
             editorKey = id
             editorLoaded = true
@@ -125,12 +125,12 @@ internal class CharacterLibraryStore(
         try {
             draft = draft?.let { it.withWorldbook(update(it.worldbookDraft())) }
         } catch (_: IllegalArgumentException) {
-            notice = "世界书设置无效，请检查扫描深度、预算与条目位置"
+            notice = "Cilësimet e botës janë të pavlefshme. Kontrollo thellësinë, kufijtë dhe pozicionet"
         }
     }
 
     fun importCard(uri: Uri, onImported: (String) -> Unit) = runOperation(
-        "导入失败，请确认文件是完整的 PNG 或 JSON 角色卡，且未超过大小限制",
+        "Importimi dështoi. Kontrollo që karta PNG/JSON të jetë e plotë dhe brenda kufirit të madhësisë",
         diagnoseCardImport = true,
     ) {
         val profile = io {
@@ -146,12 +146,12 @@ internal class CharacterLibraryStore(
     fun saveEditor(onSaved: (String) -> Unit) {
         val originalDraft = draft ?: return
         if (draftName.isBlank()) {
-            notice = "请填写角色名称"
+            notice = "Shkruaj emrin e personazhit"
             return
         }
         val card = originalDraft.withEdits(name = draftName)
         val original = selected
-        runOperation("角色保存失败，请重试") {
+        runOperation("Personazhi nuk u ruajt. Provo përsëri") {
             val profile = io {
                 if (original == null) CharacterRepository.create(card)
                 else CharacterRepository.save(original.copy(card = card))
@@ -164,13 +164,13 @@ internal class CharacterLibraryStore(
         }
     }
 
-    fun duplicate(id: String, onDuplicated: (String) -> Unit) = runOperation("角色复制失败，请重试") {
+    fun duplicate(id: String, onDuplicated: (String) -> Unit) = runOperation("Kopjimi i personazhit dështoi. Provo përsëri") {
         val profile = io { CharacterRepository.duplicate(id) }
         characters = io { CharacterRepository.list() }
         onDuplicated(profile.id)
     }
 
-    fun toggleFavorite(id: String) = runOperation("收藏状态保存失败，请重试") {
+    fun toggleFavorite(id: String) = runOperation("Gjendja e të preferuarave nuk u ruajt. Provo përsëri") {
         val profile = io { CharacterRepository.get(id) } ?: error("CHARACTER_NOT_FOUND")
         val saved = io { CharacterRepository.save(profile.copy(card = profile.card.withFavorite(!profile.card.favorite))) }
         if (selected?.id == id) selected = saved
@@ -178,7 +178,7 @@ internal class CharacterLibraryStore(
     }
 
     /** 更换头像：图片统一转为 PNG 存入角色目录，导出 PNG 角色卡时即使用新头像。 */
-    fun changeAvatar(id: String, uri: Uri) = runOperation("头像更换失败，请换一张图片重试") {
+    fun changeAvatar(id: String, uri: Uri) = runOperation("Fotografia e profilit nuk u ndryshua. Provo imazh tjetër") {
         val saved = io {
             context.contentResolver.openInputStream(uri)?.use { CharacterRepository.replaceAvatar(id, it) }
                 ?: error("AVATAR_INPUT_UNAVAILABLE")
@@ -187,40 +187,40 @@ internal class CharacterLibraryStore(
         characters = io { CharacterRepository.list() }
     }
 
-    fun restoreDefaultCharacter() = runOperation("默认角色恢复失败，请重试") {
+    fun restoreDefaultCharacter() = runOperation("Rikthimi i personazhit të parazgjedhur dështoi") {
         io { CharacterRepository.createDefaultCharacter() }
         characters = io { CharacterRepository.list() }
     }
 
-    fun delete(id: String, onDeleted: () -> Unit) = runOperation("角色删除失败，请重试") {
+    fun delete(id: String, onDeleted: () -> Unit) = runOperation("Fshirja e personazhit dështoi. Provo përsëri") {
         io { CharacterRepository.delete(id) }
         if (selected?.id == id) selected = null
         characters = io { CharacterRepository.list() }
         onDeleted()
     }
 
-    fun export(id: String, format: CharacterCardFormat, uri: Uri) = runOperation("角色卡导出失败，请重试") {
+    fun export(id: String, format: CharacterCardFormat, uri: Uri) = runOperation("Eksportimi i kartës dështoi. Provo përsëri") {
         io {
             context.contentResolver.openOutputStream(uri, "wt")?.use {
                 CharacterRepository.export(id, format, it)
             } ?: error("CHARACTER_OUTPUT_UNAVAILABLE")
         }
-        notice = "角色卡已导出"
+        notice = "Karta e personazhit u eksportua"
     }
 
     fun startConversation(id: String, onReady: (RoleplayBinding, String) -> Unit) = runOperation(
-        "新对话创建失败，请重试",
+        "Krijimi i bisedës së re dështoi. Provo përsëri",
     ) {
         val profile = io { CharacterRepository.get(id) } ?: error("CHARACTER_NOT_FOUND")
         val storedBinding = io { CharacterRepository.binding(id) }
-        val binding = if (usePersona) storedBinding else storedBinding.copy(userName = "用户", userDescription = "")
+        val binding = if (usePersona) storedBinding else storedBinding.copy(userName = "Përdoruesi", userDescription = "")
         val greetings = listOf(profile.card.firstMessage) + profile.card.alternateGreetings
         onReady(binding, greetings.getOrElse(greetingIndex) { profile.card.firstMessage })
     }
 
     fun loadPersona() {
         if (personaLoaded && personaDraft != persona) return
-        runOperation("用户人设读取失败，请重试", queueIfBusy = true) {
+        runOperation("Profili i përdoruesit nuk u lexua. Provo përsëri", queueIfBusy = true) {
             persona = io { CharacterRepository.persona() }
             personaDraft = persona
             personaLoaded = true
@@ -231,8 +231,8 @@ internal class CharacterLibraryStore(
         if (!busy) personaDraft = UserPersona(name, description)
     }
 
-    fun savePersona(onSaved: () -> Unit) = runOperation("用户人设保存失败，请重试") {
-        val normalized = personaDraft.copy(name = personaDraft.name.trim().ifBlank { "用户" })
+    fun savePersona(onSaved: () -> Unit) = runOperation("Profili i përdoruesit nuk u ruajt. Provo përsëri") {
+        val normalized = personaDraft.copy(name = personaDraft.name.trim().ifBlank { "Përdoruesi" })
         io { CharacterRepository.savePersona(normalized) }
         persona = normalized
         personaDraft = normalized
@@ -241,7 +241,7 @@ internal class CharacterLibraryStore(
 
     fun loadMemory(id: String, force: Boolean = false) {
         if (!force && memoryCharacterId == id && memorySnapshot != null && memoryDraft != memorySnapshot?.content) return
-        runOperation("剧情记忆读取失败，请重试", queueIfBusy = true) {
+        runOperation("Kujtesa e historisë nuk u lexua. Provo përsëri", queueIfBusy = true) {
             val snapshot = io { CharacterMemoryRepository.snapshot(context, id) }
             memoryCharacterId = id
             memorySnapshot = snapshot
@@ -254,16 +254,16 @@ internal class CharacterLibraryStore(
     fun saveMemory(id: String) {
         val original = memorySnapshot ?: return
         val content = memoryDraft
-        runOperation("剧情记忆保存失败，请检查内容长度后重试") {
+        runOperation("Kujtesa e historisë nuk u ruajt. Kontrollo gjatësinë dhe provo përsëri") {
             when (val result = io {
                 CharacterMemoryRepository.replaceAllIfRevision(context, id, original.revision, content)
             }) {
                 is AgentMemoryWriteResult.Success -> {
                     memorySnapshot = result.snapshot
-                    notice = "剧情记忆已保存"
+                    notice = "Kujtesa e historisë u ruajt"
                 }
                 is AgentMemoryWriteResult.Conflict -> {
-                    notice = "剧情记忆已被对话更新。当前草稿仍保留，请复制需要的内容后重新载入，再合并保存。"
+                    notice = "Kujtesa e historisë u përditësua nga biseda. Kopja jote mbetet; ruaj tekstin e nevojshëm, ringarko dhe bashko ndryshimet."
                 }
             }
         }

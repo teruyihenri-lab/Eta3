@@ -90,6 +90,15 @@ internal fun iconForTool(toolId: String): ImageVector = when (toolId) {
     "press_key" -> Icons.Rounded.KeyboardCommandKey
     "open_system_panel" -> Icons.Rounded.WebAsset
     "read_image" -> Icons.Rounded.Image
+    "process_list", "frida_ps" -> Icons.Rounded.Apps
+    "mem_read", "mem_search" -> Icons.Rounded.Search
+    "mem_write", "frida_script" -> Icons.Rounded.Terminal
+    "knowledge_search" -> Icons.Rounded.Search
+    "knowledge_get" -> Icons.Rounded.Description
+    "knowledge_save" -> Icons.Rounded.EditNote
+    "knowledge_delete" -> Icons.Rounded.AdminPanelSettings
+    "voice_call" -> Icons.Rounded.Phone
+    "skills_suggest" -> Icons.Rounded.Extension
     "skills_list", "skills_read", "skills_read_resource",
     "skills_list_curated", "skills_inspect_github", "skills_install_from_github",
         -> Icons.Rounded.Extension

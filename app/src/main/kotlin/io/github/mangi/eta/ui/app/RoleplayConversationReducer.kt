@@ -139,7 +139,7 @@ internal object RoleplayConversationReducer {
         val grouped = state.roleplayMessages.links.entries.groupBy { it.value.transcriptMessageId }
         val journal = state.journal.ifEmpty { state.history }
         if (journal.any { it.contextSummary }) add(ConversationMessage(
-            role = "system", content = "早期历史仅保留摘要；正文修订只应用于仍有原文的消息，不能恢复已缺失的历史。",
+            role = "system", content = "Nga historia e hershme ruhen vetëm përmbledhjet; ndryshimet vlejnë vetëm kur ekziston teksti origjinal.",
         ))
         journal.forEach { entry ->
             val links = grouped[entry.messageId].orEmpty().sortedBy { it.value.blockOrder }
@@ -154,7 +154,7 @@ internal object RoleplayConversationReducer {
                 }.joinToString("\n\n")
                 if (entry.role == "user") add(ConversationMessage(
                     role = "system",
-                    content = "以下历史用户正文经用户修订；后续已有工具记录来自原请求，不能视为修订后请求已被执行。",
+                    content = "Teksti vijues u ndryshua nga përdoruesi. Veprimet e mëparshme të mjeteve i përkasin kërkesës fillestare.",
                 ))
                 add(entry.copy(content = body, contentJson = ""))
             }
@@ -184,7 +184,7 @@ internal object RoleplayConversationReducer {
         val base = edited ?: state
         val messages = if (edited != null) base.messages else base.messages + SystemNoticeMessageUi(
             id = "rewrite-result-$runId", code = SystemNoticeCode.RuntimeFailed,
-            detail = result.error ?: "重新生成未完成，已保留原回复。",
+            detail = result.error ?: "Rigjenerimi nuk përfundoi; përgjigjja origjinale u ruajt.",
         )
         return base.copy(
             messages = messages,

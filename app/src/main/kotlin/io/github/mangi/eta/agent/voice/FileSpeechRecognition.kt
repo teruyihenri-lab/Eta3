@@ -19,7 +19,7 @@ internal suspend fun recognizeSpeechFile(context: Context, settings: SpeechSetti
     withTimeout(300_000) {
         val base = speechBaseUrl(settings.qwenAsr.endpoint())
         if (settings.asr == AsrProvider.QWEN_FLASH) {
-            onProgress("正在识别")
+            onProgress("Po njihet e folura")
             val options = JSONObject().put("enable_itn", true)
             settings.language.takeIf(String::isNotBlank)?.let { options.put("language", it) }
             val body = JSONObject().put("model", "qwen3-asr-flash").put("stream", false)
@@ -30,7 +30,7 @@ internal suspend fun recognizeSpeechFile(context: Context, settings: SpeechSetti
             val response = SpeechHttp.json(SpeechHttp.jsonRequest("$base/compatible-mode/v1/chat/completions", credentials.qwenAsr, body).build())
             response.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content").trim()
         } else {
-            onProgress("正在上传录音")
+            onProgress("Po ngarkohet regjistrimi")
             SpeechOssUpload(context).withAudio(settings.oss, credentials, wav) { audioUrl ->
                 val parameters = JSONObject().put("channel_id", JSONArray().put(0)).put("enable_itn", true)
                 settings.language.takeIf(String::isNotBlank)?.let { parameters.put("language", it) }
@@ -39,8 +39,8 @@ internal suspend fun recognizeSpeechFile(context: Context, settings: SpeechSetti
                 val submitted = SpeechHttp.json(SpeechHttp.jsonRequest("$base/api/v1/services/audio/asr/transcription",
                     credentials.qwenAsr, body).header("X-DashScope-Async", "enable").build())
                 val task = submitted.getJSONObject("output").getString("task_id")
-                if (!Regex("[A-Za-z0-9_-]+").matches(task)) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "文件转写任务编号无效")
-                onProgress("正在等待文件转写，可随时取消")
+                if (!Regex("[A-Za-z0-9_-]+").matches(task)) throw SpeechFailure(SpeechErrorCode.PROTOCOL, "Identifikuesi i transkriptimit është i pavlefshëm")
+                onProgress("Po pritet transkriptimi i skedarit. Mund ta anulosh në çdo moment")
                 while (true) {
                     delay(1500)
                     val result = SpeechHttp.json(Request.Builder().url("$base/api/v1/tasks/$task")
@@ -54,8 +54,8 @@ internal suspend fun recognizeSpeechFile(context: Context, settings: SpeechSetti
                             val transcription = SpeechHttp.json(Request.Builder().url(url).build())
                             return@withAudio fileTranscript(transcription)
                         }
-                        "FAILED", "CANCELED", "UNKNOWN" -> throw SpeechFailure(SpeechErrorCode.SERVER, "千问文件转写失败，请检查服务权限")
-                        else -> throw SpeechFailure(SpeechErrorCode.PROTOCOL, "文件转写返回未知任务状态")
+                        "FAILED", "CANCELED", "UNKNOWN" -> throw SpeechFailure(SpeechErrorCode.SERVER, "Transkriptimi Qwen dështoi. Kontrollo lejet")
+                        else -> throw SpeechFailure(SpeechErrorCode.PROTOCOL, "Transkriptimi ktheu një gjendje të panjohur")
                     }
                 }
                 @Suppress("UNREACHABLE_CODE")

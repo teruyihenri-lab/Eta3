@@ -8,7 +8,7 @@ internal object AgentBrowserToolCatalog {
         tools.put(
             AgentToolSchema.function(
                 name = "browser_use",
-                description = "操作 Eta 共享的离屏 Agent 浏览器，不会切换到外部浏览器。一次调用只执行一个 action；网页浏览通常先 navigate，再用 get_readable 提取正文，或用 find_elements 查找可交互元素。支持 run_js 在当前页面执行任意 JavaScript，以及油猴（用户脚本）管理：add_script 安装（source 内联或 url 下载 .user.js）、list_scripts 列出、toggle_script 启停、remove_script 删除、debug_scripts 诊断注入链路；安装过的脚本按 @match/@include 在页面加载时自动注入并提供 GM_* API，注入结果可用 get_page_info 的 userscripts 字段核对。支持请求拦截与改包：set_intercept 开启记录，list_requests/clear_requests 查看与清空，add_intercept_replace 按 URL 子串替换响应（body/mime_type/status），clear_intercept_replace 删除规则。需要把 URI 显式交给外部应用时使用 open_uri。",
+                description = "Kontrollo shfletuesin e përbashkët të agjentit Eta pa kaluar te një shfletues i jashtëm. Një thirrje kryen vetëm një action: zakonisht navigate, më pas get_readable për përmbajtjen ose find_elements për elementet ndërvepruese. run_js ekzekuton JavaScript në faqen aktuale. Skriptet e përdoruesit menaxhohen me add_script (source ose url .user.js), list_scripts, toggle_script, remove_script dhe debug_scripts. Skriptet injektohen sipas @match/@include dhe ofrojnë GM_* API; kontrollo userscripts në get_page_info. Përgjimi i kërkesave: set_intercept, list_requests, clear_requests, add_intercept_replace (body/mime_type/status sipas pjesës së URL-së) dhe clear_intercept_replace. Përdor open_uri kur URI duhet kaluar shprehimisht te një aplikacion tjetër.",
                 parameters = JSONObject()
                     .put("type", "object")
                     .put(
@@ -18,7 +18,7 @@ internal object AgentBrowserToolCatalog {
                                 "action",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "本次唯一执行的浏览器动作。")
+                                    .put("description", "Veprimi i vetëm i shfletuesit për këtë thirrje.")
                                     .put(
                                         "enum",
                                         JSONArray()
@@ -52,128 +52,128 @@ internal object AgentBrowserToolCatalog {
                                 "url",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "navigate 要访问的 URL。")
+                                    .put("description", "URL-ja që duhet hapur me navigate.")
                             )
                             .put(
                                 "selector",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "click、type、get_text、find_elements 或 wait_for_selector 使用的 CSS selector。")
+                                    .put("description", "Selektori CSS për click, type, get_text, find_elements ose wait_for_selector.")
                             )
                             .put(
                                 "text",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "type 要输入的文本。只会发送给工具，不会显示在运行摘要中。")
+                                    .put("description", "Teksti që duhet futur me type; i dërgohet vetëm mjetit dhe nuk shfaqet te përmbledhja e ekzekutimit.")
                             )
                             .put(
                                 "submit",
                                 JSONObject()
                                     .put("type", "boolean")
-                                    .put("description", "type 输入后是否提交所在表单，默认 false。")
+                                    .put("description", "A duhet dërguar formulari pas type; parazgjedhja false.")
                             )
                             .put(
                                 "coordinate_x",
                                 JSONObject()
                                     .put("type", "integer")
-                                    .put("description", "click 或 type 的视口 X 坐标，和 coordinate_y 一起使用。")
+                                    .put("description", "Koordinata X e zonës së shikimit për click ose type; përdore së bashku me coordinate_y.")
                             )
                             .put(
                                 "coordinate_y",
                                 JSONObject()
                                     .put("type", "integer")
-                                    .put("description", "click 或 type 的视口 Y 坐标，和 coordinate_x 一起使用。")
+                                    .put("description", "Koordinata Y e zonës së shikimit për click ose type; përdore së bashku me coordinate_x.")
                             )
                             .put(
                                 "amount",
                                 JSONObject()
                                     .put("type", "integer")
-                                    .put("description", "scroll 的滚动像素量。")
+                                    .put("description", "Distanca e lëvizjes së scroll në pikselë.")
                             )
                             .put(
                                 "direction",
                                 JSONObject()
                                     .put("type", "string")
                                     .put("enum", JSONArray().put("up").put("down"))
-                                    .put("description", "scroll 的滚动方向。")
+                                    .put("description", "Drejtimi i lëvizjes së scroll.")
                             )
                             .put(
                                 "offset",
                                 JSONObject()
                                     .put("type", "integer")
-                                    .put("description", "get_readable 或 get_text 的文本起始偏移，默认 0。")
+                                    .put("description", "Pozicioni fillestar i tekstit për get_readable ose get_text; parazgjedhja 0.")
                             )
                             .put(
                                 "max_chars",
                                 JSONObject()
                                     .put("type", "integer")
-                                    .put("description", "get_readable 或 get_text 最多返回的文本字符数。")
+                                    .put("description", "Numri maksimal i karaktereve të kthyera nga get_readable ose get_text.")
                             )
                             .put(
                                 "read_image",
                                 JSONObject()
                                     .put("type", "boolean")
-                                    .put("description", "screenshot 时是否把截图附给模型直接查看，默认 true。")
+                                    .put("description", "A t'i bashkëngjitet pamja e ekranit modelit gjatë screenshot; parazgjedhja true.")
                             )
                             .put(
                                 "timeout_ms",
                                 JSONObject()
                                     .put("type", "integer")
-                                    .put("description", "navigate 或 wait_for_selector 的超时毫秒数。")
+                                    .put("description", "Koha maksimale e pritjes në milisekonda për navigate ose wait_for_selector.")
                             )
                             .put(
                                 "code",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "run_js 要在当前页面执行的 JavaScript 源码，最后一条表达式的值作为结果返回。")
+                                    .put("description", "Kodi JavaScript që run_js ekzekuton në faqen aktuale; kthen vlerën e shprehjes së fundit.")
                             )
                             .put(
                                 "source",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "add_script 内联提供的完整用户脚本源码（含 ==UserScript== 元数据块）。")
+                                    .put("description", "Kodi i plotë i skriptit të përdoruesit për add_script, përfshirë metadata ==UserScript==.")
                             )
                             .put(
                                 "script_id",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "toggle_script 或 remove_script 的目标脚本 id，来自 list_scripts。")
+                                    .put("description", "ID-ja e skriptit për toggle_script ose remove_script, marrë nga list_scripts.")
                             )
                             .put(
                                 "enabled",
                                 JSONObject()
                                     .put("type", "boolean")
-                                    .put("description", "toggle_script 的目标状态（缺省切换）；set_intercept 的拦截开关。")
+                                    .put("description", "Gjendja e synuar për toggle_script (pa vlerë ndryshon gjendjen); për set_intercept aktivizon ose çaktivizon përgjimin.")
                             )
                             .put(
                                 "match",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "add_intercept_replace / clear_intercept_replace 的 URL 匹配子串。")
+                                    .put("description", "Pjesa e URL-së që duhet përputhur nga add_intercept_replace / clear_intercept_replace.")
                             )
                             .put(
                                 "body",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "add_intercept_replace 的替换响应正文。")
+                                    .put("description", "Përmbajtja zëvendësuese e përgjigjes për add_intercept_replace.")
                             )
                             .put(
                                 "mime_type",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "add_intercept_replace 的响应 MIME，缺省 text/html。")
+                                    .put("description", "Lloji MIME i përgjigjes për add_intercept_replace; parazgjedhja text/html.")
                             )
                             .put(
                                 "encoding",
                                 JSONObject()
                                     .put("type", "string")
-                                    .put("description", "add_intercept_replace 的响应编码，缺省 utf-8。")
+                                    .put("description", "Kodimi i përgjigjes për add_intercept_replace; parazgjedhja utf-8.")
                             )
                             .put(
                                 "status",
                                 JSONObject()
                                     .put("type", "integer")
-                                    .put("description", "add_intercept_replace 的响应状态码，缺省 200。")
+                                    .put("description", "Kodi i statusit të përgjigjes për add_intercept_replace; parazgjedhja 200.")
                             )
                     )
                     .put("required", JSONArray().put("action"))

@@ -41,9 +41,9 @@ import top.yukonga.miuix.kmp.basic.TextField
 import top.yukonga.miuix.kmp.theme.MiuixTheme
 
 /**
- * 作战协议页：正文来自 `filesDir/prompts/` 下第一个非空 `.md`。
+ * Protokolli i punës页：Teksti来自 `filesDir/prompts/` 下第一个非空 `.md`。
  *
- * 页面顺序刻意是「先看到状态、再决定是否启用」——默认关闭，文件存在也不改变行为，
+ * 页面顺序刻意是「先看到状态、再决定是否启用」——默认Çaktivizuar，文件存在也不改变行为，
  * 避免用户没开就发现行为变了还找不到原因。
  */
 @Composable
@@ -60,15 +60,15 @@ internal fun AgentUserPromptScreen(
     }
 
     MiuixScaffoldPage(
-        title = "作战协议",
+        title = "Protokolli i punës",
         onBack = { onAction(AgentUserPromptAction.NavigateBack) },
         modifier = Modifier.imePadding(),
     ) {
         item(key = "intro") {
             Text(
-                text = "把要常驻的提示词正文放进 prompts/ 目录下第一个非空 .md（默认 ${
+                text = "Vendos udhëzimet e përhershme në skedarin e parë .md jo bosh te prompts/ (parazgjedhja:${
                     AgentUserPromptStore.DEFAULT_FILE_NAME
-                }），或直接从文件导入。它以独立 system 消息整篇注入，与内建交付契约同等优先，两者冲突时以本协议为准。",
+                }), ose importoji nga skedari. Udhëzimi dërgohet si mesazh i veçantë system; në rast konflikti merr përparësi mbi kontratën e integruar.",
                 style = MiuixTheme.textStyles.body2,
                 color = MiuixTheme.colorScheme.onSurfaceVariantSummary,
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp),
@@ -78,39 +78,39 @@ internal fun AgentUserPromptScreen(
         item(key = "status") {
             EtaPreferenceGroup {
                 EtaPreference(
-                    title = "生效范围",
+                    title = "Fusha e zbatimit",
                     summary = modeSummary(state),
                 )
                 EtaPreferenceDivider()
                 EtaPreference(
-                    title = "当前文件",
+                    title = "Skedari aktual",
                     summary = fileSummary(state),
                 )
                 EtaPreferenceDivider()
                 EtaPreference(
-                    title = "内置版本",
+                    title = "Versioni i integruar",
                     summary = builtinSummary(state),
                 )
             }
         }
 
-        item(key = "inject-title") { EtaPreferenceGroupTitle("注入") }
+        item(key = "inject-title") { EtaPreferenceGroupTitle("Shtimi i udhëzimeve") }
         item(key = "inject") {
             EtaPreferenceGroup {
                 EtaPreference(
-                    title = "协议跟随逆向能力",
-                    summary = injectSummary(state) + "；使用设置或技能页的逆向能力总开关",
+                    title = "Protokolli ndjek aftësitë e analizës së kundërt",
+                    summary = injectSummary(state) + "；Përdor çelësin kryesor të aftësive të analizës së kundërt te Cilësimet ose Aftësitë",
                 )
             }
         }
 
-        item(key = "editor-title") { EtaPreferenceGroupTitle("正文") }
+        item(key = "editor-title") { EtaPreferenceGroupTitle("Teksti") }
         item(key = "editor") {
             if (state.showEditor) {
                 TextField(
                     value = state.draft,
                     onValueChange = { onAction(AgentUserPromptAction.DraftChanged(it)) },
-                    label = "作战协议正文",
+                    label = "Teksti i protokollit të punës",
                     enabled = !state.isLoading && !state.isSaving && !state.editingLocked,
                     singleLine = false,
                     minLines = 10,
@@ -134,11 +134,11 @@ internal fun AgentUserPromptScreen(
             )
         }
 
-        item(key = "sources-title") { EtaPreferenceGroupTitle("正文来源") }
+        item(key = "sources-title") { EtaPreferenceGroupTitle("Burimi i tekstit") }
         item(key = "sources") {
             Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp)) {
                 EtaTextButton(
-                    text = "从文件导入",
+                    text = "Importo nga skedari",
                     onClick = { importLauncher.launch(arrayOf("*/*")) },
                     enabled = !state.isLoading && !state.isSaving,
                     modifier = Modifier.fillMaxWidth(),
@@ -146,7 +146,7 @@ internal fun AgentUserPromptScreen(
                 if (state.builtinAvailable) {
                     Spacer(Modifier.height(4.dp))
                     EtaTextButton(
-                        text = if (state.builtinInstalled) "重新装配内置版本" else "装配内置版本",
+                        text = if (state.builtinInstalled) "Riaktivizo versionin e integruar" else "Aktivizo versionin e integruar",
                         onClick = { onAction(AgentUserPromptAction.InstallBuiltin) },
                         enabled = !state.isLoading && !state.isSaving,
                         modifier = Modifier.fillMaxWidth(),
@@ -161,13 +161,13 @@ internal fun AgentUserPromptScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 EtaTextButton(
-                    text = "重新载入",
+                    text = "Ringarko",
                     onClick = { onAction(AgentUserPromptAction.Reload) },
                     enabled = !state.isLoading && !state.isSaving,
                     modifier = Modifier.weight(1f),
                 )
                 EtaTextButton(
-                    text = "保存",
+                    text = "Ruaj",
                     onClick = { onAction(AgentUserPromptAction.Save) },
                     enabled = state.canSave,
                     modifier = Modifier.weight(1f),
@@ -178,7 +178,7 @@ internal fun AgentUserPromptScreen(
 
         item(key = "clear") {
             EtaTextButton(
-                text = "清空（先备份）",
+                text = "Pastro (krijo më parë kopje rezervë)",
                 onClick = { showClearDialog = true },
                 enabled = !state.isLoading && !state.isSaving && state.savedContent.isNotBlank(),
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp),
@@ -187,7 +187,7 @@ internal fun AgentUserPromptScreen(
 
         item(key = "footer") {
             Text(
-                text = "改动会在下个会话生效；会话中途动文件不会改变正在进行的请求前缀（否则系统提示抖动会让整段缓存失效）。",
+                text = "Ndryshimet zbatohen në bisedën e ardhshme. Ndryshimi i skedarit gjatë bisedës nuk prek kërkesën aktive.",
                 style = MiuixTheme.textStyles.footnote1,
                 color = MiuixTheme.colorScheme.onSurfaceVariantSummary,
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp),
@@ -198,12 +198,12 @@ internal fun AgentUserPromptScreen(
     if (showClearDialog) {
         EtaWindowDialog(
             show = true,
-            title = "清空作战协议",
-            summary = "当前文件会先备份到 prompts/.backup/，再清空。清空后不再注入任何协议。",
+            title = "Pastro protokollin e punës",
+            summary = "Skedari aktual ruhet fillimisht te prompts/.backup/ dhe pastaj pastrohet. Nuk do të dërgohet më protokoll.",
             onDismissRequest = { showClearDialog = false },
         ) {
             MiuixDialogActions(
-                confirmText = "清空",
+                confirmText = "Pastro",
                 destructive = true,
                 confirmEnabled = !state.isSaving,
                 onCancel = { showClearDialog = false },
@@ -218,18 +218,18 @@ internal fun AgentUserPromptScreen(
     state.pendingImport?.let { pending ->
         EtaWindowDialog(
             show = true,
-            title = "导入作战协议",
+            title = "Importo protokollin e punës",
             summary = buildString {
-                appendLine("${pending.fileName}｜${formatNumber(pending.charCount)} 字符｜${formatBytes(pending.byteSize)}")
+                appendLine("${pending.fileName}｜${formatNumber(pending.charCount)}  karaktere｜${formatBytes(pending.byteSize)}")
                 if (pending.overLimit) {
-                    appendLine("超出 ${formatNumber(AgentUserPromptStore.MAX_CHARS)} 字符上限，导入后会按截断版注入。")
+                    appendLine("Tejkalon kufirin prej${formatNumber(AgentUserPromptStore.MAX_CHARS)}karakteresh; pas importimit do të përdoret versioni i shkurtuar.")
                 }
-                append("确认后替换当前生效文件；原文件会先备份到 prompts/.backup/。")
+                append("Pas konfirmimit zëvendësohet skedari aktiv; origjinali ruhet te prompts/.backup/.")
             },
             onDismissRequest = { onAction(AgentUserPromptAction.CancelImport) },
         ) {
             MiuixDialogActions(
-                confirmText = "导入",
+                confirmText = "Importo",
                 confirmEnabled = !state.isSaving,
                 onCancel = { onAction(AgentUserPromptAction.CancelImport) },
                 onConfirm = { onAction(AgentUserPromptAction.ConfirmImport) },
@@ -240,12 +240,12 @@ internal fun AgentUserPromptScreen(
     state.notice?.let { notice ->
         EtaWindowDialog(
             show = true,
-            title = "作战协议",
+            title = "Protokolli i punës",
             summary = notice,
             onDismissRequest = { onAction(AgentUserPromptAction.DismissNotice) },
         ) {
             EtaTextButton(
-                text = "知道了",
+                text = "E kuptova",
                 onClick = { onAction(AgentUserPromptAction.DismissNotice) },
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -254,11 +254,11 @@ internal fun AgentUserPromptScreen(
 }
 
 /**
- * 正文过长时的只读预览。
+ * Teksti过长时的只读预览。
  *
- * 8 万字符塞进 TextField，每次重排都要整段测量，手机上会明显卡顿；而这条链路的真实用法是
- * 「导入整份提示词再启用」，不需要逐字编辑。所以默认只渲染前 [AgentUserPromptUiState.PREVIEW_CHARS]
- * 个字符供核对，要手改再显式展开全文。
+ * 8 万 karaktere塞进 TextField，每次重排都要整段测量，手机上会明显卡顿；而这条链路的真实用法是
+ * 「Importo整份提示词再启用」，不需要逐字编辑。所以默认只渲染前 [AgentUserPromptUiState.PREVIEW_CHARS]
+ * 个 karaktere供核对，要手改再显式展开全文。
  */
 @Composable
 private fun LargeContentPreview(
@@ -277,16 +277,16 @@ private fun LargeContentPreview(
         if (state.previewTruncated) {
             Spacer(Modifier.height(6.dp))
             Text(
-                text = "仅预览前 ${formatNumber(AgentUserPromptUiState.PREVIEW_CHARS)} 字符，全文 ${
+                text = "Shfaqen vetëm${formatNumber(AgentUserPromptUiState.PREVIEW_CHARS)}karakteret e para; teksti i plotë ka${
                     formatNumber(state.draft.length)
-                } 字符。在手机上展开编辑会明显卡顿，建议直接用文件导入覆盖。",
+                }karaktere. Ndryshimi i të gjithit mund të ngadalësojë telefonin; rekomandohet importimi nga skedari.",
                 style = MiuixTheme.textStyles.footnote1,
                 color = MiuixTheme.colorScheme.onSurfaceVariantSummary,
             )
         }
         Spacer(Modifier.height(6.dp))
         EtaTextButton(
-            text = "在编辑区打开全文",
+            text = "Hap tekstin e plotë për redaktim",
             onClick = onOpenEditor,
             enabled = !state.isLoading && !state.isSaving && !state.editingLocked,
             modifier = Modifier.fillMaxWidth(),
@@ -294,56 +294,56 @@ private fun LargeContentPreview(
     }
 }
 
-/** 内置版本状态：随包多少字符、是否就是当前生效文件——换版或手改过会显示「与当前不同」。 */
+/** Versioni i integruar状态：随包多少 karaktere、是否就是当前生效文件——换版或手改过会显示「与当前不同」。 */
 private fun builtinSummary(state: AgentUserPromptUiState): String {
-    val chars = state.builtinCharCount ?: return "未随包内置；只能手动粘贴或从文件导入"
-    val size = "${formatNumber(chars)} 字符"
+    val chars = state.builtinCharCount ?: return "Nuk përfshihet në paketë; ngjite tekstin ose importoje nga skedari"
+    val size = "${formatNumber(chars)}  karaktere"
     return when {
-        state.builtinInstalled -> "随包 $size · 已装配为当前生效文件"
-        state.sourceFileName.isNullOrBlank() -> "随包 $size · 尚未装配"
-        else -> "随包 $size · 与当前生效文件不同（可点下方覆盖）"
+        state.builtinInstalled -> "I integruar:$size · aktiv si skedar aktual"
+        state.sourceFileName.isNullOrBlank() -> "I integruar:$size · ende joaktiv"
+        else -> "I integruar:$size · ndryshon nga skedari aktual (mund ta zëvendësosh)"
     }
 }
 
 private fun injectSummary(state: AgentUserPromptUiState): String = when {
-    state.sourceFileName.isNullOrBlank() -> "没有可用正文——先装配内置版本或从文件导入"
-    state.enabled -> "已开启 · 每个会话都会注入"
-    else -> "已关闭 · 不会注入"
+    state.sourceFileName.isNullOrBlank() -> "Nuk ka tekst të disponueshëm. Aktivizo versionin e integruar ose importoje."
+    state.enabled -> "Aktiv · dërgohet në çdo bisedë"
+    else -> "Joaktiv · nuk dërgohet"
 }
 
 private fun modeSummary(state: AgentUserPromptUiState): String = when {
-    state.enabled -> "注入中"
+    state.enabled -> "Po dërgohen udhëzimet"
     state.mode == AgentUserPromptMode.Off && state.pendingActivation ->
-        "已检测到正文，但注入开关关闭——不会注入"
-    state.mode == AgentUserPromptMode.Off -> "关闭"
-    state.mode == AgentUserPromptMode.Global -> "已关闭注入"
-    else -> "已关闭注入"
+        "Teksti u gjet, por aktivizimi është i fikur; nuk dërgohet"
+    state.mode == AgentUserPromptMode.Off -> "Çaktivizuar"
+    state.mode == AgentUserPromptMode.Global -> "Dërgimi i udhëzimeve është joaktiv"
+    else -> "Dërgimi i udhëzimeve është joaktiv"
 }
 
 private fun fileSummary(state: AgentUserPromptUiState): String {
     val name = state.sourceFileName
     if (name.isNullOrBlank()) {
-        return "未检测到：prompts/ 下没有非空的 .md"
+        return "Nuk u gjet tekst: nuk ka skedar .md jo bosh te prompts/"
     }
-    val size = "${formatNumber(state.charCount)} 字符"
+    val size = "${formatNumber(state.charCount)}  karaktere"
     return if (state.truncated) {
-        "prompts/$name · $size（超出 ${formatNumber(AgentUserPromptStore.MAX_CHARS)} 上限，按截断版注入；编辑已锁定）"
+        "prompts/$name · $size(tejkalon${formatNumber(AgentUserPromptStore.MAX_CHARS)} kufirin; dërgohet versioni i shkurtuar dhe redaktimi është i kyçur)"
     } else {
         "prompts/$name · $size"
     }
 }
 
-/** 体积警告：实时字符数、与上限的关系以及模型上下文窗口——超限用红、接近上限用黄。 */
+/** 体积警告：实时 karaktere数、与上限的关系以及模型上下文窗口——超限用红、接近上限用黄。 */
 private fun budgetSummary(state: AgentUserPromptUiState): String = buildString {
     val limit = AgentUserPromptStore.MAX_CHARS
-    append("${formatNumber(state.draftCharCount)} / ${formatNumber(limit)} 字符")
+    append("${formatNumber(state.draftCharCount)} / ${formatNumber(limit)}  karaktere")
     when {
-        state.truncated -> append("　磁盘文件超限，实际按截断版注入")
-        state.draftCharCount > limit -> append("　超出上限，保存后会按截断版注入")
-        state.nearBudget -> append("　已接近上限，注意上下文开销")
-        else -> append("　每轮请求都随系统提示发送")
+        state.truncated -> append(" Skedari tejkalon kufirin; do të përdoret versioni i shkurtuar")
+        state.draftCharCount > limit -> append(" Kufiri u tejkalua; pas ruajtjes do të përdoret versioni i shkurtuar")
+        state.nearBudget -> append(" Afër kufirit; kontrollo përdorimin e kontekstit")
+        else -> append(" Dërgohet me udhëzimin e sistemit në çdo kërkesë")
     }
-    state.contextWindow?.let { append("　模型上下文窗口 ${formatNumber(it)} token") }
+    state.contextWindow?.let { append(" Dritarja e kontekstit:${formatNumber(it)} token") }
 }
 
 @Composable
