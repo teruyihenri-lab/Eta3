@@ -6,12 +6,12 @@
 - Repository: `teruyihenri-lab/Eta3`; dega bazë: `main`.
 - Aplikacion Android në Kotlin / Jetpack Compose.
 - `applicationId`: `io.github.mangi.eta`; versioni i lexuar nga `app/build.gradle.kts`: `3.3.1`, `versionCode=2026101401`.
-- Gjuhët e deklaruara më 2026-11-07: `en`, `zh-Hans`, `zh-Hant`; shqipja `sq` nuk është integruar ende.
-- `app/src/main/res/values/strings.xml` përmban rreth 1,333 burime `string` dhe 20 `plurals`.
-- 2026-11-07: shkrimi në GitHub u verifikua në degën `localization/albanian-sq`, commit `217c066d3847b34b8e93c831b7ec15e614e31875`.
+- Gjuhët e deklaruara: `en`, `sq`, `zh-Hans`, `zh-Hant`.
+- `app/src/main/res/values/strings.xml` mbetet burimi i parazgjedhur, ndërsa `values-sq/strings.xml` është krijuar si bazë e lokalizimit.
+- 2026-11-07: konfigurimi i locale `sq` u shtua në degën `localization/albanian-sq`; testet e shfaqjes së ekranit dhe importimit të kartës së personazhit u rregulluan sipas tekstit shqiptar.
 
 ## Statuset
-- Qasja GitHub për shkrim: **funksionale në degën e punës**, pa ndryshime në `main` nga kjo seancë.
-- Dokumentacioni: përgatitur në këtë degë; duhet rishikuar dhe bashkuar në `main`.
-- Përkthimi i plotë në shqip: **i pambaruara**, nuk është kontrolluar ekran më ekran.
-- Build, nënshkrim dhe test APK në pajisje: **nuk janë kryer**.
+- Qasja GitHub për shkrim: **funksionale në degën e punës**.
+- Dokumentacioni: përditësuar me regjistrin e ri të ndryshimeve; duhet të rishikohet dhe bashkohet në `main`.
+- Përkthimi i plotë në shqip: **në progres**, jo akoma i plotë për të gjitha ekranet dhe string-et.
+- Build, nënshkrim dhe test APK në pajisje: **nuk janë ekzekutuar në këtë sesion**.

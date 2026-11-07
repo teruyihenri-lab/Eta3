@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Eta</string>
+    <string name="xposed_description">Agjent AI i nivelit të sistemit që merr kontrollin e Breeno dhe Super XiaoAI, aktivizon Gemini dhe Circle to Search dhe integron shfletuesin, terminalin dhe mjetet e pajisjes.</string>
+    <string name="agent_accessibility_label">Agjenti Eta</string>
+    <string name="agent_accessibility_description">Lexo përmbajtjen e ekranit dhe kryej trokitje, rrëshqitje, futje teksti dhe veprime të tjera për të ndihmuar agjentin të përfundojë detyrat.</string>
+    <string name="notification_history_service_label">Historiku i njoftimeve të Eta</string>
+    <string name="voice_interaction_service_label">Eta</string>
+    <string name="recognition_service_label">Njohja e të folurit të Eta</string>
+    <string name="settings_language">Gjuha</string>
+    <string name="settings_language_system">Ndjek sistemin</string>
+</resources>
