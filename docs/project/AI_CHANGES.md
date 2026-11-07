@@ -36,3 +36,7 @@
 ## 2026-11-07 — Paraqitja dhe përshëndetjet e personazhit
 - U lokalizuan pamja e personazhit, butoni për nisjen e bisedës, titujt e përshëndetjeve, përshkrimi i avatarit dhe etiketa e autorit në `CharacterHero.kt`.
 - Emrat e personazheve dhe përmbajtja e shkruar nga përdoruesi mbeten të paprekura.
+
+## 2026-11-07 — Përditësim i statusit dhe auditimit
+- U mat sërish mbulimi: **1,407/1,407** burime teksti dhe 20/20 grupe shumësi; nuk ka çelësa që mungojnë në `values-sq`.
+- U regjistruan shprehimisht ekranet që ende kanë vargje hardcoded për të mos i humbur në vazhdim.

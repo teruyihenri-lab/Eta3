@@ -25,3 +25,6 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - U shtua test për `character_delete` në sq-AL; CI duhet të konfirmojë ekzekutimin e suksesshëm.
 
 - Tekstet e `CharacterHero.kt` u lidhën me `stringResource`; test vizual ende nuk është kryer.
+
+- Numërimi i fundit i GitHub: 1,407 çelësa në origjinal dhe 1,407 në `values-sq`, pa mungesa; 20 `plurals` në shqip.
+- Kontrolli GitHub Actions `Kontrolli i dokumentacionit` ka kaluar për SHA `5e35a5e1`; `PR Check` ende nuk ka përfunduar me sukses në SHA-n e fundit të verifikuar.

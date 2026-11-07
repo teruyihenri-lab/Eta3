@@ -1,9 +1,11 @@
 # Përparimi
 
-> Përditësuar 2026-11-07
+> 2026-11-07 · `localization/albanian-ui-phase1`
 
-- Dokumentacioni: 79/79 skedarë të ruajtur në `main`.
-- Përkthimi i vargjeve të burimeve Android: **1,331/1,331 (100% e emrave)**.
-- Grupet e shumësit: **20/20**.
-- Aplikacioni i plotë: **nuk mund të deklarohet 100%** pa auditim të vargjeve hardcoded dhe prova në pajisje.
-- Teste build/instalim: **nuk janë verifikuar**.
+- Dokumentacioni: **79/79** skedarë në `main`.
+- Burimet e përkthyeshme Android: **1,407/1,407** çelësa në shqip (**100% mbulim i burimeve**, jo i gjithë aplikacionit).
+- Shumësat: **20/20**.
+- Gjuha `sq`: e regjistruar në konfigurimin e aplikacionit.
+- Ekranet e personazheve: 6 skedarë të përpunuar; Worldbook dhe faqe të tjera mbeten.
+- Build/teste Gradle: në proces verifikimi nga CI.
+- APK e testuar në pajisje: **jo**.

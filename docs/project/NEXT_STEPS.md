@@ -16,3 +16,5 @@
 9. Lokalizo `CharacterHero`, `CharacterWorldbookEditor`, `AgentMemoryScreen` dhe tekstet e tjera hardcoded.
 
 10. Lokalizo fushat e `CharacterWorldbookEditor.kt`, `AgentMemoryScreen.kt` dhe dialogët e roleplay.
+
+12. Pasi të kalojë CI për versionin e fundit, mbyll detyrat e etiketuara te `KNOWN_ISSUES.md` dhe kryej verifikim në pajisje; mos shpërnda APK pa teste.
