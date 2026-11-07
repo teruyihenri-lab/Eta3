@@ -10,3 +10,10 @@
 - APK i instaluar/testuar: **nuk është verifikuar**.
 
 Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun.
+
+## 2026-11-07 — Kontroll statik i burimeve shqipe
+- Përkthimet: **297** emra unikë u gjetën në burimin bazë.
+- Vendmbajtësit e formateve `%...` për 297 vargjet: përputhje e kontrolluar kundrejt anglishtes.
+- Grupet e shumësit: 20 me format `one/other`.
+- Shtuar testet Robolectric për `sq-AL`, por **nuk janë ekzekutuar ende**.
+- Build real, lint dhe testim në pajisje: **nuk janë kryer**.

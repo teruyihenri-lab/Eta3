@@ -8,3 +8,9 @@
 - APK e re: **jo e ndërtuar/testuar**.
 
 Përqindjet e ardhshme duhet të bazohen te çelësat e përkthyer e të validuar, jo te vlerësimet.
+
+## Matje e fazës së parë — 2026-11-07
+- Vargjet e përkthyeshme: 297/1331 (22.3%).
+- Grupet e shumësit: 20/20 (100% e grupeve; sjellja e ekraneve e patestuar).
+- Tekstet hardcoded në Kotlin: pa auditim të plotë.
+- Kriteri "gjithçka shqip": ende i paplotësuar.

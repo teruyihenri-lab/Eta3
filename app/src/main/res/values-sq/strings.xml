@@ -297,4 +297,84 @@
     <string name="voice_running_tool">Eta po ekzekuton %1$s</string>
     <string name="voice_input_hint">Shkruaji Eta-s…</string>
     <string name="voice_send">Dërgo</string>
+    <plurals name="conversation_delete_later_turns">
+        <item quantity="one">Ky mesazh dhe %d hap tjetër do të fshihen.</item>
+        <item quantity="other">Ky mesazh dhe %d hapa të tjerë do të fshihen.</item>
+    </plurals>
+    <plurals name="conversation_regenerate_later_turns">
+        <item quantity="one">Do të fshihet %d hap pasues dhe përgjigjja do të rigjenerohet nga ky mesazh.</item>
+        <item quantity="other">Do të fshihen %d hapa pasues dhe përgjigjja do të rigjenerohet nga ky mesazh.</item>
+    </plurals>
+    <plurals name="work_processing_step">
+        <item quantity="one">Në punë · hapi %d</item>
+        <item quantity="other">Në punë · hapi %d</item>
+    </plurals>
+    <plurals name="work_completed_steps">
+        <item quantity="one">Përfundoi %d hap</item>
+        <item quantity="other">Përfunduan %d hapa</item>
+    </plurals>
+    <plurals name="tool_group_calls">
+        <item quantity="one">%d thirrje</item>
+        <item quantity="other">%d thirrje</item>
+    </plurals>
+    <plurals name="work_summary_thinking">
+        <item quantity="one">U arsyetua %d herë</item>
+        <item quantity="other">U arsyetua %d herë</item>
+    </plurals>
+    <plurals name="work_summary_tools">
+        <item quantity="one">%d thirrje mjeti</item>
+        <item quantity="other">%d thirrje mjetesh</item>
+    </plurals>
+    <plurals name="work_summary_failed">
+        <item quantity="one">%d dështim</item>
+        <item quantity="other">%d dështime</item>
+    </plurals>
+    <plurals name="reasoning_completed_seconds">
+        <item quantity="one">Arsyetimi përfundoi · %d sekondë</item>
+        <item quantity="other">Arsyetimi përfundoi · %d sekonda</item>
+    </plurals>
+    <plurals name="file_references_added_with_failures">
+        <item quantity="one">U shtua %1$d element; %2$d element nuk u referua</item>
+        <item quantity="other">U shtuan %1$d elemente; %2$d elemente nuk u referuan</item>
+    </plurals>
+    <plurals name="provider_models_fetched">
+        <item quantity="one">U mor %d model</item>
+        <item quantity="other">U morën %d modele</item>
+    </plurals>
+    <plurals name="provider_models_added">
+        <item quantity="one">U shtua %d model</item>
+        <item quantity="other">U shtuan %d modele</item>
+    </plurals>
+    <plurals name="provider_selected_delete_summary">
+        <item quantity="one">Modeli i përzgjedhur do të fshihet përgjithmonë.</item>
+        <item quantity="other">%d modelet e përzgjedhura do të fshihen përgjithmonë.</item>
+    </plurals>
+    <plurals name="provider_models_deleted">
+        <item quantity="one">U fshi %d model</item>
+        <item quantity="other">U fshinë %d modele</item>
+    </plurals>
+    <plurals name="provider_models_selected">
+        <item quantity="one">%d i përzgjedhur</item>
+        <item quantity="other">%d të përzgjedhur</item>
+    </plurals>
+    <plurals name="provider_delete_models_action">
+        <item quantity="one">Fshi %d model</item>
+        <item quantity="other">Fshi %d modele</item>
+    </plurals>
+    <plurals name="linux_missing_core_commands">
+        <item quantity="one">Mungon %d komandë bazë</item>
+        <item quantity="other">Mungojnë %d komanda bazë</item>
+    </plurals>
+    <plurals name="provider_configured_count">
+        <item quantity="one">Ofruesit e konfiguruar (%d)</item>
+        <item quantity="other">Ofruesit e konfiguruar (%d)</item>
+    </plurals>
+    <plurals name="provider_models_count">
+        <item quantity="one">%d model</item>
+        <item quantity="other">%d modele</item>
+    </plurals>
+    <plurals name="permission_health_issues">
+        <item quantity="one">%d element kërkon vëmendje</item>
+        <item quantity="other">%d elemente kërkojnë vëmendje</item>
+    </plurals>
 </resources>

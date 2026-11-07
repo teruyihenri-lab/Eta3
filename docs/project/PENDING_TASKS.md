@@ -8,3 +8,11 @@
 - [ ] Kontrolli i vargjeve të shkruara drejtpërdrejt në kod dhe i teksteve nga mjetet.
 - [ ] Testet e përkthimit, ndërtimit dhe ndërfaqes në telefon.
 - [ ] Miratimi dhe bashkimi i dokumenteve nga dega e punës në `main`.
+
+## Gjendja e detyrave — 2026-11-07
+- [x] Regjistrimi i gjuhës `sq` në konfigurim dhe filtër build-i (dega e punës).
+- [x] Shtimi i 297 përkthimeve fillestare dhe 20 grupeve të shumësit.
+- [ ] Përkthimi i 1034 vargjeve të tjera.
+- [ ] Auditimi i teksteve hardcoded në Kotlin.
+- [ ] Ekzekutimi i testeve Gradle, build-i dhe testimi në telefon.
+- [ ] Bashkimi në main pas verifikimit.

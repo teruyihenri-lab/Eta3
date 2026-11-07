@@ -15,3 +15,12 @@
 - Dokumentacioni: përgatitur në këtë degë; duhet rishikuar dhe bashkuar në `main`.
 - Përkthimi i plotë në shqip: **i pambaruara**, nuk është kontrolluar ekran më ekran.
 - Build, nënshkrim dhe test APK në pajisje: **nuk janë kryer**.
+
+## 2026-11-07 — Statusi i ri i lokalizimit
+- Dega e punës: `feature/albanian-localization`.
+- Gjuhët e deklaruara në këtë degë: `en`, `sq`, `zh-Hans`, `zh-Hant`.
+- Burime `string`: **297 / 1331** të përkthyeshme në shqip (22.3%).
+- Burime `plurals`: **20 / 20** grupe të përkthyera.
+- Android do të përdorë gjuhën bazë për tekstet shqip që mungojnë; prandaj ndërfaqja **nuk është ende tërësisht shqip**.
+- Testet dhe build-i: jo të ekzekutuara; APK i gatshëm: jo.
+- Dokumentacioni me 79 skedarë është tashmë në `main`.

@@ -9,3 +9,11 @@
 4. Ruaj markat, emrat e API, fjalëkyçet teknike dhe serializimin.
 5. Ekzekuto teste të resources, testet Gradle dhe një build; verifiko në pajisje me gjuhën shqip.
 6. Përditëso `AI_CHANGES.md`, `CURRENT_STATUS.md`, `NEXT_STEPS.md`, `TEST_RESULTS.md` bashkë me çdo ndryshim.
+
+## Vazhdimi pas fazës së parë (2026-11-07)
+1. Përkthe 1034 etiketat `string` që mungojnë në `values-sq`.
+2. Audito strings hardcoded nga Kotlin dhe tekstet e mjeteve, përfshirë njoftimet/aksesueshmërinë.
+3. Kontrollo formulimet, apostrofat, XML escapes dhe parametrat e formatimit.
+4. Ekzekuto `./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug` në mjedis me JDK 25 dhe Android SDK 37.
+5. Testo në telefon: gjuha e aplikacionit shqip, menu, chat, zë, terminal, provider, Linux dhe njoftime.
+6. Përditëso dokumentacionin me prova të rezultateve, pastaj përgatit PR të verifikuar.
