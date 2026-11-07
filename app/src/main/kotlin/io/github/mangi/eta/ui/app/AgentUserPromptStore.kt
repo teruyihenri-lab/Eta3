@@ -101,7 +101,7 @@ internal class AgentUserPromptStore(
                     withContext(Dispatchers.Main) {
                         promptState = promptState.copy(
                             isLoading = false,
-                            notice = throwable.message ?: "读取作战协议失败，请稍后重试。",
+                            notice = throwable.message ?: "Protokolli i punës nuk u lexua. Provo përsëri më vonë.",
                         )
                     }
                 },
@@ -125,7 +125,7 @@ internal class AgentUserPromptStore(
                             "User prompt switch update failed: type=${throwable.safeLogType()}"
                         }
                         withContext(Dispatchers.Main) {
-                            promptState = promptState.copy(notice = "注入开关保存失败，请稍后重试。")
+                            promptState = promptState.copy(notice = "Cilësimi i aktivizimit nuk u ruajt. Provo përsëri.")
                         }
                     },
                 )
@@ -147,7 +147,7 @@ internal class AgentUserPromptStore(
                             "User prompt mode update failed: type=${throwable.safeLogType()}"
                         }
                         withContext(Dispatchers.Main) {
-                            promptState = promptState.copy(notice = "生效范围保存失败，请稍后重试。")
+                            promptState = promptState.copy(notice = "Fusha e zbatimit nuk u ruajt. Provo përsëri.")
                         }
                     },
                 )
@@ -177,7 +177,7 @@ internal class AgentUserPromptStore(
                                 revision = snapshot.revision,
                                 truncated = snapshot.truncated,
                                 editorExpanded = false,
-                                notice = "已保存；下个会话生效。",
+                                notice = "U ruajt; do të zbatohet në bisedën e ardhshme.",
                             )
                         }
                     },
@@ -188,7 +188,7 @@ internal class AgentUserPromptStore(
                         withContext(Dispatchers.Main) {
                             promptState = promptState.copy(
                                 isSaving = false,
-                                notice = throwable.message ?: "保存作战协议失败，请稍后重试。",
+                                notice = throwable.message ?: "Protokolli i punës nuk u ruajt. Provo përsëri.",
                             )
                         }
                     },
@@ -213,7 +213,7 @@ internal class AgentUserPromptStore(
                                 revision = snapshot.revision,
                                 truncated = snapshot.truncated,
                                 editorExpanded = false,
-                                notice = "已清空（原文件已备份到 prompts/.backup/）。",
+                                notice = "U pastrua; skedari origjinal u ruajt te prompts/.backup/.",
                             )
                         }
                     },
@@ -224,7 +224,7 @@ internal class AgentUserPromptStore(
                         withContext(Dispatchers.Main) {
                             promptState = promptState.copy(
                                 isSaving = false,
-                                notice = throwable.message ?: "清空作战协议失败，请稍后重试。",
+                                notice = throwable.message ?: "Pastrimi i protokollit dështoi. Provo përsëri.",
                             )
                         }
                     },
@@ -272,7 +272,7 @@ internal class AgentUserPromptStore(
                         withContext(Dispatchers.Main) {
                             promptState = promptState.copy(
                                 isLoading = false,
-                                notice = throwable.message ?: "导入失败，请换一个文件重试。",
+                                notice = throwable.message ?: "Importimi dështoi. Provo një skedar tjetër.",
                             )
                         }
                     },
@@ -306,9 +306,9 @@ internal class AgentUserPromptStore(
                             editorExpanded = false,
                             pendingImport = null,
                             notice = if (snapshot.truncated) {
-                                "已导入 ${pending.fileName}，但超出上限被截断，请精简后重新导入。"
+                                "U importua ${pending.fileName}, por u shkurtua për shkak të kufirit. Përmblidhe dhe importoje përsëri."
                             } else {
-                                "已导入 ${pending.fileName}（${pending.charCount} 字符）；下个会话生效。"
+                                "U importua ${pending.fileName} (${pending.charCount} karaktere); zbatohet në bisedën e ardhshme."
                             },
                         )
                     }
@@ -321,7 +321,7 @@ internal class AgentUserPromptStore(
                         promptState = promptState.copy(
                             isSaving = false,
                             pendingImport = null,
-                            notice = throwable.message ?: "导入作战协议失败，请稍后重试。",
+                            notice = throwable.message ?: "Importimi i protokollit dështoi. Provo përsëri.",
                         )
                     }
                 },
@@ -352,7 +352,7 @@ internal class AgentUserPromptStore(
                                 revision = snapshot.revision,
                                 truncated = snapshot.truncated,
                                 editorExpanded = false,
-                                notice = "已装配内置破甲记忆（${snapshot.charCount} 字符）；下个会话生效。",
+                                notice = "U aktivizua kujtesa e integruar (${snapshot.charCount} karaktere); zbatohet në bisedën e ardhshme.",
                             )
                         }
                     },
@@ -363,7 +363,7 @@ internal class AgentUserPromptStore(
                         withContext(Dispatchers.Main) {
                             promptState = promptState.copy(
                                 isSaving = false,
-                                notice = throwable.message ?: "装配内置版本失败，请稍后重试。",
+                                notice = throwable.message ?: "Aktivizimi i versionit të integruar dështoi. Provo përsëri.",
                             )
                         }
                     },
@@ -381,7 +381,7 @@ internal class AgentUserPromptStore(
             .query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)
             ?.use { cursor -> if (cursor.moveToFirst()) cursor.getString(0) else null }
             ?.takeIf { it.isNotBlank() }
-            ?: "导入的协议.md"
+            ?: "protokolli_i_importuar.md"
 
         val bytes = resolver.openInputStream(uri)?.use { input ->
             val buffer = ByteArrayOutputStream()
@@ -392,7 +392,7 @@ internal class AgentUserPromptStore(
                 if (buffer.size() + read > PROMPT_MAX_FILE_BYTES) {
                     throw AgentUserPromptException(
                         code = "PROMPT_TOO_LARGE",
-                        message = "文件超过 ${PROMPT_MAX_FILE_BYTES / 1024} KiB，拒绝导入",
+                        message = "Skedari tejkalon ${PROMPT_MAX_FILE_BYTES / 1024} KiB; importimi u refuzua",
                     )
                 }
                 buffer.write(chunk, 0, read)
@@ -400,21 +400,21 @@ internal class AgentUserPromptStore(
             buffer.toByteArray()
         } ?: throw AgentUserPromptException(
             code = "PROMPT_IMPORT_FAILED",
-            message = "无法读取所选文件",
+            message = "Skedari i zgjedhur nuk mund të lexohet",
         )
 
         if (bytes.isEmpty()) {
-            throw AgentUserPromptException(code = "PROMPT_IMPORT_FAILED", message = "所选文件是空的")
+            throw AgentUserPromptException(code = "PROMPT_IMPORT_FAILED", message = "Skedari i zgjedhur është bosh")
         }
         if (bytes.any { it == 0.toByte() }) {
-            throw AgentUserPromptException(code = "PROMPT_IMPORT_FAILED", message = "所选文件不是文本文件")
+            throw AgentUserPromptException(code = "PROMPT_IMPORT_FAILED", message = "Skedari i zgjedhur nuk është tekst")
         }
         val text = bytes.toString(Charsets.UTF_8)
             .removePrefix("\uFEFF")
             .replace("\r\n", "\n")
             .replace('\r', '\n')
         if (text.isBlank()) {
-            throw AgentUserPromptException(code = "PROMPT_IMPORT_FAILED", message = "所选文件没有可注入的正文")
+            throw AgentUserPromptException(code = "PROMPT_IMPORT_FAILED", message = "Skedari i zgjedhur nuk përmban tekst të përdorshëm")
         }
         return Triple(fileName, text, bytes.size)
     }

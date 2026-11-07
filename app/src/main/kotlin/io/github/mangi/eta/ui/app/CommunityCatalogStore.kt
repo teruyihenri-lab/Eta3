@@ -92,7 +92,7 @@ internal class CommunityCatalogStore(
     }
 
     suspend fun importProvider(provider: CommunityCatalogProvider, modelIds: Set<String>): String {
-        check(!importing) { "目录导入正在进行" }
+        check(!importing) { "Importimi i katalogut është në proces" }
         importing = true
         try {
             val added = ProviderRepository.addProvider(
@@ -140,14 +140,14 @@ internal class CommunityCatalogStore(
             ?.groupValues
             ?.get(1)
         return when {
-            status != null -> "目录服务返回 HTTP $status"
-            this is SocketTimeoutException -> "连接目录服务超时"
-            this is UnknownHostException -> "无法解析目录服务地址"
-            this is SSLException -> "目录服务安全连接失败"
-            message == "模型目录超出大小限制" -> "目录文件超出大小限制"
-            this is org.json.JSONException || this is IllegalArgumentException -> "目录格式无效"
-            this is IOException -> "网络连接或本地缓存写入失败"
-            else -> "更新失败，请稍后重试"
+            status != null -> "Shërbimi i katalogut ktheu HTTP $status"
+            this is SocketTimeoutException -> "Lidhja me shërbimin e katalogut përfundoi nga koha"
+            this is UnknownHostException -> "Adresa e shërbimit të katalogut nuk u gjet"
+            this is SSLException -> "Lidhja e sigurt me katalogun dështoi"
+            message == "模型目录超出大小限制" -> "Skedari i katalogut tejkaloi kufirin e madhësisë"
+            this is org.json.JSONException || this is IllegalArgumentException -> "Formati i katalogut është i pavlefshëm"
+            this is IOException -> "Lidhja në rrjet ose ruajtja lokale dështoi"
+            else -> "Përditësimi dështoi. Provo më vonë"
         }
     }
 }
