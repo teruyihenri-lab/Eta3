@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="capability_current_device">Pajisja aktuale</string>
+    <string name="capability_all">Të gjitha aftësitë</string>
+    <string name="capability_enhancements">Përmirësimet e root dhe sistemit</string>
+    <string name="capability_enhancements_summary">Autorizimi Root dhe statusi i framework-ut</string>
+    <string name="capability_root_checking">Po kontrollohet autorizimi Root…</string>
+    <string name="capability_root_granted">Qasja Root është dhënë</string>
+    <string name="capability_root_unavailable">Root nuk u zbulua; veçoritë standarde mbeten të disponueshme</string>
+    <string name="capability_root_timeout">Autorizimi skadoi; provo përsëri manualisht</string>
+    <string name="capability_root_not_granted">Qasja Root nuk u dha; po përdoret modaliteti standard</string>
+    <string name="capability_root_request">Autorizo</string>
+    <string name="capability_root_refresh">Kontrollo përsëri</string>
+    <string name="capability_root_required">Kërkohet qasje Root</string>
+    <string name="capability_root_partial">Po përdoren aftësitë standarde; Root aktivizon veprime shtesë</string>
+    <string name="capability_accessibility_required">Mund të përdoret pasi të aktivizohet qasja në aksesueshmëri</string>
+    <string name="capability_xposed_service">Lidhja e framework-ut</string>
+    <string name="capability_xposed_connected">Shërbimi është i lidhur; kjo nuk do të thotë se moduli Eta është aktiv</string>
+    <string name="capability_xposed_disconnected">Nuk ka lidhje me shërbimin e framework-ut; bisedat, GUI, shfletuesi dhe mjediset standarde Linux mbeten të disponueshme</string>
+    <string name="capability_xposed_help">Aktivizimi dhe gama e modulit</string>
+    <string name="capability_root_features">Aftësitë Root</string>
+    <string name="capability_system_features">Asistenti i sistemit dhe përmirësimet</string>
+    <string name="capability_root_device">Menaxhimi i aplikacioneve dhe sistemit</string>
+    <string name="capability_root_device_summary">Ngriu dhe ndalo aplikacione, ndrysho cilësime të mbrojtura të sistemit dhe lexoni logjet e sistemit. Eta kërkon qasje Root.</string>
+    <string name="capability_root_data">Të dhëna dhe skedarë të mbrojtur</string>
+    <string name="capability_root_data_summary">Qasja në disa të dhëna të ruajtura nga aplikacione të tjera dhe sistemi. Kërkon Root; disponueshmëria varet nga sistemi, versionet e aplikacionit dhe lejet e aktivizuara të mjeteve.</string>
+    <string name="capability_root_linux">Përmirësimet e Linux dhe terminalit</string>
+    <string name="capability_root_linux_summary">Root lejon chroot, direktori të sistemit dhe detyrat daemon të pavarura nga aplikacioni. Modaliteti standard mbështet hapësirën private të punës dhe PRoot.</string>
+    <string name="capability_workspace">Hapësira e punës dhe skedarët</string>
+    <string name="capability_workspace_summary">Importo, eksporto dhe qasje në direktorium</string>
+    <string name="capability_workspace_private">Hapësira private e punës</string>
+    <string name="capability_workspace_private_summary">Direktori i parazgjedhur i skedarëve për terminalin dhe mjedisin standard Linux; nuk kërkohet leje ruajtjeje</string>
+    <string name="capability_workspace_import">Importo skedarë</string>
+    <string name="settings_tools_list">Lista e mjeteve</string>
+</resources>

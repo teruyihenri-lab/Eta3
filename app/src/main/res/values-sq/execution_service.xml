@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="execution_channel">Detyrat në ekzekutim</string>
+    <string name="execution_title">Eta po ekzekutohet</string>
+    <plurals name="execution_summary">
+        <item quantity="one">%1$d detyrë po ekzekutohet. Kthehu te Eta për të kontrolluar përparimin.</item>
+        <item quantity="other">%1$d detyra po ekzekutohen. Kthehu te Eta për të kontrolluar përparimin.</item>
+    </plurals>
+    <string name="execution_stop">Ndalo detyrat e ekzekutimit</string>
+    <string name="execution_chip_running">Po punon</string>
+    <string name="execution_chip_answering">Po përgjigjet</string>
+</resources>
