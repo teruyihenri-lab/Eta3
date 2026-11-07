@@ -41,3 +41,9 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Shkaku: `assertFalse(description.contains("拦截"))` bie ndesh me veçoritë e tanishme të përgjimit të kërkesave të shfletuesit.
 - Korrigjim: test pozitiv mbi enum-in e veprimeve dhe format e parametrave JSON; nuk u çaktivizua asnjë funksion.
 - Statusi i suite-it pas korrigjimit: **ende pa rezultat CI**.
+
+## 2026-11-07 — Gabim gjatë bashkimit të burimeve Android
+- **Log i përdoruesit:** `app/src/main/res/values-sq/strings.xml:139:4`, `Multiple substitutions specified in non-positional format` për `appearance_interface_scale_summary`.
+- **Diagnoza statike:** atributi `formatted="false"` ekziston në `values/strings.xml`, por mungonte në `values-sq/strings.xml`; asnjë çelës tjetër me mospërputhje të këtij atributi nuk u identifikua.
+- **Korrigjimi:** atributi u rivendos dhe kontrolli statik u zgjerua.
+- **Build i plotë pas ndryshimit:** ende i pakonfirmuar.

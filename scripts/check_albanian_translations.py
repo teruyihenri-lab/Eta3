@@ -26,10 +26,28 @@ def entries(filename):
 def placeholders(s):
     return sorted(FORMAT.findall(s))
 
+def unformatted_keys(filename):
+    root = ET.parse(filename).getroot()
+    return {
+        item.attrib["name"]
+        for item in root
+        if item.tag == "string"
+        and item.attrib.get("translatable", "true") != "false"
+        and item.attrib.get("formatted") == "false"
+    }
+
 def main():
     base, base_plural = entries(BASE)
     sq, sq_plural = entries(SQ)
     errors = []
+    base_unformatted = unformatted_keys(BASE)
+    sq_unformatted = unformatted_keys(SQ)
+    if base_unformatted != sq_unformatted:
+        errors.append(
+            "Atributet formatted=false nuk përputhen: "
+            f"mungojnë {sorted(base_unformatted - sq_unformatted)}, "
+            f"të tepërt {sorted(sq_unformatted - base_unformatted)}"
+        )
     for label, a, b in (("string", base, sq), ("plurals", base_plural, sq_plural)):
         missing, extra = sorted(a.keys() - b.keys()), sorted(b.keys() - a.keys())
         if missing: errors.append(f"{label}: mungojnë {missing[:30]}")

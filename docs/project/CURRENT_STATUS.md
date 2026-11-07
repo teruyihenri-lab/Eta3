@@ -56,3 +56,8 @@
 - Logu i `:app:testDebugUnitTest` zbuloi një dështim të vërtetë në `AgentToolCatalogTest.kt:65` për një pritshmëri të vjetruar.
 - Testi u përditësua për të verifikuar funksionet reale të shfletuesit. Ky ndryshim nuk është ende provë e suksesit të të gjithë suite-it të testeve.
 - Përkthimi i plotë i Kotlin dhe testimi në telefon mbeten të hapura.
+
+## 2026-11-07 — Gabim XML përqindjeje i korrigjuar në degën e punës
+- `values-sq/strings.xml`: shtuar `formatted="false"` te `appearance_interface_scale_summary` për tekstin `80%–110%`.
+- Kontrolli i përkthimeve tani kap edhe atributet e formatimit që mungojnë.
+- Duhet verifikuar me GitHub Actions nëse `mergeDebugResources`, lint, testet dhe `assembleDebug` kalojnë.

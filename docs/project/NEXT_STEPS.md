@@ -48,3 +48,8 @@
 1. Kontrollo PR Check për commit-in e korrigjimit; nxirr gabimet e mbetura nga raporti `:app:testDebugUnitTest`.
 2. Verifiko `:app:lintDebug`, `:app:testDebugUnitTest`, `:app:assembleDebug` dhe artifact-in e APK-së, nëse CI e publikon.
 3. Mos bashko në `main` përpara build-it të suksesshëm dhe auditimit të literaleve Kotlin.
+
+## Pas korrigjimit të burimit me përqindje
+1. Kontrollo `PR Check` në commit-in e ri që `mergeDebugResources` të mos raportojë më gabimin e `appearance_interface_scale_summary`.
+2. Nëse dështojnë teste të tjera, analizo raportet Gradle dhe korrigjo shkaqet reale pa fshehur testet.
+3. Vazhdo auditimin e plotë të teksteve Kotlin dhe testimin në pajisje para bashkimit në `main`.

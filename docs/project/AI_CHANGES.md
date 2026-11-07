@@ -50,3 +50,10 @@
 - Kodi aktual i `AgentBrowserToolCatalog` përfshin `set_intercept`, `list_requests`, `clear_requests`, `add_intercept_replace` dhe `clear_intercept_replace`.
 - Testi tani kontrollon veprimet dhe parametrat në JSON Schema, pa varësi nga teksti kinez. Funksionaliteti i shfletuesit nuk u hoq apo ndryshua.
 - Gradle / GitHub Actions duhet të ekzekutohen përsëri për konfirmim.
+
+## 2026-11-07 — Riparim i formatimit të përqindjeve në burimet shqip
+- Sipas logut të përdoruesit, `:app:mergeDebugResources` raportoi gabimin `Multiple substitutions specified in non-positional format` për `appearance_interface_scale_summary` në `values-sq/strings.xml:139`.
+- Shkaku i verifikuar: burimi anglisht kishte `formatted="false"`, ndërsa përkthimi shqip e kishte humbur këtë atribut (teksti përmban `80%–110%`).
+- Rivendosur `formatted="false"` në burimin shqip, pa ndryshuar tekstin që sheh përdoruesi.
+- Përmirësuar `scripts/check_albanian_translations.py` për të krahasuar atributet `formatted="false"` dhe për të parandaluar regresionin.
+- Nuk është verifikuar ende një build i plotë i suksesshëm pas këtij commit-i.
