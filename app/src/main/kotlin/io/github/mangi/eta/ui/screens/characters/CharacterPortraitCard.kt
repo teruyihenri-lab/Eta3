@@ -45,7 +45,7 @@ internal val CharacterPortraitCorner = 20.dp
 
 /**
  * 角色库卡片：整张图铺满，底部渐暗承载名字与标签，避免图文分栏显得像设置项。
- * 收藏星标悬浮在右上角，点击不进入详情。
+ * Shto te të preferuarat星标悬浮在右上角，点击不进入详情。
  */
 @Composable
 internal fun CharacterPortraitCard(
@@ -96,7 +96,7 @@ internal fun CharacterPortraitCard(
             ) {
                 Icon(
                     imageVector = if (card.favorite) Icons.Rounded.Star else Icons.Rounded.StarOutline,
-                    contentDescription = if (card.favorite) "取消收藏" else "收藏",
+                    contentDescription = if (card.favorite) "Hiq nga të preferuarat" else "Shto te të preferuarat",
                     modifier = Modifier.size(16.dp),
                     tint = if (card.favorite) FavoriteColor else Color.White,
                 )
@@ -141,7 +141,7 @@ private fun PortraitTag(text: String) {
     )
 }
 
-/** 收藏星标的暖金色，固定值保证落在任意头像上都可辨认。 */
+/** Shto te të preferuarat星标的暖金色，固定值保证落在任意头像上都可辨认。 */
 internal val FavoriteColor = Color(0xFFFFC94D)
 
 /**
@@ -181,7 +181,7 @@ internal fun CharacterAddTile(
                 Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(24.dp), tint = colors.primary)
             }
             Spacer(Modifier.height(12.dp))
-            Text("新建角色", style = MiuixTheme.textStyles.body2, fontWeight = FontWeight.Medium, color = colors.onSurface)
+            Text("Personazh i ri", style = MiuixTheme.textStyles.body2, fontWeight = FontWeight.Medium, color = colors.onSurface)
         }
         Box(
             modifier = Modifier
@@ -199,7 +199,7 @@ internal fun CharacterAddTile(
         ) {
             Icon(Icons.Rounded.FileUpload, contentDescription = null, modifier = Modifier.size(16.dp), tint = colors.onSurfaceVariantSummary)
             Spacer(Modifier.width(6.dp))
-            Text("导入角色卡", style = MiuixTheme.textStyles.footnote1, color = colors.onSurfaceVariantSummary)
+            Text("Importo kartën e personazhit", style = MiuixTheme.textStyles.footnote1, color = colors.onSurfaceVariantSummary)
         }
     }
 }

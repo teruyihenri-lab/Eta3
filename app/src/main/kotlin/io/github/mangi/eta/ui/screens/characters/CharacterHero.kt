@@ -136,7 +136,7 @@ internal fun CharacterHero(
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.PhotoCamera,
-                        contentDescription = "更换头像",
+                        contentDescription = "Ndrysho fotografinë e profilit",
                         modifier = Modifier.size(18.dp),
                         tint = colors.onSurface,
                     )
@@ -157,14 +157,14 @@ internal fun CharacterHero(
                 IconButton(onClick = onToggleFavorite, enabled = !busy, minWidth = 36.dp, minHeight = 36.dp) {
                     Icon(
                         imageVector = if (card.favorite) Icons.Rounded.Star else Icons.Rounded.StarOutline,
-                        contentDescription = if (card.favorite) "取消收藏" else "收藏",
+                        contentDescription = if (card.favorite) "Hiq nga të preferuarat" else "Shto te të preferuarat",
                         modifier = Modifier.size(20.dp),
                         tint = if (card.favorite) FavoriteColor else colors.onSurfaceVariantSummary,
                     )
                 }
             }
             val byline = listOfNotNull(
-                card.creator.takeIf(String::isNotBlank)?.let { "作者 $it" },
+                card.creator.takeIf(String::isNotBlank)?.let { "Autori:$it" },
                 card.version.takeIf(String::isNotBlank)?.let { "v$it" },
             ).joinToString(" · ")
             if (byline.isNotEmpty()) {
@@ -213,7 +213,7 @@ internal fun CharacterHero(
             }
             Spacer(Modifier.height(20.dp))
             EtaTextButton(
-                text = "开始对话",
+                text = "Nis bisedën",
                 enabled = !busy,
                 onClick = onStart,
                 modifier = Modifier.fillMaxWidth(),
@@ -225,7 +225,7 @@ internal fun CharacterHero(
 
 /**
  * 开场白横向翻页：每张卡完整预览一段开场，当前页即选中的开场白，免去单选列表的二次确认。
- * 卡片定高并截断，全文通过“阅读全文”弹窗查看，翻页时高度不跳动。
+ * 卡片定高并截断，全文通过“Lexo të gjithën”弹窗查看，翻页时高度不跳动。
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -277,7 +277,7 @@ internal fun GreetingPager(
                             if (page == pagerState.settledPage) {
                                 Icon(
                                     imageVector = Icons.Rounded.Check,
-                                    contentDescription = "已选择",
+                                    contentDescription = "U përzgjodh",
                                     modifier = Modifier.size(12.dp),
                                     tint = colors.onPrimary,
                                 )
@@ -287,7 +287,7 @@ internal fun GreetingPager(
                 }
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = text.ifBlank { "没有预设开场白，由你先开口" },
+                    text = text.ifBlank { "Nuk ka përshëndetje fillestare; fol ti i pari" },
                     style = MiuixTheme.textStyles.body2,
                     color = if (text.isBlank()) colors.onSurfaceVariantSummary else colors.onSurface,
                     maxLines = 6,
@@ -296,7 +296,7 @@ internal fun GreetingPager(
                 )
                 if (text.isNotBlank()) {
                     Text(
-                        text = "阅读全文",
+                        text = "Lexo të gjithën",
                         style = MiuixTheme.textStyles.footnote1,
                         color = colors.primary,
                     )
