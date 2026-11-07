@@ -42,7 +42,7 @@
   <string name="action_launch_kimi_web">Launch Kimi Web</string>
   <string name="route_browser">Agent browser</string>
   <string name="route_tools">Tools</string>
-  <string name="route_skills" translatable="false">Skills</string>
+  <string name="route_skills">Skills</string>
   <string name="route_permissions">Permissions</string>
   <string name="route_system_enhancements">System enhancements</string>
   <string name="route_settings">Settings</string>
@@ -1294,7 +1294,7 @@
   <string name="speech_region_beijing">Beijing</string>
   <string name="speech_region_singapore">Singapore</string>
   <string name="speech_access_token">Access Token</string>
-  <string name="speech_api_key" translatable="false">API Key</string>
+  <string name="speech_api_key">API Key</string>
   <string name="speech_app_id">App ID</string>
   <string name="speech_base_url">Base URL</string>
   <string name="speech_qwen_base_url_hint">Base URL (leave empty for the region default)</string>
@@ -1415,4 +1415,28 @@
   <string name="memory_discard">Discard</string>
   <string name="chat_character_input_hint">Say something to %1$s…</string>
   <string name="chat_character_typing">%1$s is replying…</string>
+  <string name="character_persona_title">My persona</string>
+  <string name="character_persona_description">Define who you are in the story. Choose whether to use this persona when starting a conversation. Existing stories keep their original persona.</string>
+  <string name="character_persona_name">Name or nickname</string>
+  <string name="character_persona_relationship">Identity and relationships</string>
+  <string name="character_persona_save">Save persona</string>
+  <string name="character_story_memory">Story memory</string>
+  <string name="character_story_memory_description">Record this character\'s important experiences, relationships, and agreements. They are shared across conversations and controlled by the memory setting.</string>
+  <string name="character_story_relationships">Story and relationships</string>
+  <string name="character_reload">Reload</string>
+  <string name="character_save_memory">Save memory</string>
+  <string name="character_library_title">Characters</string>
+  <string name="character_import_card">Import character card</string>
+  <string name="character_create">Create character</string>
+  <string name="character_search">Search names or tags</string>
+  <string name="character_library_empty">No characters yet</string>
+  <string name="character_library_empty_summary">Create a character or import a PNG or JSON character card to start chatting.</string>
+  <string name="character_restore_defaults">Restore default characters</string>
+  <string name="character_no_matches">No matching characters</string>
+  <string name="character_no_matches_summary">Try another keyword. Search matches names and tags.</string>
+  <string name="character_my_section">Mine</string>
+  <string name="character_persona_summary">How characters address you and your role in the story</string>
+  <string name="character_favorite_remove">Remove from favorites</string>
+  <string name="character_favorite_add">Add to favorites</string>
+  <string name="character_new_tile">New character</string>
 </resources>

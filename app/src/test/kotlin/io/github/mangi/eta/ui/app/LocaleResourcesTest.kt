@@ -71,10 +71,13 @@ class LocaleResourcesTest {
             "已匯入 2 個檔案，其餘檔案無法讀取或超過 32 MiB",
             localizedQuantity("zh-TW", R.plurals.capability_workspace_partial_import, 2),
         )
-        for (locale in listOf("en-US", "sq-AL", "zh-CN", "zh-TW", "fr-FR")) {
+        for (locale in listOf("en-US", "zh-CN", "zh-TW", "fr-FR")) {
             assertEquals("Skills", localizedString(locale, R.string.route_skills))
             assertEquals("API Key", localizedString(locale, R.string.speech_api_key))
         }
+        assertEquals("Aftësitë", localizedString("sq-AL", R.string.route_skills))
+        assertEquals("Çelësi API", localizedString("sq-AL", R.string.speech_api_key))
+        assertEquals("Personazhet", localizedString("sq-AL", R.string.character_library_title))
     }
 
     @Suppress("DEPRECATION")

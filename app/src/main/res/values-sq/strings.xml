@@ -1411,4 +1411,30 @@
     <item quantity="one">%d element kërkon vëmendje</item>
     <item quantity="other">%d elemente kërkojnë vëmendje</item>
   </plurals>
+  <string name="route_skills">Aftësitë</string>
+  <string name="speech_api_key">Çelësi API</string>
+  <string name="character_persona_title">Identiteti im në histori</string>
+  <string name="character_persona_description">Përcakto kush je në histori. Kur nis një bisedë mund të zgjedhësh ta përdorësh; historitë e nisura ruajnë identitetin fillestar.</string>
+  <string name="character_persona_name">Emri ose pseudonimi</string>
+  <string name="character_persona_relationship">Identiteti dhe marrëdhëniet</string>
+  <string name="character_persona_save">Ruaj identitetin</string>
+  <string name="character_story_memory">Kujtesa e historisë</string>
+  <string name="character_story_memory_description">Regjistro përvojat, marrëdhëniet dhe marrëveshjet e rëndësishme të këtij personazhi. Ato ndahen mes bisedave dhe varen nga cilësimi i kujtesës.</string>
+  <string name="character_story_relationships">Historia dhe marrëdhëniet</string>
+  <string name="character_reload">Ringarko</string>
+  <string name="character_save_memory">Ruaj kujtesën</string>
+  <string name="character_library_title">Personazhet</string>
+  <string name="character_import_card">Importo kartën e personazhit</string>
+  <string name="character_create">Krijo personazh</string>
+  <string name="character_search">Kërko sipas emrit ose etiketës</string>
+  <string name="character_library_empty">Ende nuk ka personazhe</string>
+  <string name="character_library_empty_summary">Krijo një personazh ose importo një kartë PNG apo JSON për të nisur bisedën.</string>
+  <string name="character_restore_defaults">Rikthe personazhet e parazgjedhur</string>
+  <string name="character_no_matches">Nuk u gjetën personazhe që përputhen</string>
+  <string name="character_no_matches_summary">Provo një fjalë tjetër kyçe. Kërkimi kontrollon emrat dhe etiketat.</string>
+  <string name="character_my_section">Të miat</string>
+  <string name="character_persona_summary">Si të drejtohen personazhet dhe cili është roli yt në histori</string>
+  <string name="character_favorite_remove">Hiq nga të preferuarat</string>
+  <string name="character_favorite_add">Shto te të preferuarat</string>
+  <string name="character_new_tile">Personazh i ri</string>
 </resources>

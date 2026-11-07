@@ -17,3 +17,5 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Parametrat e formatimit u krahasuan gjatë futjes së përkthimeve.
 - Teste `LocaleResourcesTest.kt` për shqipen: **u shtuan, nuk janë ekzekutuar ende**.
 - Build APK / lint / test në pajisje: **nuk janë verifikuar ende**.
+
+- Vargjet e para statike të ekranit të personazheve u zhvendosën në resources; testet instrumentale/CI mbeten për konfirmim.

@@ -17,3 +17,8 @@
 - U ruajt shenja `formatted="false"` për `appearance_interface_scale_summary`.
 - Nuk janë modifikuar `applicationId`, nënshkrimi ose logjika e runtime.
 - **Ende për t'u verifikuar:** CI, ndërfaqja në pajisje, dhe tekste hardcoded në Kotlin.
+
+## 2026-11-07 — Lokalizim i ndërfaqes së personazheve
+- 24 vargje hardcoded kineze në `CharacterContextScreens`, `CharacterLibraryScreen` dhe `CharacterPortraitCard` u zëvendësuan me burime Android për anglisht, shqip, kinezisht të thjeshtuar dhe tradicionale.
+- `Skills` dhe `API Key` janë përkthyer në UI shqip pa ndryshuar identifikuesit teknikë.
+- Zgjeruar testet `LocaleResourcesTest`; mbetet të verifikohen nga CI.
