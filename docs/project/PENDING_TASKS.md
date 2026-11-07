@@ -22,3 +22,11 @@
 - [ ] Përkthe 846 vargjet e mbetura.
 - [ ] Audito tekstet hardcoded në Kotlin dhe verifiko përkthimet në ekran.
 - [ ] Ekzekuto testet, build-in dhe verifiko instalimin pa humbje të dhënash.
+
+## Detyrat e hapura pas burimeve të plota
+- [x] Shto `sq` në Android dhe përkthe 1331 `string` + 20 `plurals`.
+- [x] Kontrollo që çelësat dhe vendmbajtësit e formateve përputhen.
+- [ ] Rishiko gjuhësisht të gjitha përkthimet dhe përshtat ekranet.
+- [ ] Audito Kotlin/UI për tekste hardcoded ose dinamike jashtë `strings.xml`.
+- [ ] Konfirmo PR CI, testet Android, build-in dhe funksionimin në telefon.
+- [ ] Bashko ndryshimet në `main` vetëm pas verifikimit.

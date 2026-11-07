@@ -22,3 +22,11 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - U verifikuan **188 çelësa të rinj** kundrejt burimit bazë; asnjë emër i panjohur ose i dyfishtë.
 - U krahasuan parametrat e formatimit të teksteve të reja; nuk u gjet mospërputhje.
 - **Nuk** është kryer ekzekutimi i testeve ose build-i i APK-së.
+
+## Kontrolli i burimeve — 2026-11-07
+- Nga GitHub: 1331 burime `string` të përkthyeshme u gjetën në bazë dhe 1331 të përkthyera; mungojnë **0**.
+- Kontrollet e formateve `%`: **0 mospërputhje**.
+- Grupe `plurals` të mbuluara: 20/20; grupet kanë `one` dhe `other`.
+- Kontrolle sintaksore: 0 simbol `&` të paescape dhe 0 apostrofa të paescape në përkthimet string.
+- Është shtuar `scripts/check_albanian_translations.py` dhe workflow për PR.
+- Teste Gradle/Android në pajisje: ende në pritje të rezultateve CI dhe testimit real.

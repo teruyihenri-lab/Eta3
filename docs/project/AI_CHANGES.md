@@ -22,3 +22,10 @@
 - Totali i regjistruar në `values-sq`: **485/1331** burime `string` dhe **20/20** grupe `plurals`.
 - U kontrolluan emrat e çelësave dhe formatimet `%` të këtyre 188 teksteve.
 - Gradle build dhe testim në pajisje mbeten të pakryer.
+
+## 2026-11-07 — Përfundimi i inventarit të burimeve shqipe
+- `app/src/main/res/values-sq/strings.xml` përmban **1331/1331** burime `string` të përkthyeshme dhe **20/20** `plurals`.
+- Shqipja `sq` është deklaruar në `locales_config.xml` dhe `localeFilters`; janë shtuar teste Robolectric.
+- U ruajtën emrat zyrtarë të modeleve dhe zërave; përshkrimet e ndërfaqes janë në shqip.
+- Shtuar një kontroll i automatizuar që verifikon numrin e çelësave dhe parametrat `%`.
+- Mbeten auditimi i teksteve hardcoded Kotlin, cilësia e përkthimit dhe verifikimi i build-it/telefonit.

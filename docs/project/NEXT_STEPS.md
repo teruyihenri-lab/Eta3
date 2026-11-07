@@ -22,3 +22,10 @@
 - Përkthe **846 vargjet e mbetura** dhe kontrollo me kujdes parametrat e formatimit.
 - Audito tekstet e futur drejtpërdrejt në Kotlin; verifiko mesazhet e shfaqura nga tool/runtime.
 - Kryej build, testet Robolectric, lint, testim në pajisje dhe korrigjo regresionet para bashkimit në `main`.
+
+## Pas plotësimit të values-sq
+1. Kontrollo GitHub Actions PR #3 për build/test; zgjidh çdo gabim konkret.
+2. Audito 214 skedarët e ndërfaqes Kotlin, më pas mesazhet runtime/përshkrimet dinamike; lokalizo çdo tekst të dukshëm hardcoded.
+3. Kontrollo shqipen në telefon, përfshirë tekstet e gjata, dialogët, terminalin, MCP, zërin dhe njoftimet.
+4. Ruaj versionCode, applicationId dhe nënshkrimin e përditësimit; mos u shpreh se ka APK derisa të testohet.
+5. Përditëso dokumentacionin në çdo ndryshim; bashko PR vetëm pasi të verifikohen testet.

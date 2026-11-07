@@ -29,3 +29,11 @@
 - Në degën `feature/albanian-localization`: **485/1331** vargje të përkthyeshme (36.4%) dhe **20/20** grupe shumësash.
 - Mbeten **846 vargje `string`** dhe auditimi i teksteve të shkruara në Kotlin.
 - Ky ndryshim nuk është përkthim i përfunduar dhe nuk ka APK të verifikuar.
+
+## Statusi më i ri — 2026-11-07
+- Dega: `feature/albanian-localization` · Pull Request: **#3**.
+- Burime `string` të përkthyeshme: **1331/1331 (100% e çelësave)**.
+- Grupe shumësash: **20/20 (100%)**.
+- Kjo **nuk është dëshmi** se çdo tekst i dukshëm është shqip: mbetet auditimi i hardcoded Kotlin, përmbajtjeve dinamike dhe testeve.
+- Kontrolli statik i vendmbajtësve në kod u krye; PR CI/build Android duhet të konfirmohet para bashkimit.
+- Nuk ka APK të nënshkruar/testuar në telefon të dorëzuar nga kjo seancë.
