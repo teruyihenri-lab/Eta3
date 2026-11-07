@@ -11,8 +11,10 @@ internal object ModelContextInference {
 
     private val VENDOR_PREFIX = Regex("""^[a-z0-9_-]+/""")
     private val TAG_SUFFIX = Regex("""[:@].*$""")
+    // Model generations such as deepseek-v3 and claude-sonnet-v4 are not revisions.
+    // Strip release dates and latest tags, never the family generation marker (-vN).
     private val VERSION_SUFFIX = Regex(
-        """-(?:\d{8}|\d{6}|\d{4}-\d{2}-\d{2}|\d{4}|latest|v\d+(?:\.\d+)?)$""",
+        """-(?:\d{8}|\d{6}|\d{4}-\d{2}-\d{2}|\d{4}|latest)$""",
         RegexOption.IGNORE_CASE,
     )
 

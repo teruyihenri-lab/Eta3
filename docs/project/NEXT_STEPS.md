@@ -59,3 +59,8 @@
 2. Nëse dështon një test i madhësisë së skedarit, analizo përdorimin real të memories; mos e anashkalo testin.
 3. Nëse ka ikona të tjera pa mapim, shtoji në `ToolIcons.kt`, jo në listën e përjashtimeve të testit.
 4. Pas build/testeve, testim real i APK-së dhe auditim i shqipes në çdo ekran.
+
+## 2026-11-07 — Verifikimi i familjeve të modeleve
+1. Kontrollo `ModelContextInferenceTest` në GitHub Actions për `familyStripsDateAndVersionSuffixes`, `overrideOfSiblingWins` dhe provat e tjera.
+2. Shiko rezultatet e tjera të `testDebugUnitTest`, `lintDebug`, `assembleDebug` pa fshehur dështimet.
+3. Mos bashko PR #3 në `main` pa verifikim të plotë.

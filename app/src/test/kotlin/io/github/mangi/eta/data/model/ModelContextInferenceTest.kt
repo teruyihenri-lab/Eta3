@@ -30,6 +30,10 @@ class ModelContextInferenceTest {
     fun familyStripsDateAndVersionSuffixes() {
         assertEquals("gpt-4o-mini", ModelContextInference.family("gpt-4o-mini-2024-07-18"))
         assertEquals("deepseek-v3", ModelContextInference.family("deepseek-v3-0324"))
+        assertEquals("deepseek-v3", ModelContextInference.family("deepseek-v3"))
+        assertEquals("deepseek-v3", ModelContextInference.family("deepseek-v3-latest"))
+        assertEquals("claude-sonnet-v4", ModelContextInference.family("claude-sonnet-v4"))
+        assertEquals("qwen3-vl-v2", ModelContextInference.family("qwen3-vl-v2"))
         assertEquals("gpt-4o", ModelContextInference.family("openai/gpt-4o:free"))
         assertEquals("qwen3-coder", ModelContextInference.family("qwen3-coder-latest"))
     }

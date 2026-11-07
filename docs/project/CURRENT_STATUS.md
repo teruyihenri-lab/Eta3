@@ -67,3 +67,7 @@
 - U publikuan riparimet për burimet XML dhe problemet e identifikuara në testet e modeleve, memories, ikonave dhe memory heap.
 - **Nuk deklarohet sukses** pa dalë GitHub Actions në commit-in e ri.
 - Auditimi dhe korrigjimi i përmbajtjes hardcoded Kotlin mbetet i hapur.
+
+## 2026-11-07 — Riparim i regresionit të modeleve
+- Riparuar në degën `feature/albanian-localization` normalizimi që hiqte `-v3` nga `deepseek-v3-0324`.
+- Testi i plotë Android nuk është konfirmuar ende; ky ndryshim kërkon një ekzekutim të ri të CI.

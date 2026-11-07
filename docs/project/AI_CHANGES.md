@@ -68,3 +68,10 @@
 - Shtuar ikonat për mjetet reverse engineering, njohurinë lokale dhe telefonatat.
 - Rritur limiti i memories së JVM-së së testeve në 2 GiB për provën e ruajtjes së skedarëve të mëdhenj. Kjo kërkon verifikim CI.
 - Nuk janë hequr teste ose fikur rregulla Lint.
+
+## 2026-11-07 — Regresioni i familjeve të modeleve
+- Gabimi real: `ModelContextInferenceTest.familyStripsDateAndVersionSuffixes` dështoi në rreshtin 32 për `deepseek-v3-0324`.
+- Shkaku: cikli i heqjes së prapashtesave së pari hiqte `-0324`, pastaj hiqte gabimisht edhe `-v3`, duke e kthyer `deepseek-v3` në `deepseek`.
+- Riparimi: mos hiq gjeneratat e modelit `-vN`; hiq vetëm datat dhe `-latest`.
+- Shtuar raste regresioni për `deepseek-v3`, `deepseek-v3-latest`, `claude-sonnet-v4` dhe `qwen3-vl-v2`.
+- Ndërtimi/testet CI në commit-in e ri ende duhen konfirmuar.

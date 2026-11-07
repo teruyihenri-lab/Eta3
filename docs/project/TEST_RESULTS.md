@@ -53,3 +53,8 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Dështime: `PrefsDefaultsTest`, dy prova `ModelContextInferenceTest`, `EtaBackupRepositoryTest`, `EtaBackupStreamingTest` (Java heap), `ModelMetadataCatalogTest`, `ToolCatalogUiTest`.
 - Lint: 150 MissingTranslation errors; raporti ZIP u lexua dhe klasifikua në 102 burime shqipe që mungonin nga skedarët XML shtesë dhe 48 burime kineze që mungonin pas shtimit të UI-së së re.
 - Riparimet janë publikuar, por kjo pjesë dokumenton **shkaqet dhe ndryshimet**, jo një kalim testesh ende të paverifikuar.
+
+## 2026-11-07 — ModelContextInferenceTest.kt:32
+- Pritshmëria: `deepseek-v3-0324` → `deepseek-v3`.
+- Para riparimit: `deepseek-v3-0324` → `deepseek-v3` → `deepseek`; `-v3` trajtohej gabimisht si prapashtesë versioni.
+- Pas ndryshimit të kodit, testet e reja ende duhen ekzekutuar nga CI; ky është rezultat i analizës së kodit, jo test i kaluar.
