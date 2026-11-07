@@ -43,3 +43,8 @@
 ## Vazhdimi i zërit
 - Audito `SpeechProtocol.kt`, `SpeechHttp.kt`, `SpeechRecorder.kt`, `StreamingSpeechSynthesis.kt` dhe gabimet e tjera që shfaqen te përdoruesi.
 - Verifiko testet e build-it dhe përkthimin e njoftimeve të zërit në telefon.
+
+## Verifikimi pas korrigjimit të testit
+1. Kontrollo PR Check për commit-in e korrigjimit; nxirr gabimet e mbetura nga raporti `:app:testDebugUnitTest`.
+2. Verifiko `:app:lintDebug`, `:app:testDebugUnitTest`, `:app:assembleDebug` dhe artifact-in e APK-së, nëse CI e publikon.
+3. Mos bashko në `main` përpara build-it të suksesshëm dhe auditimit të literaleve Kotlin.

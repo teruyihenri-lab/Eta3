@@ -50,7 +50,7 @@ class AgentToolCatalogTest {
     }
 
     @Test
-    fun browserToolAllowsArbitraryUrlsAndFormSubmission() {
+    fun browserToolAllowsArbitraryUrlsFormSubmissionAndInterception() {
         val function = AgentToolCatalog.build(
             terminalTools = false,
             browserTools = true,
@@ -62,7 +62,19 @@ class AgentToolCatalogTest {
         assertEquals("string", properties.getJSONObject("url").getString("type"))
         assertEquals("boolean", properties.getJSONObject("submit").getString("type"))
         assertFalse(properties.getJSONObject("url").getString("description").contains("HTTPS"))
-        assertFalse(function.getString("description").contains("拦截"))
+
+        // Interception and response replacement are supported browser actions.
+        // Check the JSON schema, not Chinese prose in a description.
+        val actions = properties.getJSONObject("action").getJSONArray("enum").stringValues().toSet()
+        assertTrue(
+            actions.containsAll(
+                setOf("set_intercept", "list_requests", "clear_requests",
+                    "add_intercept_replace", "clear_intercept_replace"),
+            ),
+        )
+        assertEquals("boolean", properties.getJSONObject("enabled").getString("type"))
+        assertEquals("string", properties.getJSONObject("match").getString("type"))
+        assertEquals("string", properties.getJSONObject("body").getString("type"))
     }
 
     @Test

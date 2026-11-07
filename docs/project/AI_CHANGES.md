@@ -44,3 +44,9 @@
 ## 2026-11-07 — Statuset e njohjes zanore
 - U zhvendosën shtatë mesazhe kineze të progresit dhe gabimit nga `SpeechInputController.kt` në burimet anglisht/shqip; ruhet logjika e kapjes dhe njohjes së zërit.
 - Nuk ndryshuan protokollet ASR, token-ët ose rruga e audios.
+
+## 2026-11-07 — Korrigjim i testit të shfletuesit
+- Testi `AgentToolCatalogTest.browserToolAllowsArbitraryUrlsAndFormSubmission` dështoi te `AgentToolCatalogTest.kt:65` sepse priste gabimisht mungesën e funksionit `拦截` (përgjimi i kërkesave).
+- Kodi aktual i `AgentBrowserToolCatalog` përfshin `set_intercept`, `list_requests`, `clear_requests`, `add_intercept_replace` dhe `clear_intercept_replace`.
+- Testi tani kontrollon veprimet dhe parametrat në JSON Schema, pa varësi nga teksti kinez. Funksionaliteti i shfletuesit nuk u hoq apo ndryshua.
+- Gradle / GitHub Actions duhet të ekzekutohen përsëri për konfirmim.

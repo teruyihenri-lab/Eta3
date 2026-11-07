@@ -51,3 +51,8 @@
 ## Statuset e diktimit zanor
 - Mesazhet e lidhjes, dëgjimit, njohjes, korrigjimit dhe përfundimit në `SpeechInputController.kt` tani lokalizohen sipas gjuhës Android.
 - Mbeten mesazhe kineze të tjera në `agent/voice/` dhe `ui/app/` për t'u audituar.
+
+## Kontrolli i ndërtimit — 2026-11-07
+- Logu i `:app:testDebugUnitTest` zbuloi një dështim të vërtetë në `AgentToolCatalogTest.kt:65` për një pritshmëri të vjetruar.
+- Testi u përditësua për të verifikuar funksionet reale të shfletuesit. Ky ndryshim nuk është ende provë e suksesit të të gjithë suite-it të testeve.
+- Përkthimi i plotë i Kotlin dhe testimi në telefon mbeten të hapura.

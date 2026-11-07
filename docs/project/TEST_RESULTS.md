@@ -35,3 +35,9 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Workflow `Auditimi i teksteve në Kotlin` kaloi si raport informues; zbuloi 691 rreshta të mundshëm kinezë, jo 691 gabime të konfirmuara UI.
 - Kontrolli i mbulimit të burimeve shqip dhe ai i dokumentacionit kaluan në commit-et e mëparshme.
 - Verifikimi i build-it Android dhe i telefonit mbetet i papërfunduar.
+
+## Dështimi i parë i konfirmuar në Gradle — 2026-11-07
+- `AgentToolCatalogTest > browserToolAllowsArbitraryUrlsAndFormSubmission FAILED`, `AgentToolCatalogTest.kt:65`.
+- Shkaku: `assertFalse(description.contains("拦截"))` bie ndesh me veçoritë e tanishme të përgjimit të kërkesave të shfletuesit.
+- Korrigjim: test pozitiv mbi enum-in e veprimeve dhe format e parametrave JSON; nuk u çaktivizua asnjë funksion.
+- Statusi i suite-it pas korrigjimit: **ende pa rezultat CI**.
