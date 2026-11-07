@@ -81,3 +81,8 @@
 - U zgjerua auditi i literaleve kineze/angleze nga ekrani dhe zëri te **i gjithë kodi Kotlin**. Ky audit është orientues dhe nuk përkthen apo ndryshon logjikën vetvetiu.
 - PR Check tani publikon një APK Debug artifact në rast suksesi të të gjitha testeve/Lint/assembleDebug; debug APK mund të ketë certifikatë tjetër nga ajo e instalimit ekzistues.
 - Testimi real në telefon dhe auditimi i plotë i teksteve jashtë burimeve mbeten të pakonfirmuara.
+
+## 2026-11-07 — Përputhshmëria e statusit të ndërprerjes
+- Rifreskua konstanta e brendshme `LEGACY_STOPPED_ERROR` në `已停止`, sepse shërbimi runtime e përdor si vlerë protokolli. Përkthimi i këtij kodi në `U ndal` prishte klasifikimin si ndalim dhe e shfaqte si dështim.
+- Rezultati i ndalimit të krijuar nga UI përdor sërish këtë konstante; etiketa e dukshme shqip ruhet në burimet UI.
+- Duhet verifikuar me CI.

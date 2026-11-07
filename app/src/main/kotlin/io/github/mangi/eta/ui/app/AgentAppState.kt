@@ -1426,7 +1426,7 @@ internal class AgentAppState(
             }
             if (withContext(Dispatchers.Main) { runId in stopRequestedRunIds }) {
                 withContext(Dispatchers.Main) {
-                    applyRunResult(runId, AgentRuntimeWire.RunResult(runId, false, "", "U ndal", operation = operation))
+                    applyRunResult(runId, AgentRuntimeWire.RunResult(runId, false, "", LEGACY_STOPPED_ERROR, operation = operation))
                 }
                 return@launch
             }
@@ -2353,7 +2353,7 @@ internal class AgentAppState(
     private companion object {
         const val MAX_TITLE_CHARS = 24
         const val MAX_PREVIEW_CHARS = 48
-        const val LEGACY_STOPPED_ERROR = "U ndal"
+        const val LEGACY_STOPPED_ERROR = "已停止"
         const val SYNTHETIC_STATUS_STOPPED = "eta_status:stopped"
         /** 逆向模式批量开关期间占用 busy 槽位，使技能页整体进入操作中状态。 */
         const val REVERSE_MODE_BUSY_ID = "__reverse_mode__"
