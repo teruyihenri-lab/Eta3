@@ -19,6 +19,10 @@ class LocaleResourcesTest {
     @Test
     fun supportedLocalesSelectExpectedResourcesAndOthersFallBackToEnglish() {
         assertEquals("Settings", localizedString("en-US", R.string.route_settings))
+        assertEquals("Cilësimet", localizedString("sq-AL", R.string.route_settings))
+        assertEquals("Pamja dhe tema", localizedString("sq-AL", R.string.appearance_title))
+        assertEquals("Dërgo", localizedString("sq-AL", R.string.chat_send))
+        assertEquals("Arsyetimi", localizedString("sq-AL", R.string.overlay_reasoning))
         assertEquals("设置", localizedString("zh-CN", R.string.route_settings))
         assertEquals("设置", localizedString("zh-SG", R.string.route_settings))
         assertEquals("設定", localizedString("zh-TW", R.string.route_settings))
@@ -67,7 +71,7 @@ class LocaleResourcesTest {
             "已匯入 2 個檔案，其餘檔案無法讀取或超過 32 MiB",
             localizedQuantity("zh-TW", R.plurals.capability_workspace_partial_import, 2),
         )
-        for (locale in listOf("en-US", "zh-CN", "zh-TW", "fr-FR")) {
+        for (locale in listOf("en-US", "sq-AL", "zh-CN", "zh-TW", "fr-FR")) {
             assertEquals("Skills", localizedString(locale, R.string.route_skills))
             assertEquals("API Key", localizedString(locale, R.string.speech_api_key))
         }

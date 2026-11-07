@@ -173,7 +173,7 @@
   <string name="appearance_predictive_back">Gjesti parashikues i kthimit</string>
   <string name="appearance_predictive_back_summary">Aktivizo animacionet parashikuese të kthimit</string>
   <string name="appearance_interface_scale">Shkalla e ndërfaqes</string>
-  <string name="appearance_interface_scale_summary">Rregullo shkallën e shfaqjes (80%–110%)</string>
+  <string name="appearance_interface_scale_summary" formatted="false">Rregullo shkallën e shfaqjes (80%–110%)</string>
   <string name="appearance_interface_scale_dialog_title">Shkalla e ndërfaqes</string>
   <string name="appearance_interface_scale_dialog_summary">Shkruaj një numër të plotë nga 80 deri në 110</string>
   <string name="appearance_interface_scale_input_label">Përqindja</string>

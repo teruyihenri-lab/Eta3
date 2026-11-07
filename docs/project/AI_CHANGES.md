@@ -8,3 +8,12 @@
 **Kufiri:** vetëm dokumentacion; nuk janë ndryshuar ende rrugët runtime, Kodi Kotlin, resource-t e gjuhës apo APK-ja.
 
 **Verifikimi:** kontrolli i skedarëve në GitHub pas commit-it. Testet e ndërtimit Android nuk janë kryer.
+
+## 2026-11-07 — Burimet Android në shqip
+- Shtuar `app/src/main/res/values-sq/strings.xml`: **1,331/1,331** tekste dhe **20/20** grupe shumësi nga skedari bazë.
+- Shtuar `sq` te `locales_config.xml` dhe `localeFilters`; zgjidhet nga cilësimet e gjuhës.
+- Zgjeruar `LocaleResourcesTest.kt` me pohime për gjuhën shqipe.
+- Shtuar kontrollin e çelësave dhe formatuesve te `scripts/check_albanian_resources.py`.
+- U ruajt shenja `formatted="false"` për `appearance_interface_scale_summary`.
+- Nuk janë modifikuar `applicationId`, nënshkrimi ose logjika e runtime.
+- **Ende për t'u verifikuar:** CI, ndërfaqja në pajisje, dhe tekste hardcoded në Kotlin.

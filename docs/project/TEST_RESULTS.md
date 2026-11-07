@@ -10,3 +10,10 @@
 - APK i instaluar/testuar: **nuk është verifikuar**.
 
 Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun.
+
+## 2026-11-07 — Përkthimi shqip
+- Përputhja e çelësave `strings.xml`: **1,331/1,331** pa dublikime ose mungesa (kontroll përmes leximit të repository-t).
+- Përputhja e grupeve `plurals`: **20/20**.
+- Parametrat e formatimit u krahasuan gjatë futjes së përkthimeve.
+- Teste `LocaleResourcesTest.kt` për shqipen: **u shtuan, nuk janë ekzekutuar ende**.
+- Build APK / lint / test në pajisje: **nuk janë verifikuar ende**.

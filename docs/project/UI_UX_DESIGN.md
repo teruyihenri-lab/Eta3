@@ -8,3 +8,7 @@
 - Ruaj numrat, argumentet e formatimit (`%1$s`, `%1$d`), escape XML dhe shumësat.
 - Testo tekstet e gjata për prerje në ekran dhe për ekranet e vogla.
 - Emrat e markave dhe termat e papërkthyeshëm të API-ve nuk ndryshojnë.
+
+## Implementim 2026-11-07
+- `sq` shtohet si gjuhë e aplikacionit; `values-sq/strings.xml` plotëson tekstet e përkthyeshme në burimet Android.
+- Vargjet e gjata, ndërfaqet Compose dhe tekstet hardcoded mbeten për rishikim me test real.

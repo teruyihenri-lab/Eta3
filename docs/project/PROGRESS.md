@@ -1,10 +1,9 @@
 # Përparimi
 
-> Eta3 · dokumentacioni në shqip · krijuar më 2026-11-07 · dega `localization/albanian-sq`
+> Përditësuar 2026-11-07
 
-## Matje të verifikueshme
-- Dokumentacioni: 79 skedarë të përcaktuar për repository.
-- Përkthimi shqip: **0% e validuar**, sepse nuk ka kaluar auditimin dhe testin e ekranit.
-- APK e re: **jo e ndërtuar/testuar**.
-
-Përqindjet e ardhshme duhet të bazohen te çelësat e përkthyer e të validuar, jo te vlerësimet.
+- Dokumentacioni: 79/79 skedarë të ruajtur në `main`.
+- Përkthimi i vargjeve të burimeve Android: **1,331/1,331 (100% e emrave)**.
+- Grupet e shumësit: **20/20**.
+- Aplikacioni i plotë: **nuk mund të deklarohet 100%** pa auditim të vargjeve hardcoded dhe prova në pajisje.
+- Teste build/instalim: **nuk janë verifikuar**.
