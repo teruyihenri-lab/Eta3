@@ -82,3 +82,7 @@
 - Shkaku: pas përkthimit, interpolimi Kotlin `$MAX_INPUT_TEXT_CHARS` u bashkua me `karaktere` dhe u interpretua si identifikues i vetëm.
 - Korrigjimi: përdor `${MAX_INPUT_TEXT_CHARS} karaktere`, pa ndryshuar limitin e hyrjes.
 - Build-i i ri duhet të konfirmojë korrigjimin; nuk është ende përfundim testimi.
+
+## Artefakti Debug nga CI
+- Pas çdo PR Check të suksesshëm, GitHub Actions duhet të publikojë `eta3-debug-apk`. Verifiko lidhjen e artifact-it kur ekzekutimi përfundon.
+- Lokalizimi i Kotlin nuk është 100%: raporti i fundit i auditimit në gjithë kodin identifikoi 2481 rreshta kinezisht dhe 108 anglisht kandidatë, duke përfshirë mesazhe teknike.

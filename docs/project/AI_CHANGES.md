@@ -92,3 +92,7 @@
 - Shkaku: pas përkthimit, interpolimi Kotlin `$MAX_INPUT_TEXT_CHARS` u bashkua me `karaktere` dhe u interpretua si identifikues i vetëm.
 - Korrigjimi: përdor `${MAX_INPUT_TEXT_CHARS} karaktere`, pa ndryshuar limitin e hyrjes.
 - Build-i i ri duhet të konfirmojë korrigjimin; nuk është ende përfundim testimi.
+
+## 2026-11-07 — Ruajtja e APK-së së ndërtuar nga CI
+- PR Check tani ruan `eta3-debug-apk` si artifact pas kalimit të `lintDebug`, `testDebugUnitTest` dhe `assembleDebug`.
+- Artifact-i Debug shërben për prova; nënshkrimi i Debug mund të jetë i ndryshëm nga instalimi ekzistues, prandaj nuk premtohet përditësim mbi release.

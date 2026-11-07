@@ -69,3 +69,7 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Shkaku: pas përkthimit, interpolimi Kotlin `$MAX_INPUT_TEXT_CHARS` u bashkua me `karaktere` dhe u interpretua si identifikues i vetëm.
 - Korrigjimi: përdor `${MAX_INPUT_TEXT_CHARS} karaktere`, pa ndryshuar limitin e hyrjes.
 - Build-i i ri duhet të konfirmojë korrigjimin; nuk është ende përfundim testimi.
+
+## Rregulli i ndërtimit Debug — 2026-11-07
+- Workflow është zgjeruar për të ruajtur APK-në vetëm kur kontrollet e build-it kanë sukses.
+- Kjo hyrje përshkruan ndryshimin e konfigurimit; testi real i APK-së në pajisje mbetet i pakryer.

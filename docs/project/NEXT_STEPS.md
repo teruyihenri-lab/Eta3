@@ -75,3 +75,8 @@
 - Shkaku: pas përkthimit, interpolimi Kotlin `$MAX_INPUT_TEXT_CHARS` u bashkua me `karaktere` dhe u interpretua si identifikues i vetëm.
 - Korrigjimi: përdor `${MAX_INPUT_TEXT_CHARS} karaktere`, pa ndryshuar limitin e hyrjes.
 - Build-i i ri duhet të konfirmojë korrigjimin; nuk është ende përfundim testimi.
+
+## APK Debug dhe kontrolli i lokalizimit
+1. Konfirmo CI pas korrigjimit të interpolimit Kotlin.
+2. Shkarko dhe testo `eta3-debug-apk`; mos e instalo mbi release pa verifikuar certifikatën.
+3. Përkthe mesazhet e dukshme në Kotlin duke ruajtur protokollet, identifikuesit dhe interpolimet Kotlin; ndërto pas çdo grupi.
