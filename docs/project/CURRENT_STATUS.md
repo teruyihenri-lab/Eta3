@@ -6,11 +6,12 @@
 - Repo: `teruyihenri-lab/Eta3`
 - Dega aktuale: `localization/albanian-sq`
 - Aplikacion Android në Kotlin / Jetpack Compose
-- Konfigurimi i `sq` locale dhe skedarët e resursit të Shqipërisë janë shtuar; mbetën disa string-e shtesë të UI-së për të përfunduar në fazën tjetër.
-- Build/testim me Gradle nuk mund të ekzekutohet në këtë mjedis pa një shell/SDK të disponueshëm; për këtë arsye verifikimi i projektit vazhdon vetëm me kontrollin static të resursit dhe konfigurimit.
+- Konfigurimi i `sq` locale dhe skedarët e resursit të Shqipërisë janë shtuar; përfshirë çelësat primarë të UI-së dhe përkthimet e funksioneve të njohura në mjedisin Linux, terminalin, bisedën dhe lejet.
+- Verifikimi i build-it nuk është kryer në një mjedis me SDK/Gradle të konfiguruar; kjo mbetet një hap i përfundimit pas kontrollit statik të resursit.
 
 ## Statusi i lokalizimit
-- `app/src/main/res/xml/locales_config.xml`: e përditësuar
-- `app/build.gradle.kts`: e përditësuar me filtrin `sq`
-- `app/src/main/res/values-sq/*.xml`: e krijuar/mbushur me tekstin e parë shqip
-- `values/strings.xml` ka mbetur burimi anglez; përkthimi i plotë i të gjitha fushave të ekranit është ende një pastrim i vazhdueshëm.
+- `app/src/main/res/xml/locales_config.xml`: e përditësuar për `sq`
+- `app/build.gradle.kts`: e përditësuar për `localeFilters` të `sq`
+- `app/src/main/res/values-sq/strings.xml`: përkthim fillestar i pjesës më të dukshme të UI-së
+- `app/src/main/res/values-sq/*.xml`: krijuar për terminal, root, mjedis Linux dhe detaje UI
+- Mbetet një pastrim i planifikuar i pjesës tjetër të string-eve të projektit për një përkthim të plotë dhe të verifikuar.
