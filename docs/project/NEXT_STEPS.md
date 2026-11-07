@@ -53,3 +53,9 @@
 1. Kontrollo `PR Check` në commit-in e ri që `mergeDebugResources` të mos raportojë më gabimin e `appearance_interface_scale_summary`.
 2. Nëse dështojnë teste të tjera, analizo raportet Gradle dhe korrigjo shkaqet reale pa fshehur testet.
 3. Vazhdo auditimin e plotë të teksteve Kotlin dhe testimin në pajisje para bashkimit në `main`.
+
+## Kontrolli pas riparimeve të fundit
+1. Lexo `PR Check` për commit-in e fundit dhe raporto me numra Lint errors / teste të dështuara.
+2. Nëse dështon një test i madhësisë së skedarit, analizo përdorimin real të memories; mos e anashkalo testin.
+3. Nëse ka ikona të tjera pa mapim, shtoji në `ToolIcons.kt`, jo në listën e përjashtimeve të testit.
+4. Pas build/testeve, testim real i APK-së dhe auditim i shqipes në çdo ekran.

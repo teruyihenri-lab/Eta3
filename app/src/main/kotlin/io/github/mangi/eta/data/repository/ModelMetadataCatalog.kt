@@ -304,7 +304,7 @@ internal object ModelMetadataCatalog {
     internal fun normalizeForMatch(modelId: String): String {
         var id = modelId.trim().lowercase()
         val slash = id.lastIndexOf('/')
-        if (slash >= 0 && id.indexOf('/') != slash) id = id.substring(slash + 1)
+        if (slash >= 0) id = id.substring(slash + 1)
         id = id.replace(Regex("-(20\\d{6})$"), "")
         id = id.replace(Regex("-(latest|preview|exp|experimental|stable)$"), "")
         id = id.replace(Regex("[^a-z0-9]"), "")

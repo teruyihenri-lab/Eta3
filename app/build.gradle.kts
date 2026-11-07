@@ -116,6 +116,9 @@ android {
         unitTests.isIncludeAndroidResources = true
         // Robolectric 在高版本 JDK 下需要访问内部 API，参数只作用于测试 JVM。
         unitTests.all {
+            // The backup streaming test round-trips multiple 17 MiB JSON fields.
+            // Robolectric's default test worker heap is insufficient for this case.
+            it.maxHeapSize = "2g"
             it.jvmArgs(
                 "--add-opens=java.base/java.lang=ALL-UNNAMED",
                 "--add-opens=java.base/java.util=ALL-UNNAMED",

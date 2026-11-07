@@ -30,3 +30,11 @@
 - [ ] Audito Kotlin/UI për tekste hardcoded ose dinamike jashtë `strings.xml`.
 - [ ] Konfirmo PR CI, testet Android, build-in dhe funksionimin në telefon.
 - [ ] Bashko ndryshimet në `main` vetëm pas verifikimit.
+
+## Detyrat e verifikimit (2026-11-07)
+- [x] Shto 102 burimet shqipe në skedarët XML përkatës.
+- [x] Shto 48 burimet kineze për tekstet e reja.
+- [x] Përmirëso kontrollin e përkthimit për të gjitha burimet XML.
+- [x] Korrigjo problemet e identifikuara në model lookup, statuset e memories, ikonat dhe testet.
+- [ ] Konfirmo në GitHub Actions që Lint, unit tests dhe Debug APK ndërtohen.
+- [ ] Testo në telefon dhe kryej auditimin e teksteve Kotlin jashtë res.

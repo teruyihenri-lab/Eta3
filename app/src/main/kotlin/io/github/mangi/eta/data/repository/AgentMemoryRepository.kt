@@ -292,7 +292,12 @@ internal class AgentMemoryStore(
 
     /** Shared file lock makes revision checks atomic across app and agent-runtime processes. */
     private fun <T> diskLocked(action: () -> T): T = synchronized(lock) {
-        check(memoryDir.isDirectory || memoryDir.mkdirs()) { "Cannot create memory directory" }
+        if (!memoryDir.isDirectory && !memoryDir.mkdirs()) {
+            throw AgentMemoryException(
+                code = "MEMORY_WRITE_FAILED",
+                message = "Cannot create memory directory",
+            )
+        }
         RandomAccessFile(lockFile, "rw").channel.use { channel ->
             val acquired = channel.lock()
             try { action() } finally { acquired.release() }

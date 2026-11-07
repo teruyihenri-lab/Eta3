@@ -57,3 +57,14 @@
 - Rivendosur `formatted="false"` në burimin shqip, pa ndryshuar tekstin që sheh përdoruesi.
 - Përmirësuar `scripts/check_albanian_translations.py` për të krahasuar atributet `formatted="false"` dhe për të parandaluar regresionin.
 - Nuk është verifikuar ende një build i plotë i suksesshëm pas këtij commit-i.
+
+## 2026-11-07 — Riparimi i Lint dhe testeve Android
+- Shtuar përkthimet shqipe të 102 burimeve të njoftimeve, mjedisit Linux, Root dhe detajeve të ndërfaqes; plotësuar 48 përkthime kineze për të mos prishur gjuhët ekzistuese.
+- Kontrolli statik tani skanon **të gjitha** dosjet XML `values/` dhe `values-sq/`, përfshirë `formatted`, vendmbajtësit dhe shumësat.
+- Korrigjuar normalizimi i prefiksit të ofruesve dhe data `-0324` në familjet e modeleve.
+- Testi i inferencës tani krahason modelin pa dritare konteksti, jo modelin që e ka tashmë vlerën.
+- Testi i cilësimeve përfshin çelësat ekzistues të `AGENT_REFUSAL_FAILOVER_ENABLED` dhe `AGENT_ROLEPLAY_DEFAULT`.
+- `AgentMemoryStore` kthen `AgentMemoryException` kur dosja e memories nuk mund të krijohet.
+- Shtuar ikonat për mjetet reverse engineering, njohurinë lokale dhe telefonatat.
+- Rritur limiti i memories së JVM-së së testeve në 2 GiB për provën e ruajtjes së skedarëve të mëdhenj. Kjo kërkon verifikim CI.
+- Nuk janë hequr teste ose fikur rregulla Lint.

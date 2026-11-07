@@ -61,3 +61,9 @@
 - `values-sq/strings.xml`: shtuar `formatted="false"` te `appearance_interface_scale_summary` për tekstin `80%–110%`.
 - Kontrolli i përkthimeve tani kap edhe atributet e formatimit që mungojnë.
 - Duhet verifikuar me GitHub Actions nëse `mergeDebugResources`, lint, testet dhe `assembleDebug` kalojnë.
+
+## 2026-11-07 — Riparime nga raporti i GitHub Actions
+- Nga kontrolli i mëparshëm: 150 gabime MissingTranslation, 7 teste të dështuara dhe 1 i anashkaluar; prova e plotë: `PR Check` #42401565088.
+- U publikuan riparimet për burimet XML dhe problemet e identifikuara në testet e modeleve, memories, ikonave dhe memory heap.
+- **Nuk deklarohet sukses** pa dalë GitHub Actions në commit-in e ri.
+- Auditimi dhe korrigjimi i përmbajtjes hardcoded Kotlin mbetet i hapur.

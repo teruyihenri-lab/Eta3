@@ -12,7 +12,7 @@ internal object ModelContextInference {
     private val VENDOR_PREFIX = Regex("""^[a-z0-9_-]+/""")
     private val TAG_SUFFIX = Regex("""[:@].*$""")
     private val VERSION_SUFFIX = Regex(
-        """-(?:\d{8}|\d{6}|\d{4}-\d{2}-\d{2}|latest|v\d+(?:\.\d+)?)$""",
+        """-(?:\d{8}|\d{6}|\d{4}-\d{2}-\d{2}|\d{4}|latest|v\d+(?:\.\d+)?)$""",
         RegexOption.IGNORE_CASE,
     )
 

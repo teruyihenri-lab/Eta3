@@ -47,3 +47,9 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - **Diagnoza statike:** atributi `formatted="false"` ekziston në `values/strings.xml`, por mungonte në `values-sq/strings.xml`; asnjë çelës tjetër me mospërputhje të këtij atributi nuk u identifikua.
 - **Korrigjimi:** atributi u rivendos dhe kontrolli statik u zgjerua.
 - **Build i plotë pas ndryshimit:** ende i pakonfirmuar.
+
+## Raporti real GitHub Actions #42401565088 (2026-11-07)
+- 1783 teste gjithsej, 7 dështime dhe 1 i anashkaluar.
+- Dështime: `PrefsDefaultsTest`, dy prova `ModelContextInferenceTest`, `EtaBackupRepositoryTest`, `EtaBackupStreamingTest` (Java heap), `ModelMetadataCatalogTest`, `ToolCatalogUiTest`.
+- Lint: 150 MissingTranslation errors; raporti ZIP u lexua dhe klasifikua në 102 burime shqipe që mungonin nga skedarët XML shtesë dhe 48 burime kineze që mungonin pas shtimit të UI-së së re.
+- Riparimet janë publikuar, por kjo pjesë dokumenton **shkaqet dhe ndryshimet**, jo një kalim testesh ende të paverifikuar.
