@@ -1329,4 +1329,86 @@
   <string name="memory_discard">Hidh poshtë</string>
   <string name="chat_character_input_hint">Thuaji diçka %1$s…</string>
   <string name="chat_character_typing">%1$s po përgjigjet…</string>
+  <string name="ui_core_memory_user_name_long_term_preferences_aa6ff9"># kujtesa bazë - Emri i përdoruesit: - Preferencat afatgjata:</string>
+  <string name="context_usage_previous_response">Deri tani: %1$s\nMatur në mesazhin e mëparshëm</string>
+  <plurals name="conversation_delete_later_turns">
+    <item quantity="one">Ky mesazh dhe %d mesazh pas tij do të fshihen.</item>
+    <item quantity="other">Ky mesazh dhe %d mesazhe pas tij do të fshihen.</item>
+  </plurals>
+  <plurals name="conversation_regenerate_later_turns">
+    <item quantity="one">Kjo do të fshijë %d mesazh pasues dhe do të rigjenerojë përgjigjen nga ky mesazh.</item>
+    <item quantity="other">Kjo do të fshijë %d mesazhe pasuese dhe do të rigjenerojë përgjigjen nga ky mesazh.</item>
+  </plurals>
+  <plurals name="work_processing_step">
+    <item quantity="one">Në punë · hapi %d</item>
+    <item quantity="other">Në punë · hapi %d</item>
+  </plurals>
+  <plurals name="work_completed_steps">
+    <item quantity="one">U përfundua %d hap</item>
+    <item quantity="other">U përfunduan %d hapa</item>
+  </plurals>
+  <plurals name="tool_group_calls">
+    <item quantity="one">%d thirrje</item>
+    <item quantity="other">%d thirrje</item>
+  </plurals>
+  <plurals name="work_summary_thinking">
+    <item quantity="one">U arsyetua %d herë</item>
+    <item quantity="other">U arsyetua %d herë</item>
+  </plurals>
+  <plurals name="work_summary_tools">
+    <item quantity="one">%d thirrje mjeti</item>
+    <item quantity="other">%d thirrje mjetesh</item>
+  </plurals>
+  <plurals name="work_summary_failed">
+    <item quantity="one">%d dështim</item>
+    <item quantity="other">%d dështime</item>
+  </plurals>
+  <plurals name="reasoning_completed_seconds">
+    <item quantity="one">Arsyetimi përfundoi · %d sekondë</item>
+    <item quantity="other">Arsyetimi përfundoi · %d sekonda</item>
+  </plurals>
+  <plurals name="file_references_added_with_failures">
+    <item quantity="one">U shtua %1$d element; %2$d element nuk mund të referohej</item>
+    <item quantity="other">U shtuan %1$d elemente; %2$d elemente nuk mund të referoheshin</item>
+  </plurals>
+  <plurals name="provider_models_fetched">
+    <item quantity="one">U mor %d model</item>
+    <item quantity="other">U morën %d modele</item>
+  </plurals>
+  <plurals name="provider_models_added">
+    <item quantity="one">U shtua %d model</item>
+    <item quantity="other">U shtuan %d modele</item>
+  </plurals>
+  <plurals name="provider_selected_delete_summary">
+    <item quantity="one">Modeli i zgjedhur do të fshihet përgjithmonë.</item>
+    <item quantity="other">%d modelet e zgjedhura do të fshihen përgjithmonë.</item>
+  </plurals>
+  <plurals name="provider_models_deleted">
+    <item quantity="one">U fshi %d model</item>
+    <item quantity="other">U fshinë %d modele</item>
+  </plurals>
+  <plurals name="provider_models_selected">
+    <item quantity="one">%d i zgjedhur</item>
+    <item quantity="other">%d të zgjedhur</item>
+  </plurals>
+  <plurals name="provider_delete_models_action">
+    <item quantity="one">Fshi %d model</item>
+    <item quantity="other">Fshi %d modele</item>
+  </plurals>
+  <plurals name="linux_missing_core_commands">
+    <item quantity="one">Mungon %d komandë bazë</item>
+    <item quantity="other">Mungojnë %d komanda bazë</item>
+  </plurals>
+  <plurals name="provider_configured_count">
+    <item quantity="one">Ofrues të konfiguruar (%d)</item>
+    <item quantity="other">Ofrues të konfiguruar (%d)</item>
+  </plurals>
+  <plurals name="provider_models_count">
+    <item quantity="one">%d model</item>
+    <item quantity="other">%d modele</item>
+  </plurals>
+  <plurals name="permission_health_issues">
+    <item quantity="one">%d element kërkon vëmendje</item>
+    <item quantity="other">%d elemente kërkojnë vëmendje</item>
+  </plurals>
 </resources>
