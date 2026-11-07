@@ -325,11 +325,11 @@ internal fun ProviderModelsTab(
                         if (isOpenCode) {
                             EtaPreferenceDivider()
                             EtaArrowPreference(
-                                title = if (isFetching) "正在读取免费模型…" else "拉取 OpenCode 免费模型",
+                                title = if (isFetching) "Po lexohen modelet falas…" else "Merr modelet falas të OpenCode",
                                 summary = if (RemoteModelFetcher.shouldReadOfficialZenCatalog(provider)) {
-                                    "直接读取 OpenCode Zen 官方公开目录，无需等待内置网关；显示免费标记不代表可以匿名推理"
+                                    "Lexo katalogun zyrtar OpenCode Zen pa pritur ndërmjetësin. Etiketa falas nuk garanton përdorim anonim"
                                 } else {
-                                    "从当前 opencode2api /v1/models 读取免费模型；需要网关自身目录就绪"
+                                    "Lexo modelet falas nga /v1/models i opencode2api. Katalogu i ndërmjetësit duhet të jetë gati"
                                 },
                                 enabled = !isFetching && !isMutatingModel,
                                 startAction = {
@@ -349,10 +349,10 @@ internal fun ProviderModelsTab(
                                             val candidates = ModelRepository.newRemoteModels(provider.id, models)
                                             message = if (candidates.isEmpty()) {
                                                 if (models.isEmpty()) {
-                                                    "目录已返回，但没有明确标记免费的聊天模型；不会导入未验证的付费模型"
+                                                    "Katalogu u kthye, por asnjë model bisede nuk është shënuar qartë falas. Modelet me pagesë të paverifikuara nuk importohen"
                                                 } else {
-                                                    "已读取 ${models.size} 个免费聊天模型，全部已添加。" +
-                                                        "目录可见不代表推理已获授权；本次不会移除已有模型"
+                                                    "U lexuan ${models.size} modele bisede falas; të gjitha janë shtuar." +
+                                                        "Dukshmëria e katalogut nuk garanton autorizimin e përdorimit; modelet ekzistuese nuk hiqen"
                                                 }
                                             } else {
                                                 pendingImport = RemoteModelImport(
@@ -365,10 +365,10 @@ internal fun ProviderModelsTab(
                                             throw cancelled
                                         } catch (throwable: Throwable) {
                                             val source = if (RemoteModelFetcher.shouldReadOfficialZenCatalog(provider)) {
-                                                "官方 Zen 公开目录"
-                                            } else "当前网关目录"
-                                            message = "${source}读取失败：${throwable.message ?: throwable.javaClass.simpleName}。" +
-                                                "模型列表和实际推理授权是两项独立检查"
+                                                "Katalogu publik zyrtar Zen"
+                                            } else "Katalogu i ndërmjetësit aktual"
+                                            message = "Leximi i ${source} dështoi: ${throwable.message ?: throwable.javaClass.simpleName}." +
+                                                "Lista e modeleve dhe autorizimi për përdorim janë kontrolle të ndryshme"
                                         } finally {
                                             isFetching = false
                                         }
@@ -1004,12 +1004,12 @@ private fun ModelEditDialog(
                             OpenCodeEmbeddedGateway.zenKey().isBlank() &&
                             OpenCodeEmbeddedGateway.goKey().isBlank()
                         ) {
-                            notes += "内置网关未配置 Zen/Go 上游 Key；免费模型目录可读取，不代表匿名推理已授权"
+                            notes += "Ndërmjetësi nuk ka çelësa Zen/Go; katalogu falas mund të lexohet, por përdorimi anonim nuk garantohet"
                         } else if (provider.apiKey.isBlank() &&
                             (provider.id != BuiltinProviders.OPENCODE_ID ||
                                 !OpenCodeEmbeddedGateway.useLocal(provider))
                         ) {
-                            notes += "请在 OpenCode 配置页填写有效 API Key；公开目录不代表推理免认证"
+                            notes += "Shkruaj çelës API të vlefshëm te OpenCode; katalogu publik nuk garanton përdorim pa autentikim"
                         }
                     }
                 }
