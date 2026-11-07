@@ -11,7 +11,7 @@ import sys
 ROOT = Path("app/src/main/kotlin")
 # Upper-case constant name followed directly by lower-case text:
 # Kotlin interprets the entire run as the identifier, causing unresolved references.
-PATTERN = re.compile(r"(?<!\\)\\$[A-Z][A-Z0-9_]{2,}[a-z][A-Za-z0-9_]*")
+PATTERN = re.compile(r"(?<!\\)\$[A-Z][A-Z0-9_]{2,}[a-z][A-Za-z0-9_]*")
 issues = []
 for file in ROOT.rglob("*.kt"):
     for number, line in enumerate(file.read_text(encoding="utf-8").splitlines(), 1):
