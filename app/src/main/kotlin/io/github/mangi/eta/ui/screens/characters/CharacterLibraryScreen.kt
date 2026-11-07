@@ -60,14 +60,14 @@ internal fun CharacterLibraryScreen(
         onNavigate(AppRoute.CharacterEditor())
     }
     MiuixScaffoldPage(
-        title = "角色",
+        title = "Personazhi",
         onBack = onBack,
         actions = {
             IconButton(onClick = importCard, enabled = !store.busy) {
-                Icon(Icons.Rounded.FileUpload, contentDescription = "导入角色卡")
+                Icon(Icons.Rounded.FileUpload, contentDescription = "Importo kartën e personazhit")
             }
             IconButton(onClick = createCharacter, enabled = !store.busy) {
-                Icon(Icons.Rounded.Add, contentDescription = "创建角色")
+                Icon(Icons.Rounded.Add, contentDescription = "Krijo personazh")
             }
         },
     ) {
@@ -88,7 +88,7 @@ internal fun CharacterLibraryScreen(
                         onSearch = { store.query = it },
                         expanded = false,
                         onExpandedChange = {},
-                        label = "搜索名称或标签",
+                        label = "Kërko emër ose etiketë",
                     )
                 },
                 content = {},
@@ -108,18 +108,18 @@ internal fun CharacterLibraryScreen(
             store.characters.isEmpty() -> {
                 item(key = "empty-library") {
                     ListEmptyState(
-                        title = "还没有角色",
-                        summary = "创建一个角色，或导入 PNG、JSON 角色卡开始对话",
+                        title = "Ende nuk ka personazhe",
+                        summary = "Krijo personazh ose importo kartë PNG/JSON për të nisur bisedën",
                         icon = Icons.Rounded.TheaterComedy,
                         action = {
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                 EtaTextButton(
-                                    text = "恢复默认角色",
+                                    text = "Rikthe personazhin e parazgjedhur",
                                     onClick = { store.restoreDefaultCharacter() },
                                     enabled = !store.busy,
                                 )
                                 EtaTextButton(
-                                    text = "创建角色",
+                                    text = "Krijo personazh",
                                     onClick = createCharacter,
                                     colors = ButtonDefaults.textButtonColorsPrimary(),
                                 )
@@ -131,14 +131,14 @@ internal fun CharacterLibraryScreen(
             store.filteredCharacters.isEmpty() -> {
                 item(key = "empty-search") {
                     ListEmptyState(
-                        title = "没有找到匹配的角色",
-                        summary = "换个关键词试试，搜索会匹配名称与标签",
+                        title = "Nuk u gjet personazh që përputhet",
+                        summary = "Provo fjalë kyçe të tjera; kërkimi përdor emrat dhe etiketat",
                         icon = Icons.Rounded.SearchOff,
                     )
                 }
             }
         }
-        // 两列竖版卡片：每行一个 Lazy 项，长列表仍按行组合。未搜索时末尾追加一张新建卡，
+        // 两列竖版卡片：每行一  Lazy 项，长列表仍按行组合。未搜索时末尾追加一张新建卡，
         // 既补齐单数时的空位，也让创建与导入在网格中就近可达。
         val showAddTile = store.query.isBlank() && store.characters.isNotEmpty()
         val tiles: List<CharacterProfile?> = store.filteredCharacters + if (showAddTile) listOf(null) else emptyList()
@@ -171,13 +171,13 @@ internal fun CharacterLibraryScreen(
                 if (row.size == 1) Spacer(Modifier.weight(1f))
             }
         }
-        item(key = "persona-title") { EtaPreferenceGroupTitle("我的") }
+        item(key = "persona-title") { EtaPreferenceGroupTitle("Të miat") }
         item(key = "persona") {
             EtaPreferenceGroup {
                 EtaArrowPreference(
-                    title = "我的人设",
+                    title = "Profili im",
                     startAction = { EtaPreferenceIcon(Icons.Rounded.Face, tint = EtaPreferenceColors.Blue) },
-                    summary = "角色对你的称呼与你在故事中的身份",
+                    summary = "Si të thërret personazhi dhe cili është roli yt në histori",
                     onClick = { onNavigate(AppRoute.CharacterPersona) },
                 )
             }
