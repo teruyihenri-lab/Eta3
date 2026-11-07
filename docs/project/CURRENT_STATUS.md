@@ -86,3 +86,9 @@
 ## Artefakti Debug nga CI
 - Pas çdo PR Check të suksesshëm, GitHub Actions duhet të publikojë `eta3-debug-apk`. Verifiko lidhjen e artifact-it kur ekzekutimi përfundon.
 - Lokalizimi i Kotlin nuk është 100%: raporti i fundit i auditimit në gjithë kodin identifikoi 2481 rreshta kinezisht dhe 108 anglisht kandidatë, duke përfshirë mesazhe teknike.
+
+## 2026-11-07 — Interpolimet Kotlin në komandat e tekstit
+- CI #42409706310 dështoi me tre referenca të pazgjidhura: `MAX_REPLACE_TEXT_CHARSkaraktere` në rreshtin 351 dhe `MAX_CLIPBOARD_TEXT_CHARSkaraktere` në rreshtat 620/672.
+- U korrigjuan të tri vargjet në `${MAX_...} karaktere`, pa ndryshuar limitet ose sjelljen.
+- Shtuar `scripts/check_kotlin_interpolation.py` te workflow i përkthimeve për të kapur modele të dyshimta përpara kompilimit.
+- Ndërtimi pas korrigjimeve kërkon ende sukses të konfirmuar nga CI.

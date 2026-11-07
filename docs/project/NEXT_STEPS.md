@@ -80,3 +80,9 @@
 1. Konfirmo CI pas korrigjimit të interpolimit Kotlin.
 2. Shkarko dhe testo `eta3-debug-apk`; mos e instalo mbi release pa verifikuar certifikatën.
 3. Përkthe mesazhet e dukshme në Kotlin duke ruajtur protokollet, identifikuesit dhe interpolimet Kotlin; ndërto pas çdo grupi.
+
+## 2026-11-07 — Interpolimet Kotlin në komandat e tekstit
+- CI #42409706310 dështoi me tre referenca të pazgjidhura: `MAX_REPLACE_TEXT_CHARSkaraktere` në rreshtin 351 dhe `MAX_CLIPBOARD_TEXT_CHARSkaraktere` në rreshtat 620/672.
+- U korrigjuan të tri vargjet në `${MAX_...} karaktere`, pa ndryshuar limitet ose sjelljen.
+- Shtuar `scripts/check_kotlin_interpolation.py` te workflow i përkthimeve për të kapur modele të dyshimta përpara kompilimit.
+- Ndërtimi pas korrigjimeve kërkon ende sukses të konfirmuar nga CI.

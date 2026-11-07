@@ -15,3 +15,5 @@ jobs:
           python-version: '3.12'
       - name: Verifiko burimet shqipe
         run: python scripts/check_albanian_translations.py
+      - name: Kontrollo interpolimet e dyshimta Kotlin
+        run: python scripts/check_kotlin_interpolation.py

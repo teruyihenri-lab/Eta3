@@ -348,7 +348,7 @@ internal class RootShellDeviceController(
         observation: ElementObservation?,
     ): String {
         if (text.length > MAX_REPLACE_TEXT_CHARS) {
-            return errorJson("TEXT_TOO_LONG", "replace_text mbështet deri në$MAX_REPLACE_TEXT_CHARSkaraktere")
+            return errorJson("TEXT_TOO_LONG", "replace_text mbështet deri në ${MAX_REPLACE_TEXT_CHARS} karaktere")
         }
         AgentAccessibilityService.current()?.let { service ->
             val snapshot = observation?.accessibilitySnapshot
@@ -617,7 +617,7 @@ internal class RootShellDeviceController(
 
     fun clipboardSet(context: Context, text: String): String {
         if (text.length > MAX_CLIPBOARD_TEXT_CHARS) {
-            return errorJson("TEXT_TOO_LONG", "Teksti i kopjuar mbështet deri në$MAX_CLIPBOARD_TEXT_CHARSkaraktere")
+            return errorJson("TEXT_TOO_LONG", "Teksti i kopjuar mbështet deri në ${MAX_CLIPBOARD_TEXT_CHARS} karaktere")
         }
         val serviceResult = AgentAccessibilityService.current()?.copyToClipboard(text)
         val ok = serviceResult?.ok ?: runCatching {
@@ -669,7 +669,7 @@ internal class RootShellDeviceController(
 
     fun pasteText(text: String): String {
         if (text.length > MAX_CLIPBOARD_TEXT_CHARS) {
-            return errorJson("TEXT_TOO_LONG", "paste_text mbështet deri në$MAX_CLIPBOARD_TEXT_CHARSkaraktere")
+            return errorJson("TEXT_TOO_LONG", "paste_text mbështet deri në ${MAX_CLIPBOARD_TEXT_CHARS} karaktere")
         }
         AgentAccessibilityService.current()?.let { service ->
             val result = service.pasteText(text)

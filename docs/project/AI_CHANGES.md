@@ -96,3 +96,9 @@
 ## 2026-11-07 — Ruajtja e APK-së së ndërtuar nga CI
 - PR Check tani ruan `eta3-debug-apk` si artifact pas kalimit të `lintDebug`, `testDebugUnitTest` dhe `assembleDebug`.
 - Artifact-i Debug shërben për prova; nënshkrimi i Debug mund të jetë i ndryshëm nga instalimi ekzistues, prandaj nuk premtohet përditësim mbi release.
+
+## 2026-11-07 — Interpolimet Kotlin në komandat e tekstit
+- CI #42409706310 dështoi me tre referenca të pazgjidhura: `MAX_REPLACE_TEXT_CHARSkaraktere` në rreshtin 351 dhe `MAX_CLIPBOARD_TEXT_CHARSkaraktere` në rreshtat 620/672.
+- U korrigjuan të tri vargjet në `${MAX_...} karaktere`, pa ndryshuar limitet ose sjelljen.
+- Shtuar `scripts/check_kotlin_interpolation.py` te workflow i përkthimeve për të kapur modele të dyshimta përpara kompilimit.
+- Ndërtimi pas korrigjimeve kërkon ende sukses të konfirmuar nga CI.
