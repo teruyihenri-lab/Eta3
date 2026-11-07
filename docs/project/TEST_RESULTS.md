@@ -79,3 +79,6 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - U korrigjuan të tri vargjet në `${MAX_...} karaktere`, pa ndryshuar limitet ose sjelljen.
 - Shtuar `scripts/check_kotlin_interpolation.py` te workflow i përkthimeve për të kapur modele të dyshimta përpara kompilimit.
 - Ndërtimi pas korrigjimeve kërkon ende sukses të konfirmuar nga CI.
+
+## Verifikimi i përshkrimeve të browser_use/web_search/fetch_url
+- Korrigjimet janë vetëm tekste përshkruese; rezultatet e build-it pas ndryshimit janë ende pa konfirmim.

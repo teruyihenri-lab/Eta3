@@ -86,3 +86,7 @@
 - U korrigjuan të tri vargjet në `${MAX_...} karaktere`, pa ndryshuar limitet ose sjelljen.
 - Shtuar `scripts/check_kotlin_interpolation.py` te workflow i përkthimeve për të kapur modele të dyshimta përpara kompilimit.
 - Ndërtimi pas korrigjimeve kërkon ende sukses të konfirmuar nga CI.
+
+## Lokalizimi i udhëzimeve për agjentin
+- Vazhdo me katalogët e gjesteve, tekst-sistem, pajisjes dhe mesazhet e brendshme, me kontrolle të testeve që krahasojnë përshkrime.
+- Konfirmo build-in dhe publiko APK Debug si artifact kur të kalojë CI.

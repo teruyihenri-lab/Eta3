@@ -92,3 +92,8 @@
 - U korrigjuan të tri vargjet në `${MAX_...} karaktere`, pa ndryshuar limitet ose sjelljen.
 - Shtuar `scripts/check_kotlin_interpolation.py` te workflow i përkthimeve për të kapur modele të dyshimta përpara kompilimit.
 - Ndërtimi pas korrigjimeve kërkon ende sukses të konfirmuar nga CI.
+
+## Lokalizimi i skemave të mjeteve Web/Browser
+- Përshkrimet e browser_use, web_search dhe fetch_url janë tashmë shqip.
+- Identifikuesit e komandave, emrat e parametrave dhe skemat e JSON mbeten të pandryshuara.
+- Ende ka shumë mesazhe të tjera kineze në komponentët e brendshëm; nuk mund të quhet përkthim 100% i kodit.

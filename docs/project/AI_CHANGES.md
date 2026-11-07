@@ -102,3 +102,8 @@
 - U korrigjuan të tri vargjet në `${MAX_...} karaktere`, pa ndryshuar limitet ose sjelljen.
 - Shtuar `scripts/check_kotlin_interpolation.py` te workflow i përkthimeve për të kapur modele të dyshimta përpara kompilimit.
 - Ndërtimi pas korrigjimeve kërkon ende sukses të konfirmuar nga CI.
+
+## 2026-11-07 — Përshkrimet e mjeteve Web/Browser
+- Përkthyer 23 përshkrime të AgentBrowserToolCatalog dhe 8 tekste të AgentWebToolCatalog në shqip; ruhen emrat dhe skemat JSON të komandave.
+- Siguria e interpretimit ruhet: tekstet e faqeve web mbeten të dhëna jo udhëzime, dhe veprimet e përgjimit nuk janë hequr.
+- Nevojitet sërish CI, sepse ndryshimet në përshkrimet e mjeteve mund të prekin testet me pritshmëri teksti.
