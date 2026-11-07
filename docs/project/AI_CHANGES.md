@@ -32,3 +32,7 @@
 - U lokalizuan etiketat, paralajmërimet dhe dialogu i fshirjes në `CharacterDetailScreen`.
 - U përdor `Context.getString` në callback për titullin e përshëndetjes, sepse callback nuk është `@Composable`.
 - Emri rezervë i skedarit të eksportuar merret nga burimi lokal; nuk ndryshohet formati i karakterit.
+
+## 2026-11-07 — Paraqitja dhe përshëndetjet e personazhit
+- U lokalizuan pamja e personazhit, butoni për nisjen e bisedës, titujt e përshëndetjeve, përshkrimi i avatarit dhe etiketa e autorit në `CharacterHero.kt`.
+- Emrat e personazheve dhe përmbajtja e shkruar nga përdoruesi mbeten të paprekura.

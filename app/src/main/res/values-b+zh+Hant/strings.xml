@@ -1435,4 +1435,10 @@
   <string name="character_delete_summary">「%1$s」將從角色庫移除，角色圖片與劇情記憶也會刪除；已有對話保留。此操作無法復原。</string>
   <string name="character_confirm_delete">刪除</string>
   <string name="character_export_default_name">角色</string>
+  <string name="character_change_avatar">更換頭像</string>
+  <string name="character_creator_line">作者：%1$s</string>
+  <string name="character_start_chat">開始對話</string>
+  <string name="character_selected">已選取</string>
+  <string name="character_no_greeting">沒有預設開場白，由你先開口</string>
+  <string name="character_read_full">閱讀全文</string>
 </resources>

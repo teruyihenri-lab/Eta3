@@ -1483,4 +1483,10 @@
   <string name="character_delete_summary">“%1$s” will be removed from the character library, including its image and story memory. Existing conversations remain. This cannot be undone.</string>
   <string name="character_confirm_delete">Delete</string>
   <string name="character_export_default_name">Character</string>
+  <string name="character_change_avatar">Change avatar</string>
+  <string name="character_creator_line">Creator: %1$s</string>
+  <string name="character_start_chat">Start conversation</string>
+  <string name="character_selected">Selected</string>
+  <string name="character_no_greeting">No preset greeting. You can start the conversation.</string>
+  <string name="character_read_full">Read full text</string>
 </resources>

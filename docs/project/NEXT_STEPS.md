@@ -14,3 +14,5 @@
 8. Auditimi i ardhshëm: `CharacterDetailScreen.kt`, `CharacterHero.kt`, `CharacterWorldbookEditor.kt` dhe ekranet e kujtesës.
 
 9. Lokalizo `CharacterHero`, `CharacterWorldbookEditor`, `AgentMemoryScreen` dhe tekstet e tjera hardcoded.
+
+10. Lokalizo fushat e `CharacterWorldbookEditor.kt`, `AgentMemoryScreen.kt` dhe dialogët e roleplay.

@@ -23,3 +23,5 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - U shtua një pohim për `character_save` në `LocaleResourcesTest`; rezultatet e CI duhen verifikuar në SHA-n e ri.
 
 - U shtua test për `character_delete` në sq-AL; CI duhet të konfirmojë ekzekutimin e suksesshëm.
+
+- Tekstet e `CharacterHero.kt` u lidhën me `stringResource`; test vizual ende nuk është kryer.

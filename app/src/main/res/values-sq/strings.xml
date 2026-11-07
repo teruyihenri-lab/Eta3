@@ -1481,4 +1481,10 @@
   <string name="character_delete_summary">«%1$s» do të hiqet nga biblioteka e personazheve, bashkë me imazhin dhe kujtesën e historisë. Bisedat ekzistuese ruhen. Veprimi nuk mund të zhbëhet.</string>
   <string name="character_confirm_delete">Fshi</string>
   <string name="character_export_default_name">Personazh</string>
+  <string name="character_change_avatar">Ndrysho avatarin</string>
+  <string name="character_creator_line">Autori: %1$s</string>
+  <string name="character_start_chat">Nis bisedën</string>
+  <string name="character_selected">E përzgjedhur</string>
+  <string name="character_no_greeting">Nuk ka përshëndetje të gatshme. Mund ta nisësh ti bisedën.</string>
+  <string name="character_read_full">Lexo tekstin e plotë</string>
 </resources>

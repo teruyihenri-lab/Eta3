@@ -1463,4 +1463,10 @@
   <string name="character_delete_summary">「${profile.card.name}」将从角色库移除，角色图片与剧情记忆一并删除；已有对话保留。此操作无法撤销。</string>
   <string name="character_confirm_delete">删除</string>
   <string name="character_export_default_name">角色</string>
+  <string name="character_change_avatar">更换头像</string>
+  <string name="character_creator_line">作者 $it</string>
+  <string name="character_start_chat">开始对话</string>
+  <string name="character_selected">已选择</string>
+  <string name="character_no_greeting">没有预设开场白，由你先开口</string>
+  <string name="character_read_full">阅读全文</string>
 </resources>
