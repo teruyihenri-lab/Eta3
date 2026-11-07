@@ -17,6 +17,8 @@ jobs:
           python-version: '3.12'
       - name: Kontrollo skedaret
         run: python scripts/check_docs_update.py --check-files
+      - name: Verifiko burimet e gjuhës shqipe
+        run: python scripts/check_albanian_resources.py
       - name: Kontrollo historikun e ndryshimeve
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}

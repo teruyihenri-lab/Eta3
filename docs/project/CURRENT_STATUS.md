@@ -1,17 +1,21 @@
-# Gjendja aktuale
+# Gjendja aktuale — Eta3
 
-> Eta3 · dokumentacioni në shqip · krijuar më 2026-11-07 · dega `localization/albanian-sq`
+> Verifikuar më 2026-11-07 · dega `localization/albanian-ui-phase1`
 
-## Verifikimi i 2026-11-07
-- Repository: `teruyihenri-lab/Eta3`; dega bazë: `main`.
-- Aplikacion Android në Kotlin / Jetpack Compose.
-- `applicationId`: `io.github.mangi.eta`; versioni i lexuar nga `app/build.gradle.kts`: `3.3.1`, `versionCode=2026101401`.
-- Gjuhët e deklaruara më 2026-11-07: `en`, `zh-Hans`, `zh-Hant`; shqipja `sq` nuk është integruar ende.
-- `app/src/main/res/values/strings.xml` përmban rreth 1,333 burime `string` dhe 20 `plurals`.
-- 2026-11-07: shkrimi në GitHub u verifikua në degën `localization/albanian-sq`, commit `217c066d3847b34b8e93c831b7ec15e614e31875`.
+## Përkthimi i burimeve të Android
+- **1,407 / 1,407** burime `string` me emra të përputhur në `values-sq`, përfshirë 76 çelësa të rinj të UI-së.
+- **20 / 20** grupe `plurals` për gjuhën shqipe.
+- Gjuha `sq` shtuar në `locales_config.xml` dhe `localeFilters`.
+- Testet `LocaleResourcesTest.kt` kanë prova për `sq-AL`.
 
-## Statuset
-- Qasja GitHub për shkrim: **funksionale në degën e punës**, pa ndryshime në `main` nga kjo seancë.
-- Dokumentacioni: përgatitur në këtë degë; duhet rishikuar dhe bashkuar në `main`.
-- Përkthimi i plotë në shqip: **i pambaruara**, nuk është kontrolluar ekran më ekran.
-- Build, nënshkrim dhe test APK në pajisje: **nuk janë kryer**.
+## Kodi UI i përkthyer në këtë fazë
+- `CharacterContextScreens.kt`, `CharacterLibraryScreen.kt`, `CharacterPortraitCard.kt`.
+- `CharacterEditorScreen.kt`, `CharacterDetailScreen.kt`, `CharacterHero.kt`.
+- Burime për anglisht, shqip, kinezisht të thjeshtuar dhe tradicionale, pa ndryshuar formatin e të dhënave të personazheve.
+
+## Çfarë nuk është përfunduar
+- `CharacterWorldbookEditor.kt` dhe disa faqe të kujtesës/udhëzimeve përmbajnë ende tekste kineze hardcoded.
+- Nuk është verifikuar mbulimi i çdo teksti të dukshëm nga 596 skedarë Kotlin.
+- PR #2 është i hapur. Kontrolli i dokumentacionit ka kaluar në SHA `5e35a5e1`; kontrolli Android `lint/test/assembleDebug` ishte ende në ekzekutim në verifikimin e fundit.
+- Nuk është bërë instalim apo test vizual në telefon.
+- **Mos e quaj përkthimin e plotë të aplikacionit ose APK-në të përfunduar.**

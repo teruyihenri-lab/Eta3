@@ -1,10 +1,11 @@
 # Përparimi
 
-> Eta3 · dokumentacioni në shqip · krijuar më 2026-11-07 · dega `localization/albanian-sq`
+> 2026-11-07 · `localization/albanian-ui-phase1`
 
-## Matje të verifikueshme
-- Dokumentacioni: 79 skedarë të përcaktuar për repository.
-- Përkthimi shqip: **0% e validuar**, sepse nuk ka kaluar auditimin dhe testin e ekranit.
-- APK e re: **jo e ndërtuar/testuar**.
-
-Përqindjet e ardhshme duhet të bazohen te çelësat e përkthyer e të validuar, jo te vlerësimet.
+- Dokumentacioni: **79/79** skedarë në `main`.
+- Burimet e përkthyeshme Android: **1,407/1,407** çelësa në shqip (**100% mbulim i burimeve**, jo i gjithë aplikacionit).
+- Shumësat: **20/20**.
+- Gjuha `sq`: e regjistruar në konfigurimin e aplikacionit.
+- Ekranet e personazheve: 6 skedarë të përpunuar; Worldbook dhe faqe të tjera mbeten.
+- Build/teste Gradle: në proces verifikimi nga CI.
+- APK e testuar në pajisje: **jo**.

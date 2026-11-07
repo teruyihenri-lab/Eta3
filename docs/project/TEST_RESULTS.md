@@ -10,3 +10,21 @@
 - APK i instaluar/testuar: **nuk është verifikuar**.
 
 Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun.
+
+## 2026-11-07 — Përkthimi shqip
+- Përputhja e çelësave `strings.xml`: **1,331/1,331** pa dublikime ose mungesa (kontroll përmes leximit të repository-t).
+- Përputhja e grupeve `plurals`: **20/20**.
+- Parametrat e formatimit u krahasuan gjatë futjes së përkthimeve.
+- Teste `LocaleResourcesTest.kt` për shqipen: **u shtuan, nuk janë ekzekutuar ende**.
+- Build APK / lint / test në pajisje: **nuk janë verifikuar ende**.
+
+- Vargjet e para statike të ekranit të personazheve u zhvendosën në resources; testet instrumentale/CI mbeten për konfirmim.
+
+- U shtua një pohim për `character_save` në `LocaleResourcesTest`; rezultatet e CI duhen verifikuar në SHA-n e ri.
+
+- U shtua test për `character_delete` në sq-AL; CI duhet të konfirmojë ekzekutimin e suksesshëm.
+
+- Tekstet e `CharacterHero.kt` u lidhën me `stringResource`; test vizual ende nuk është kryer.
+
+- Numërimi i fundit i GitHub: 1,407 çelësa në origjinal dhe 1,407 në `values-sq`, pa mungesa; 20 `plurals` në shqip.
+- Kontrolli GitHub Actions `Kontrolli i dokumentacionit` ka kaluar për SHA `5e35a5e1`; `PR Check` ende nuk ka përfunduar me sukses në SHA-n e fundit të verifikuar.

@@ -1,5 +1,7 @@
 package io.github.mangi.eta.ui.screens.characters
 
+import androidx.compose.ui.res.stringResource
+import io.github.mangi.eta.R
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -136,7 +138,7 @@ internal fun CharacterHero(
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.PhotoCamera,
-                        contentDescription = "更换头像",
+                        contentDescription = stringResource(R.string.character_change_avatar),
                         modifier = Modifier.size(18.dp),
                         tint = colors.onSurface,
                     )
@@ -157,14 +159,14 @@ internal fun CharacterHero(
                 IconButton(onClick = onToggleFavorite, enabled = !busy, minWidth = 36.dp, minHeight = 36.dp) {
                     Icon(
                         imageVector = if (card.favorite) Icons.Rounded.Star else Icons.Rounded.StarOutline,
-                        contentDescription = if (card.favorite) "取消收藏" else "收藏",
+                        contentDescription = if (card.favorite) stringResource(R.string.character_favorite_remove) else stringResource(R.string.character_favorite_add),
                         modifier = Modifier.size(20.dp),
                         tint = if (card.favorite) FavoriteColor else colors.onSurfaceVariantSummary,
                     )
                 }
             }
             val byline = listOfNotNull(
-                card.creator.takeIf(String::isNotBlank)?.let { "作者 $it" },
+                card.creator.takeIf(String::isNotBlank)?.let { stringResource(R.string.character_creator_line, it) },
                 card.version.takeIf(String::isNotBlank)?.let { "v$it" },
             ).joinToString(" · ")
             if (byline.isNotEmpty()) {
@@ -213,7 +215,7 @@ internal fun CharacterHero(
             }
             Spacer(Modifier.height(20.dp))
             EtaTextButton(
-                text = "开始对话",
+                text = stringResource(R.string.character_start_chat),
                 enabled = !busy,
                 onClick = onStart,
                 modifier = Modifier.fillMaxWidth(),
@@ -257,7 +259,8 @@ internal fun GreetingPager(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = greetingTitle(page),
+                        text = if (page == 0) stringResource(R.string.character_default_greeting)
+                            else stringResource(R.string.character_alt_greeting_number, page + 1),
                         style = MiuixTheme.textStyles.footnote1,
                         fontWeight = FontWeight.Medium,
                         color = colors.primary,
@@ -277,7 +280,7 @@ internal fun GreetingPager(
                             if (page == pagerState.settledPage) {
                                 Icon(
                                     imageVector = Icons.Rounded.Check,
-                                    contentDescription = "已选择",
+                                    contentDescription = stringResource(R.string.character_selected),
                                     modifier = Modifier.size(12.dp),
                                     tint = colors.onPrimary,
                                 )
@@ -287,7 +290,7 @@ internal fun GreetingPager(
                 }
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = text.ifBlank { "没有预设开场白，由你先开口" },
+                    text = text.ifBlank { stringResource(R.string.character_no_greeting) },
                     style = MiuixTheme.textStyles.body2,
                     color = if (text.isBlank()) colors.onSurfaceVariantSummary else colors.onSurface,
                     maxLines = 6,
@@ -296,7 +299,7 @@ internal fun GreetingPager(
                 )
                 if (text.isNotBlank()) {
                     Text(
-                        text = "阅读全文",
+                        text = stringResource(R.string.character_read_full),
                         style = MiuixTheme.textStyles.footnote1,
                         color = colors.primary,
                     )
