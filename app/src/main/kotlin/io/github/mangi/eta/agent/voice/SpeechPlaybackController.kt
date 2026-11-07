@@ -53,8 +53,8 @@ internal class SpeechPlaybackController(
                 val secrets = credentials ?: SpeechSettingsRepository.credentials(context)
                 validateSpeechSettings(config, secrets, synthesis = true)
                 val readable = withContext(Dispatchers.Default) { SpeechText.readable(text) }
-                if (readable.isBlank()) throw SpeechFailure(SpeechErrorCode.NO_SPEECH, "这条消息没有可朗读的正文")
-                if (readable.length > 30_000) throw SpeechFailure(SpeechErrorCode.CONFIGURATION, "正文过长，请选择较短的回答朗读")
+                if (readable.isBlank()) throw SpeechFailure(SpeechErrorCode.NO_SPEECH, "Ky mesazh nuk ka tekst që mund të lexohet me zë")
+                if (readable.length > 30_000) throw SpeechFailure(SpeechErrorCode.CONFIGURATION, "Teksti është tepër i gjatë. Zgjidh një përgjigje më të shkurtër")
                 lease?.requestPlaybackFocus { beforePlayback(); playbackActive = true }
                 val player = createOutput()
                 output = player
