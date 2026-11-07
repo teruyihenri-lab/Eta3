@@ -28,16 +28,12 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import io.github.mangi.eta.R
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import top.yukonga.miuix.kmp.basic.Text
-
-private val assistantSuggestions = listOf(
-    "帮我总结当前屏幕内容",
-    "这个页面怎么操作",
-    "屏幕上有什么值得注意的信息",
-)
 
 @Composable
 internal fun EtaAssistantSuggestions(
@@ -46,6 +42,11 @@ internal fun EtaAssistantSuggestions(
     modifier: Modifier = Modifier,
     visible: Boolean = true,
 ) {
+    val assistantSuggestions = listOf(
+        stringResource(R.string.voice_suggestion_summarize),
+        stringResource(R.string.voice_suggestion_how),
+        stringResource(R.string.voice_suggestion_notable),
+    )
     AnimatedVisibility(
         visible = visible,
         modifier = modifier,

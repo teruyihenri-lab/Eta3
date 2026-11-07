@@ -348,8 +348,8 @@ private fun SettingsPageContent(
 
                     EtaPreferenceDivider()
                     ManagedSwitchPref(
-                        title = "逆向能力",
-                        summary = "统一控制逆向技能、作战协议与破甲记忆（与技能页同一开关）",
+                        title = stringResource(R.string.settings_reverse_capabilities),
+                        summary = stringResource(R.string.settings_reverse_summary),
                         checked = reverseModeEnabled,
                         icon = Icons.Rounded.Security,
                         iconTint = EtaPreferenceColors.Orange,
@@ -358,7 +358,7 @@ private fun SettingsPageContent(
 
                     EtaPreferenceDivider()
                     EtaArrowPreference(
-                        title = "编辑作战协议",
+                        title = stringResource(R.string.settings_battle_protocol),
                         startAction = {
                             EtaPreferenceIcon(
                                 icon = Icons.Rounded.ImportContacts,
@@ -396,8 +396,8 @@ private fun SettingsPageContent(
                     SwitchPref(
                         context = context,
                         prefs = agentPrefs,
-                        title = "新会话默认带角色",
-                        summary = "新建会话自动沿用上次使用的角色设定",
+                        title = stringResource(R.string.settings_character_default),
+                        summary = stringResource(R.string.settings_character_default_summary),
                         key = Prefs.Keys.AGENT_ROLEPLAY_DEFAULT,
                         icon = Icons.Rounded.SportsBar,
                         iconTint = EtaPreferenceColors.Orange,
@@ -405,7 +405,7 @@ private fun SettingsPageContent(
 
                     EtaPreferenceDivider()
                     EtaArrowPreference(
-                        title = "角色",
+                        title = stringResource(R.string.settings_characters),
                         startAction = {
                             EtaPreferenceIcon(
                                 icon = Icons.Rounded.SportsBar,

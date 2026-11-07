@@ -34,3 +34,8 @@
 - Vazhdo kontrollin e skedarëve `ui/` dhe runtime për tekste kineze/anglisht të dukshme.
 - Kontrollo `OpenCodeEmbeddedGateway` për statuset dinamike të kthyer nga shërbimi.
 - Verifiko dhe korrigjo çdo problem build-i në PR #3.
+
+## Auditimi i mëtejshëm
+- Prioritet: `SpeechInputController.kt`, `StreamingSpeechSynthesis.kt`, `CharacterLibraryStore.kt`, `AgentAppState.kt` dhe mesazhet e shërbimeve zanore.
+- Ndaj komentet dhe literalet e protokolleve nga tekstet që sheh përdoruesi.
+- Konfirmo build/testet në PR #3 dhe korrigjo gabimet e gjetura.

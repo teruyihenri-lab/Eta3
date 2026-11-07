@@ -1438,4 +1438,18 @@
   <string name="opencode_stop_summary">Ndalo procesin lokal; ai riniset automatikisht me kërkesën tjetër.</string>
   <string name="opencode_stopped">U ndal; do të riniset automatikisht kur të nevojitet.</string>
   <string name="opencode_catalogue_success">Lidhja me katalogun OpenCode u krye (%1$d modele). Kjo verifikon vetëm listën e modeleve, jo autorizimin për përgjigje falas. Zgjidh një model dhe dërgo një mesazh prove.</string>
+  <string name="settings_reverse_capabilities">Aftësitë e analizës së kundërt</string>
+  <string name="settings_reverse_summary">Menaxho aftësitë e analizës së kundërt, protokollin e punës dhe kujtesën e avancuar me të njëjtin çelës si në faqen e aftësive</string>
+  <string name="settings_battle_protocol">Ndrysho protokollin e punës</string>
+  <string name="settings_character_default">Përdor personazhin e fundit në bisedat e reja</string>
+  <string name="settings_character_default_summary">Bisedat e reja përdorin automatikisht personazhin e zgjedhur më parë</string>
+  <string name="settings_characters">Personazhet</string>
+  <string name="voice_suggestion_summarize">Më përmblidh përmbajtjen e ekranit aktual</string>
+  <string name="voice_suggestion_how">Si përdoret kjo faqe?</string>
+  <string name="voice_suggestion_notable">Çfarë informacioni të rëndësishëm ka në ekran?</string>
+  <string name="speech_foreground_listening">Eta po dëgjon</string>
+  <string name="speech_foreground_reading">Eta po lexon me zë</string>
+  <string name="speech_foreground_channel">Zëri i asistentit</string>
+  <string name="speech_foreground_hint">Punon vetëm kur dritarja lundruese e asistentit është e dukshme</string>
+  <string name="speech_foreground_permission">Sistemi e bllokoi audion për këtë dritare. Kontrollo lejet e mikrofonit dhe cilësimin e asistentit dixhital të parazgjedhur.</string>
 </resources>

@@ -34,3 +34,9 @@
 - U zëvendësuan tekstet kineze të konfigurimit të ndërmjetësit OpenCode me 27 burime `R.string` në anglisht dhe shqip.
 - Ndryshimi prek vetëm përmbajtjen e mesazheve dhe etiketave; nuk ndryshon logjikën e gateway.
 - Kërkohet kontroll i build-it/CI dhe auditim i pjesës tjetër të Kotlin.
+
+## 2026-11-07 — Cilësimet dhe sugjerimet zanore
+- Lokalizuar gjashtë etiketa kineze të cilësimeve të analizës së kundërt dhe personazheve.
+- Lokalizuar tri sugjerime të asistentit zanor, titujt e njoftimeve zanore, kanali, veprimi Ndalo dhe mesazhi i lejeve.
+- Shtuar 13 burime të reja për anglishten dhe shqipen, pa ndryshuar IDs ose protokollet.
+- Puna me tekstet hardcoded vazhdon; kontrollet Android në CI duhet të përfundojnë.

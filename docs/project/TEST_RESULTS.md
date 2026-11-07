@@ -30,3 +30,8 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Kontrolle sintaksore: 0 simbol `&` të paescape dhe 0 apostrofa të paescape në përkthimet string.
 - Është shtuar `scripts/check_albanian_translations.py` dhe workflow për PR.
 - Teste Gradle/Android në pajisje: ende në pritje të rezultateve CI dhe testimit real.
+
+## Raporti i auditimit Kotlin — 2026-11-07
+- Workflow `Auditimi i teksteve në Kotlin` kaloi si raport informues; zbuloi 691 rreshta të mundshëm kinezë, jo 691 gabime të konfirmuara UI.
+- Kontrolli i mbulimit të burimeve shqip dhe ai i dokumentacionit kaluan në commit-et e mëparshme.
+- Verifikimi i build-it Android dhe i telefonit mbetet i papërfunduar.
