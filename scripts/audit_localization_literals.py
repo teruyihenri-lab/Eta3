@@ -6,7 +6,7 @@ from collections import Counter
 
 ROOT = Path("app/src/main/kotlin/io/github/mangi/eta")
 QUOTED_CJK = re.compile(r'"(?:[^"\\]|\\.)*[\u3400-\u9fff](?:[^"\\]|\\.)*"')
-DIRECT_UI = re.compile(r'(?:Text|TextField|BasicText|EtaPreference|EtaTextButton)\\s*\\(\\s*(?:text\\s*=\\s*)?"[A-Za-z][^"]{2,}"')
+DIRECT_UI = re.compile(r'(?:Text|TextField|BasicText|EtaPreference|EtaTextButton)\s*\(\s*(?:text\s*=\s*)?"[A-Za-z][^"]{2,}"')
 counts = Counter()
 candidates = []
 for path in ROOT.rglob("*.kt"):
