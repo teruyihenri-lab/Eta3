@@ -17,3 +17,8 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Grupet e shumësit: 20 me format `one/other`.
 - Shtuar testet Robolectric për `sq-AL`, por **nuk janë ekzekutuar ende**.
 - Build real, lint dhe testim në pajisje: **nuk janë kryer**.
+
+## Kontrolli statik — zgjerimi i përkthimeve
+- U verifikuan **188 çelësa të rinj** kundrejt burimit bazë; asnjë emër i panjohur ose i dyfishtë.
+- U krahasuan parametrat e formatimit të teksteve të reja; nuk u gjet mospërputhje.
+- **Nuk** është kryer ekzekutimi i testeve ose build-i i APK-së.

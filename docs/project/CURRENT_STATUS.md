@@ -24,3 +24,8 @@
 - Android do të përdorë gjuhën bazë për tekstet shqip që mungojnë; prandaj ndërfaqja **nuk është ende tërësisht shqip**.
 - Testet dhe build-i: jo të ekzekutuara; APK i gatshëm: jo.
 - Dokumentacioni me 79 skedarë është tashmë në `main`.
+
+## Gjendja pas zgjerimit të përkthimeve
+- Në degën `feature/albanian-localization`: **485/1331** vargje të përkthyeshme (36.4%) dhe **20/20** grupe shumësash.
+- Mbeten **846 vargje `string`** dhe auditimi i teksteve të shkruara në Kotlin.
+- Ky ndryshim nuk është përkthim i përfunduar dhe nuk ka APK të verifikuar.

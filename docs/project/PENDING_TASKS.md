@@ -16,3 +16,9 @@
 - [ ] Auditimi i teksteve hardcoded në Kotlin.
 - [ ] Ekzekutimi i testeve Gradle, build-i dhe testimi në telefon.
 - [ ] Bashkimi në main pas verifikimit.
+
+## Përditësim i detyrave
+- [x] Përkthimi fillestar i 485 vargjeve dhe 20 grupeve të shumësit.
+- [ ] Përkthe 846 vargjet e mbetura.
+- [ ] Audito tekstet hardcoded në Kotlin dhe verifiko përkthimet në ekran.
+- [ ] Ekzekuto testet, build-in dhe verifiko instalimin pa humbje të dhënash.

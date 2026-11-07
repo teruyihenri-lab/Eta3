@@ -17,3 +17,8 @@
 4. Ekzekuto `./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug` në mjedis me JDK 25 dhe Android SDK 37.
 5. Testo në telefon: gjuha e aplikacionit shqip, menu, chat, zë, terminal, provider, Linux dhe njoftime.
 6. Përditëso dokumentacionin me prova të rezultateve, pastaj përgatit PR të verifikuar.
+
+## Përditësim i radhës
+- Përkthe **846 vargjet e mbetura** dhe kontrollo me kujdes parametrat e formatimit.
+- Audito tekstet e futur drejtpërdrejt në Kotlin; verifiko mesazhet e shfaqura nga tool/runtime.
+- Kryej build, testet Robolectric, lint, testim në pajisje dhe korrigjo regresionet para bashkimit në `main`.

@@ -14,3 +14,8 @@ Përqindjet e ardhshme duhet të bazohen te çelësat e përkthyer e të validua
 - Grupet e shumësit: 20/20 (100% e grupeve; sjellja e ekraneve e patestuar).
 - Tekstet hardcoded në Kotlin: pa auditim të plotë.
 - Kriteri "gjithçka shqip": ende i paplotësuar.
+
+## Përparimi i përditësuar — 2026-11-07
+- `string`: **485/1331 = 36.4%** e çelësave me përkthime, pa certifikim UI.
+- `plurals`: **20/20**, testimi ende në pritje.
+- Mbeten **846 `string`**; aplikacioni nuk është ende krejtësisht shqip.

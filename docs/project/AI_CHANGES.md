@@ -16,3 +16,9 @@
 - Identiteti i aplikacionit dhe nënshkrimi nuk janë ndryshuar.
 - Mbeten **1034** etiketa `string` të përkthyeshme jashtë paketës shqipe dhe auditimi i vargjeve hardcoded.
 - Build dhe teste në Android: nuk janë ekzekutuar ende; nuk ka APK të verifikuar.
+
+## 2026-11-07 — Vazhduan përkthimet e ndërfaqes
+- U shtuan edhe **188 tekste** në shqip për ndërfaqen, mjetet, kontrollin e pajisjes, ofruesit AI dhe mesazhet e sistemit.
+- Totali i regjistruar në `values-sq`: **485/1331** burime `string` dhe **20/20** grupe `plurals`.
+- U kontrolluan emrat e çelësave dhe formatimet `%` të këtyre 188 teksteve.
+- Gradle build dhe testim në pajisje mbeten të pakryer.
