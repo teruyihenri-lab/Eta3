@@ -37,3 +37,8 @@
 - Kjo **nuk është dëshmi** se çdo tekst i dukshëm është shqip: mbetet auditimi i hardcoded Kotlin, përmbajtjeve dinamike dhe testeve.
 - Kontrolli statik i vendmbajtësve në kod u krye; PR CI/build Android duhet të konfirmohet para bashkimit.
 - Nuk ka APK të nënshkruar/testuar në telefon të dorëzuar nga kjo seancë.
+
+## Përmirësim i lokalizimit Kotlin
+- Burimet bazë dhe shqipe përmbajnë tani edhe 27 etiketa OpenCode të strukturuara.
+- Në `ModelProviderDetailScreen.kt` mbeten vetëm komente kineze, jo tekstet UI kineze që u identifikuan në atë skedar.
+- Ende nuk është kryer auditimi i plotë i të gjithë kodit.

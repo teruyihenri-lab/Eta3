@@ -29,3 +29,8 @@
 3. Kontrollo shqipen në telefon, përfshirë tekstet e gjata, dialogët, terminalin, MCP, zërin dhe njoftimet.
 4. Ruaj versionCode, applicationId dhe nënshkrimin e përditësimit; mos u shpreh se ka APK derisa të testohet.
 5. Përditëso dokumentacionin në çdo ndryshim; bashko PR vetëm pasi të verifikohen testet.
+
+## Auditimi i vargjeve hardcoded
+- Vazhdo kontrollin e skedarëve `ui/` dhe runtime për tekste kineze/anglisht të dukshme.
+- Kontrollo `OpenCodeEmbeddedGateway` për statuset dinamike të kthyer nga shërbimi.
+- Verifiko dhe korrigjo çdo problem build-i në PR #3.

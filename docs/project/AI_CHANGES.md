@@ -29,3 +29,8 @@
 - U ruajtën emrat zyrtarë të modeleve dhe zërave; përshkrimet e ndërfaqes janë në shqip.
 - Shtuar një kontroll i automatizuar që verifikon numrin e çelësave dhe parametrat `%`.
 - Mbeten auditimi i teksteve hardcoded Kotlin, cilësia e përkthimit dhe verifikimi i build-it/telefonit.
+
+## 2026-11-07 — Tekstet OpenCode në Kotlin
+- U zëvendësuan tekstet kineze të konfigurimit të ndërmjetësit OpenCode me 27 burime `R.string` në anglisht dhe shqip.
+- Ndryshimi prek vetëm përmbajtjen e mesazheve dhe etiketave; nuk ndryshon logjikën e gateway.
+- Kërkohet kontroll i build-it/CI dhe auditim i pjesës tjetër të Kotlin.

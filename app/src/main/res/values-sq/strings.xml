@@ -1411,4 +1411,31 @@
         <item quantity="one">%d element kërkon vëmendje</item>
         <item quantity="other">%d elemente kërkojnë vëmendje</item>
     </plurals>
+  <string name="opencode_embedded_help">Base URL dhe API Key më sipër janë konfigurim rezervë i API-së së jashtme. Mënyra lokale përdor ndërmjetësin në telefon, një çelës aksesi të rastësishëm dhe 127.0.0.1. Përgjigjet falas varen ende nga autorizimi i OpenCode.</string>
+  <string name="opencode_external_help">Për ndërmjetësin opencode2api të vetëhostuar, përdor adresën HTTPS /v1 dhe server_key. Një katalog publik modelesh nuk garanton autorizim për përgjigje falas.</string>
+  <string name="opencode_embedded_title">Ndërmjetësi opencode2api në telefon</string>
+  <string name="opencode_embedded_summary">Aktiv si parazgjedhje: ndërmjetësi punon në telefon te 127.0.0.1 pa VPS. Çaktivizoje për të përdorur konfigurimin e jashtëm të API-së më sipër.</string>
+  <string name="opencode_local_selected">U zgjodh mënyra lokale. Ndërmjetësi niset automatikisht në përdorimin e parë.</string>
+  <string name="opencode_external_selected">U zgjodh API-ja e jashtme. Adresa dhe çelësi i mëparshëm u ruajtën.</string>
+  <string name="opencode_mode_switch_failed">Ndërrimi i mënyrës dështoi: %1$s</string>
+  <string name="opencode_starting_check">Po niset dhe kontrollohet shërbimi…</string>
+  <string name="opencode_start_check">Nis dhe testo ndërmjetësin lokal</string>
+  <string name="opencode_starting_arm">Po niset shërbimi lokal Android ARM64…</string>
+  <string name="opencode_upstream_egress">; rruga e daljes së serverit: </string>
+  <string name="opencode_start_failed">Nisja dështoi: %1$s</string>
+  <string name="opencode_proxy_help">Proxy për lidhjen dalëse: lëre bosh për të përdorur proxy HTTP të Android-it ose lidhu drejtpërdrejt. Për proxy manual përdor http://127.0.0.1:PORT ose socks5://127.0.0.1:PORT. Adresa 127.0.0.1 i referohet telefonit, jo kompjuterit. Shkruaj direct për lidhje të drejtpërdrejtë.</string>
+  <string name="opencode_proxy_label">Proxy HTTP / SOCKS5 (opsional)</string>
+  <string name="opencode_proxy_save">Ruaj proxy dhe rinis ndërmjetësin</string>
+  <string name="opencode_proxy_saved">U ruajt; ndërmjetësi do të riniset në përdorimin e ardhshëm. </string>
+  <string name="opencode_proxy_invalid">Konfigurim i pavlefshëm i proxy: %1$s</string>
+  <string name="opencode_zen_help">Opsionale: shkruaj çelësa të vlefshëm Zen / Go. Pa çelësa përdoret vetëm mënyra anonime që mbështet ndërmjetësi. Ndërmjetësi shfaq modele falas, por ofruesit mund të kufizojnë përdorimin anonim.</string>
+  <string name="opencode_zen_key_label">Çelësi Zen i serverit (opsional)</string>
+  <string name="opencode_go_key_label">Çelësi Go i serverit (opsional)</string>
+  <string name="opencode_save_keys">Ruaj çelësat e serverit</string>
+  <string name="opencode_keys_saved">Çelësat u ruajtën; ndërmjetësi do të riniset me kërkesën tjetër.</string>
+  <string name="opencode_keys_save_failed">Ruajtja dështoi: %1$s</string>
+  <string name="opencode_stop">Ndalo ndërmjetësin e integruar</string>
+  <string name="opencode_stop_summary">Ndalo procesin lokal; ai riniset automatikisht me kërkesën tjetër.</string>
+  <string name="opencode_stopped">U ndal; do të riniset automatikisht kur të nevojitet.</string>
+  <string name="opencode_catalogue_success">Lidhja me katalogun OpenCode u krye (%1$d modele). Kjo verifikon vetëm listën e modeleve, jo autorizimin për përgjigje falas. Zgjidh një model dhe dërgo një mesazh prove.</string>
 </resources>
