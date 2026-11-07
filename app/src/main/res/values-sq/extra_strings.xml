@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tool_tap_area">Zona e trokitjes</string>
+    <string name="tool_current_context">Koha dhe vendndodhja</string>
+    <string name="tool_memory_get">Lexo memorie</string>
+    <string name="tool_memory_write">Përditëso memorie</string>
+    <string name="tool_set_alarm">Vendos alarm</string>
+    <string name="tool_set_timer">Vendos kohëmatës</string>
+    <string name="tool_device_status">Statusi i pajisjes</string>
+    <string name="tool_network_info">Statusi i rrjetit</string>
+    <string name="tool_media_control">Kontrolli i medias</string>
+    <string name="tool_set_volume">Vendos volum</string>
+    <string name="tool_top_memory_apps">Përdorimi i memories</string>
+    <string name="tool_top_storage_apps">Përdorimi i ruajtjes</string>
+    <string name="tool_read_sms_code">Lexo kodin e verifikimit</string>
+    <string name="tool_recent_notifications">Lexo njoftimet</string>
+    <string name="tool_wifi_credentials">Lexo fjalëkalimin Wi‑Fi</string>
+    <string name="tool_get_setting">Lexo cilësimin e sistemit</string>
+    <string name="tool_set_setting">Ndrysho cilësimin e sistemit</string>
+    <string name="tool_set_device_state">Kontrollet e pajisjes</string>
+    <string name="tool_app_state_control">Kontrollet e aplikacionit</string>
+    <string name="tool_get_logcat">Lexo logjet e sistemit</string>
+    <string name="tool_status_running">Po ekzekutohet</string>
+    <string name="tool_status_success">U përfundua</string>
+    <string name="tool_status_failed">Dështoi</string>
+    <string name="tool_browser_loading">Po ngarkohet · %1$d%%</string>
+    <string name="tool_browser_preview">Pamja paraprake e faqes</string>
+    <plurals name="work_processing_step">
+        <item quantity="one">Po punohet · hap %d</item>
+        <item quantity="other">Po punohet · hapa %d</item>
+    </plurals>
+    <string name="work_analyzing">Po analizohet detyra</string>
+    <plurals name="work_completed_steps">
+        <item quantity="one">U përfundua %d hap</item>
+        <item quantity="other">U përfunduan %d hapa</item>
+    </plurals>
+    <string name="work_completed">Analiza u përfundua</string>
+    <string name="tool_elapsed_seconds">%1$ds</string>
+    <plurals name="tool_group_calls">
+        <item quantity="one">%d thirrje</item>
+        <item quantity="other">%d thirrje</item>
+    </plurals>
+    <plurals name="work_summary_thinking">
+        <item quantity="one">Mendoi %d herë</item>
+        <item quantity="other">Mendoi %d herë</item>
+    </plurals>
+    <plurals name="work_summary_tools">
+        <item quantity="one">%d thirrje e mjetit</item>
+        <item quantity="other">%d thirrje të mjetit</item>
+    </plurals>
+    <plurals name="work_summary_failed">
+        <item quantity="one">%d dështoi</item>
+        <item quantity="other">%d dështuan</item>
+    </plurals>
+    <string name="work_collapse">Shkallëzo detajet e punës</string>
+    <string name="work_expand">Zgjero detajet e punës</string>
+    <string name="markdown_code_block">Kodi</string>
+    <string name="markdown_alert_note">Shënim</string>
+    <string name="markdown_alert_tip">Këshillë</string>
+    <string name="markdown_alert_important">E rëndësishme</string>
+    <string name="markdown_alert_warning">Kujdes</string>
+    <string name="markdown_alert_caution">Paralajmërim</string>
+    <string name="copy_copied">U kopjua</string>
+    <string name="copy_answer">Kopjo përgjigjen</string>
+    <string name="copy_code">Kopjo kodin</string>
+    <string name="copy_command">Kopjo komandën</string>
+    <string name="shell_command">Komanda e shell-it</string>
+    <string name="reasoning_in_progress">Po arsyetohet…</string>
+    <string name="reasoning_completed">Arsyetimi u përfundua</string>
+    <plurals name="reasoning_completed_seconds">
+        <item quantity="one">Arsyetimi u përfundua · %d sekondë</item>
+        <item quantity="other">Arsyetimi u përfundua · %d sekonda</item>
+    </plurals>
+    <string name="reasoning_collapse">Tkurre arsyetimin</string>
+    <string name="reasoning_expand">Zgjero arsyetimin</string>
+    <string name="state_hook_secondary_ability_95afe3">Aftësi dytësore e hook-ut</string>
+    <string name="state_root_permissions_958906">Lejet Root</string>
+    <string name="state_runtime_displays_a_status_pop_up_window_when_the_ser_54f285">Runtime shfaq një dritare statusi kur shërbimi po ekzekutohet</string>
+    <string name="state_direct_access_to_personal_data_387d7b">Konteksti personal</string>
+    <string name="tool_personal_context">Konteksti personal</string>
+    <string name="tool_personal_context_description">Kërko foto, shënime, memorie, fatura dhe udhëtime të indeksuara sipas përmbajtjes ose kohës; lexoni detajet dhe llogaritini totalet.</string>
+    <string name="state_location_permissions_b53f9c">lejet e vendndodhjes</string>
+    <string name="state_usage_access_20f1f8">qasje në përdorim</string>
+    <string name="state_background_running_permission_dde21b">Leja e ekzekutimit në sfond</string>
+    <string name="state_follow_up_ability_589688">aftësi ndjekëse</string>
+    <string name="state_screens_and_controls_3f095b">Ekranet dhe kontrollat</string>
+    <string name="state_applications_and_systems_9624e6">Aplikacionet dhe sistemet</string>
+    <string name="state_application_list_reading_135f16">Leximi i listës së aplikacioneve</string>
+    <string name="state_floating_window_permissions_076b77">Lejet e dritares së notuar</string>
+    <string name="state_sensitive_equipment_capabilities_fbdc4b">Aftësitë e pajisjeve të ndjeshme</string>
+    <string name="state_document_vision_6a65a7">Vizioni i dokumenteve</string>
+    <string name="state_text_and_clipboard_3a7340">Teksti dhe tabela e klipimeve</string>
+    <string name="state_accessibility_permissions_f80103">Lejet e aksesueshmërisë</string>
+    <string name="state_terminal_and_files_ae7c54">Terminali dhe skedarët</string>
+    <string name="state_web_browsing_e56105">Mjetet web</string>
+    <string name="state_memory_b55ff5">memorie</string>
+    <string name="state_memory_system_4903eb">sistemi i memories</string>
+    <string name="state_direct_access_to_equipment_eda92c">Sistemi dhe aplikacionet e integruara</string>
+    <string name="state_run_floating_window_48af02">Ekzekuto dritaren e notuar</string>
+    <string name="state_notice_of_use_rights_1ae29a">Njoftim i të drejtave të përdorimit</string>
+    <string name="status_authorized">Autorizuar</string>
+    <string name="status_unauthorized">E paautorizuar</string>
+    <string name="status_enabled">E aktivizuar</string>
+    <string name="status_disabled">E çaktivizuar</string>
+    <string name="settings_write_failed">Nuk mund të ruheshin cilësimet</string>
+    <string name="status_processing">Po përpunohet…</string>
+    <string name="power_assistant_system_default">Asistenti i sistemit i parazgjedhur</string>
+</resources>
