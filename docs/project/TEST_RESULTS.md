@@ -19,3 +19,5 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Build APK / lint / test në pajisje: **nuk janë verifikuar ende**.
 
 - Vargjet e para statike të ekranit të personazheve u zhvendosën në resources; testet instrumentale/CI mbeten për konfirmim.
+
+- U shtua një pohim për `character_save` në `LocaleResourcesTest`; rezultatet e CI duhen verifikuar në SHA-n e ri.

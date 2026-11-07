@@ -22,3 +22,8 @@
 - 24 vargje hardcoded kineze në `CharacterContextScreens`, `CharacterLibraryScreen` dhe `CharacterPortraitCard` u zëvendësuan me burime Android për anglisht, shqip, kinezisht të thjeshtuar dhe tradicionale.
 - `Skills` dhe `API Key` janë përkthyer në UI shqip pa ndryshuar identifikuesit teknikë.
 - Zgjeruar testet `LocaleResourcesTest`; mbetet të verifikohen nga CI.
+
+## 2026-11-07 — Ekrani i ndryshimit të personazhit
+- U hoqën 27 etiketa kineze hardcoded nga `CharacterEditorScreen.kt`, duke përfshirë formularin, dialogët dhe përshëndetjet.
+- U shtuan burime `stringResource` për EN, SQ, zh-Hans dhe zh-Hant; përshëndetjet me numër përdorin `%1$d`.
+- U plotësuan etiketat teknike `Skills` dhe `API Key` në dy variantet kineze për të ruajtur testet dhe përputhjen e resource-ve.

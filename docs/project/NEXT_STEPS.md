@@ -10,3 +10,5 @@
 6. Me çdo ndryshim përditëso `AI_CHANGES.md`, `CURRENT_STATUS.md`, `NEXT_STEPS.md` dhe `TEST_RESULTS.md`.
 
 7. Vazhdo heqjen e vargjeve hardcoded kineze në ekranet `CharacterEditorScreen`, `CharacterDetailScreen`, `CharacterHero`, `CharacterWorldbookEditor`, `AgentMemoryScreen` dhe `AgentUserPromptScreen`.
+
+8. Auditimi i ardhshëm: `CharacterDetailScreen.kt`, `CharacterHero.kt`, `CharacterWorldbookEditor.kt` dhe ekranet e kujtesës.

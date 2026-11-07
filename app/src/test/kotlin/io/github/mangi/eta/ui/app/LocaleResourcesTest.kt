@@ -78,6 +78,7 @@ class LocaleResourcesTest {
         assertEquals("Aftësitë", localizedString("sq-AL", R.string.route_skills))
         assertEquals("Çelësi API", localizedString("sq-AL", R.string.speech_api_key))
         assertEquals("Personazhet", localizedString("sq-AL", R.string.character_library_title))
+        assertEquals("Ruaj personazhin", localizedString("sq-AL", R.string.character_save))
     }
 
     @Suppress("DEPRECATION")
