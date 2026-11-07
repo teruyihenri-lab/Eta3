@@ -10,10 +10,9 @@ DIRECT_UI = re.compile(r'(?:Text|TextField|BasicText|EtaPreference|EtaTextButton
 counts = Counter()
 candidates = []
 for path in ROOT.rglob("*.kt"):
-    if "/ui/" not in path.as_posix() and "/agent/voice/" not in path.as_posix():
-        continue
+    # Kontrollo të gjithë kodin Kotlin, jo vetëm ekranet dhe modulin zanor.
     for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-        if line.lstrip().startswith("//"):
+        if line.lstrip().startswith(("//", "/*", "*")):
             continue
         categories = []
         if QUOTED_CJK.search(line):
@@ -24,11 +23,11 @@ for path in ROOT.rglob("*.kt"):
             key = "/".join(categories)
             counts[key] += 1
             candidates.append((key, path.as_posix(), n, line.strip()[:180]))
-print("Raporti i literaleve të mundshme në ndërfaqe dhe zë:")
+print("Raporti i literaleve të mundshme në të gjithë kodin Kotlin:")
 for k, n in counts.most_common():
     print(f"{k}: {n} rreshta")
-for key, path, n, line in candidates[:240]:
+for key, path, n, line in candidates[:400]:
     print(f"{key} {path}:{n}: {line}")
-if len(candidates) > 240:
-    print(f"... dhe {len(candidates)-240} rreshta të tjerë")
+if len(candidates) > 400:
+    print(f"... dhe {len(candidates)-400} rreshta të tjerë")
 print("Ky është auditim orientues: kërkohet shqyrtim manual për tekstet e dukshme.")

@@ -58,3 +58,8 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Pritshmëria: `deepseek-v3-0324` → `deepseek-v3`.
 - Para riparimit: `deepseek-v3-0324` → `deepseek-v3` → `deepseek`; `-v3` trajtohej gabimisht si prapashtesë versioni.
 - Pas ndryshimit të kodit, testet e reja ende duhen ekzekutuar nga CI; ky është rezultat i analizës së kodit, jo test i kaluar.
+
+## 2026-11-07 — Verifikimi i kërkuar për gjendjen e re
+- Ndryshimet e lokalizimit UI dhe zë janë në kod dhe pritet build-i i ri për verifikim.
+- Nga ky commit e tutje, një build i suksesshëm publikon `eta3-shqip-debug-apk` (APK Debug), për testim manual. Nuk garanton përditësim pa çinstalim kur certifikata ndryshon.
+- Vetëm kontrolli statik i burimeve XML nuk provon që e gjithë ndërfaqja është shqip.

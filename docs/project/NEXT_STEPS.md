@@ -64,3 +64,8 @@
 1. Kontrollo `ModelContextInferenceTest` në GitHub Actions për `familyStripsDateAndVersionSuffixes`, `overrideOfSiblingWins` dhe provat e tjera.
 2. Shiko rezultatet e tjera të `testDebugUnitTest`, `lintDebug`, `assembleDebug` pa fshehur dështimet.
 3. Mos bashko PR #3 në `main` pa verifikim të plotë.
+
+## 2026-11-07 — Kontrolli i plotë i burimit
+1. Analizo rezultatet e auditit të të gjithë Kotlin dhe ndaj tekstet e dukshme nga identifikuesit, komentet dhe protokollet që duhen ruajtur.
+2. Lokalizo mesazhet e tjera të dukshme që nuk janë te `values`; dokumento përjashtimet e sigurisë/protokolleve.
+3. Verifiko Lint, testet dhe APK Debug nga GitHub Actions, më pas testim në pajisje, sidomos Android 15/16 dhe dialogët e gjatë.

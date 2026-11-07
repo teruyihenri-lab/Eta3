@@ -71,3 +71,8 @@
 ## 2026-11-07 — Riparim i regresionit të modeleve
 - Riparuar në degën `feature/albanian-localization` normalizimi që hiqte `-v3` nga `deepseek-v3-0324`.
 - Testi i plotë Android nuk është konfirmuar ende; ky ndryshim kërkon një ekzekutim të ri të CI.
+
+## 2026-11-07 — Status i lokalizimit të zgjeruar
+- Burimet Android në `values-sq` përputhen plotësisht me `values` sipas CI; shumë mesazhe të hardcoded UI/Zë u përkthyen në këtë degë.
+- Kontrolli i ri tani inspekton të gjitha skedarët Kotlin: numri i literaleve të dyshimta nuk është ende certifikim i numrit të vargjeve të dukshme te përdoruesi.
+- APK Debug do të ngarkohet nga PR Check vetëm pas `BUILD SUCCESSFUL`.

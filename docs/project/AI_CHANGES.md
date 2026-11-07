@@ -75,3 +75,9 @@
 - Riparimi: mos hiq gjeneratat e modelit `-vN`; hiq vetëm datat dhe `-latest`.
 - Shtuar raste regresioni për `deepseek-v3`, `deepseek-v3-latest`, `claude-sonnet-v4` dhe `qwen3-vl-v2`.
 - Ndërtimi/testet CI në commit-in e ri ende duhen konfirmuar.
+
+## 2026-11-07 — Zgjerimi i përkthimeve dhe publikimi i APK-së
+- Lokalizuar kodet e dukshme të moduleve të zërit, kujtesës, katalogëve, protokollit të punës dhe personazheve në degën e punës.
+- U zgjerua auditi i literaleve kineze/angleze nga ekrani dhe zëri te **i gjithë kodi Kotlin**. Ky audit është orientues dhe nuk përkthen apo ndryshon logjikën vetvetiu.
+- PR Check tani publikon një APK Debug artifact në rast suksesi të të gjitha testeve/Lint/assembleDebug; debug APK mund të ketë certifikatë tjetër nga ajo e instalimit ekzistues.
+- Testimi real në telefon dhe auditimi i plotë i teksteve jashtë burimeve mbeten të pakonfirmuara.
