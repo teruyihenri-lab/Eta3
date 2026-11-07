@@ -248,7 +248,7 @@ internal class AgentAppState(
             currentRunId != null || conversationsById.values.any { it.isStreaming }
         }
         if (locallyBusy) {
-            throw IllegalStateException("请先停止正在运行的 Agent 任务")
+            throw IllegalStateException("Ndalo fillimisht detyrën e agjentit që është në ekzekutim")
         }
 
         val activeRunQuery = withContext(Dispatchers.IO) {
@@ -257,16 +257,16 @@ internal class AgentAppState(
         when (val active = activeRunQuery) {
             is AgentRuntimeClient.ActiveRunQuery.Known -> {
                 if (active.runId != null) {
-                    throw IllegalStateException("请先停止正在运行的 Agent 任务")
+                    throw IllegalStateException("Ndalo fillimisht detyrën e agjentit që është në ekzekutim")
                 }
             }
             AgentRuntimeClient.ActiveRunQuery.Unavailable -> {
-                throw IllegalStateException("无法确认 Agent Runtime 状态，请稍后重试")
+                throw IllegalStateException("Gjendja e agjentit nuk mund të verifikohet. Provo përsëri më vonë")
             }
         }
 
         val pendingPersistence = synchronized(persistenceLock) {
-            check(!persistencePaused) { "备份正在导入" }
+            check(!persistencePaused) { "Po importohet kopja rezervë" }
             persistencePaused = true
             persistenceJob
         }
@@ -460,7 +460,7 @@ internal class AgentAppState(
             orphanRewrites.forEach { (conversationId, runId) ->
                 conversationsById[conversationId]?.let { state ->
                     updateConversation(conversationId, RoleplayConversationReducer.applyRewrite(state, runId,
-                        AgentRuntimeWire.RunResult(runId, false, "", "重新生成已中断，原回复已保留。",
+                        AgentRuntimeWire.RunResult(runId, false, "", "Rigjenerimi u ndërpre; përgjigjja origjinale u ruajt.",
                             operation = AgentRuntimeWire.OP_REWRITE_REPLY)))
                     stateChanged = true
                 }
@@ -521,7 +521,7 @@ internal class AgentAppState(
         if (checkpoint.operation == AgentRuntimeWire.OP_REWRITE_REPLY) {
             val restored = RoleplayConversationReducer.restorePendingRewrite(existing, runId, checkpoint.rewriteTargetMessageId)
             if (interrupted) updateConversation(conversationId, RoleplayConversationReducer.applyRewrite(
-                restored, runId, AgentRuntimeWire.RunResult(runId, false, "", "重新生成已中断，原回复已保留。",
+                restored, runId, AgentRuntimeWire.RunResult(runId, false, "", "Rigjenerimi u ndërpre; përgjigjja origjinale u ruajt.",
                     operation = AgentRuntimeWire.OP_REWRITE_REPLY, rewriteTargetMessageId = checkpoint.rewriteTargetMessageId),
             )) else updateConversation(conversationId, restored)
             return interrupted || restored != existing
@@ -537,7 +537,7 @@ internal class AgentAppState(
             if (interrupted) {
                 val interruptedTools = runMessageProjector.interruptRunningTools(
                     reason = appContext.getString(R.string.system_notice_interrupted),
-                    messages = runMessageProjector.finishContextCompaction(runId, finalizedText, "上下文压缩已中断"),
+                    messages = runMessageProjector.finishContextCompaction(runId, finalizedText, "Përmbledhja e kontekstit u ndërpre"),
                 )
                 val noticeId = "interrupted-$runId"
                 if (interruptedTools.any { it.id == noticeId }) {
@@ -1369,7 +1369,7 @@ internal class AgentAppState(
                             }
                             persistConversations()
                         }.await()
-                        check(saved) { "无法保存角色会话设定" }
+                        check(saved) { "Cilësimet e personazhit nuk u ruajtën" }
                     }
                 } catch (cancelled: CancellationException) {
                     throw cancelled
@@ -1378,7 +1378,7 @@ internal class AgentAppState(
                         "Character preparation failed: type=${failure.safeLogType()}"
                     }
                     withContext(Dispatchers.Main) {
-                        applyRunResult(runId, AgentRuntimeWire.RunResult(runId, false, "", "无法读取或保存角色设定，请重试。",
+                        applyRunResult(runId, AgentRuntimeWire.RunResult(runId, false, "", "Profili i personazhit nuk mund të lexohet ose ruhet. Provo përsëri.",
                             operation = operation, rewriteTargetMessageId = rewriteTargetMessageId))
                     }
                     return@launch
@@ -1426,7 +1426,7 @@ internal class AgentAppState(
             }
             if (withContext(Dispatchers.Main) { runId in stopRequestedRunIds }) {
                 withContext(Dispatchers.Main) {
-                    applyRunResult(runId, AgentRuntimeWire.RunResult(runId, false, "", "已停止", operation = operation))
+                    applyRunResult(runId, AgentRuntimeWire.RunResult(runId, false, "", "U ndal", operation = operation))
                 }
                 return@launch
             }
@@ -1935,7 +1935,7 @@ internal class AgentAppState(
                 .getOrElse { throwable ->
                     Toast.makeText(
                         appContext,
-                        throwable.message ?: "目标保存失败",
+                        throwable.message ?: "Qëllimi nuk u ruajt",
                         Toast.LENGTH_SHORT,
                     ).show()
                     return@launch
@@ -1950,11 +1950,11 @@ internal class AgentAppState(
                     state.copy(goal = saved.takeIf { it.isNotBlank() }, goalPaused = false),
                 )
                 if (saved.isBlank()) {
-                    Toast.makeText(appContext, "已取消目标", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(appContext, "Qëllimi u anulua", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(
                         appContext,
-                        if (hadGoal) "目标已更新，下一条消息按新目标推进" else "目标已设置，开始拆解子任务",
+                        if (hadGoal) "Qëllimi u përditësua; mesazhi i ardhshëm do ta ndjekë" else "Qëllimi u vendos; po ndahet në nëndetyra",
                         Toast.LENGTH_SHORT,
                     ).show()
                     // 首次设置目标：拿目标本身当第一条消息直接开跑。
@@ -2046,7 +2046,7 @@ internal class AgentAppState(
         updateRunTrace(runId) { messages ->
             runMessageProjector.finishContextCompaction(runId,
                 runMessageProjector.finalizeRun(runId, messages),
-                if (result.ok) "上下文压缩完成" else result.error ?: "上下文压缩已停止")
+                if (result.ok) "Përmbledhja e kontekstit përfundoi" else result.error ?: "Përmbledhja e kontekstit u ndal")
         }
         if (result.contextSnapshotRef.isBlank()) {
             applyConversationHistoryResult(runId, result.transcript, result.contextSnapshot, !result.ok || result.contextSnapshot != null)
@@ -2058,7 +2058,7 @@ internal class AgentAppState(
                         runId = runId,
                         messages = messages,
                         ok = result.ok,
-                        detail = if (result.ok) "上下文压缩完成" else result.error ?: "上下文压缩失败",
+                        detail = if (result.ok) "Përmbledhja e kontekstit përfundoi" else result.error ?: "Përmbledhja e kontekstit dështoi",
                     )
                 }
             else -> {
@@ -2353,7 +2353,7 @@ internal class AgentAppState(
     private companion object {
         const val MAX_TITLE_CHARS = 24
         const val MAX_PREVIEW_CHARS = 48
-        const val LEGACY_STOPPED_ERROR = "已停止"
+        const val LEGACY_STOPPED_ERROR = "U ndal"
         const val SYNTHETIC_STATUS_STOPPED = "eta_status:stopped"
         /** 逆向模式批量开关期间占用 busy 槽位，使技能页整体进入操作中状态。 */
         const val REVERSE_MODE_BUSY_ID = "__reverse_mode__"
