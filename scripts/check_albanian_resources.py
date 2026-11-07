@@ -11,7 +11,7 @@ BASE = ROOT / "app/src/main/res/values/strings.xml"
 SQ = ROOT / "app/src/main/res/values-sq/strings.xml"
 LOCALES = ROOT / "app/src/main/res/xml/locales_config.xml"
 GRADLE = ROOT / "app/build.gradle.kts"
-FORMAT = re.compile(r"%(?:[0-9]+\\$)?[-+# 0,(]*[0-9]*(?:\\.[0-9]+)?[a-zA-Z%]")
+FORMAT = re.compile(r"%(?:[0-9]+\$)?[-+# 0,(]*[0-9]*(?:\.[0-9]+)?[a-zA-Z%]")
 
 def tokens(text):
     return Counter(FORMAT.findall(text or ""))
