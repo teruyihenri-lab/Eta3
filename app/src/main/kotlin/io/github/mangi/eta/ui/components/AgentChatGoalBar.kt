@@ -58,7 +58,7 @@ internal fun AgentGoalRow(
         )
         controls.taskProgress?.let { progress ->
             Text(
-                text = if (controls.completed) "已完成" else progress.label,
+                text = if (controls.completed) "Përfundoi" else progress.label,
                 style = MiuixTheme.textStyles.footnote1,
                 color = if (progress.allDone || controls.completed) {
                     MiuixTheme.colorScheme.primary
