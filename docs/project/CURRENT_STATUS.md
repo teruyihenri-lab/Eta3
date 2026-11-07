@@ -76,3 +76,9 @@
 - Burimet Android në `values-sq` përputhen plotësisht me `values` sipas CI; shumë mesazhe të hardcoded UI/Zë u përkthyen në këtë degë.
 - Kontrolli i ri tani inspekton të gjitha skedarët Kotlin: numri i literaleve të dyshimta nuk është ende certifikim i numrit të vargjeve të dukshme te përdoruesi.
 - APK Debug do të ngarkohet nga PR Check vetëm pas `BUILD SUCCESSFUL`.
+
+## 2026-11-07 — Gabim kompilimi gjatë lokalizimit
+- Logu i CI: `RootShellDeviceController.kt:329`, `Unresolved reference MAX_INPUT_TEXT_CHARSkaraktere`.
+- Shkaku: pas përkthimit, interpolimi Kotlin `$MAX_INPUT_TEXT_CHARS` u bashkua me `karaktere` dhe u interpretua si identifikues i vetëm.
+- Korrigjimi: përdor `${MAX_INPUT_TEXT_CHARS} karaktere`, pa ndryshuar limitin e hyrjes.
+- Build-i i ri duhet të konfirmojë korrigjimin; nuk është ende përfundim testimi.

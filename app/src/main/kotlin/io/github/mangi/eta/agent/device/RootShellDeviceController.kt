@@ -326,7 +326,7 @@ internal class RootShellDeviceController(
     fun inputText(text: String): String {
         if (text.isEmpty()) return errorJson("INVALID_ARGUMENT", "text nuk mund të jetë bosh")
         if (text.length > MAX_INPUT_TEXT_CHARS) {
-            return errorJson("TEXT_TOO_LONG", "input_text mbështet deri në$MAX_INPUT_TEXT_CHARSkaraktere")
+            return errorJson("TEXT_TOO_LONG", "input_text mbështet deri në ${MAX_INPUT_TEXT_CHARS} karaktere")
         }
         AgentAccessibilityService.current()?.let { service ->
             val result = service.inputTextFocused(text)

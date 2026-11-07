@@ -69,3 +69,9 @@
 1. Analizo rezultatet e auditit të të gjithë Kotlin dhe ndaj tekstet e dukshme nga identifikuesit, komentet dhe protokollet që duhen ruajtur.
 2. Lokalizo mesazhet e tjera të dukshme që nuk janë te `values`; dokumento përjashtimet e sigurisë/protokolleve.
 3. Verifiko Lint, testet dhe APK Debug nga GitHub Actions, më pas testim në pajisje, sidomos Android 15/16 dhe dialogët e gjatë.
+
+## 2026-11-07 — Gabim kompilimi gjatë lokalizimit
+- Logu i CI: `RootShellDeviceController.kt:329`, `Unresolved reference MAX_INPUT_TEXT_CHARSkaraktere`.
+- Shkaku: pas përkthimit, interpolimi Kotlin `$MAX_INPUT_TEXT_CHARS` u bashkua me `karaktere` dhe u interpretua si identifikues i vetëm.
+- Korrigjimi: përdor `${MAX_INPUT_TEXT_CHARS} karaktere`, pa ndryshuar limitin e hyrjes.
+- Build-i i ri duhet të konfirmojë korrigjimin; nuk është ende përfundim testimi.

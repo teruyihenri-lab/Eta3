@@ -86,3 +86,9 @@
 - Rifreskua konstanta e brendshme `LEGACY_STOPPED_ERROR` në `已停止`, sepse shërbimi runtime e përdor si vlerë protokolli. Përkthimi i këtij kodi në `U ndal` prishte klasifikimin si ndalim dhe e shfaqte si dështim.
 - Rezultati i ndalimit të krijuar nga UI përdor sërish këtë konstante; etiketa e dukshme shqip ruhet në burimet UI.
 - Duhet verifikuar me CI.
+
+## 2026-11-07 — Gabim kompilimi gjatë lokalizimit
+- Logu i CI: `RootShellDeviceController.kt:329`, `Unresolved reference MAX_INPUT_TEXT_CHARSkaraktere`.
+- Shkaku: pas përkthimit, interpolimi Kotlin `$MAX_INPUT_TEXT_CHARS` u bashkua me `karaktere` dhe u interpretua si identifikues i vetëm.
+- Korrigjimi: përdor `${MAX_INPUT_TEXT_CHARS} karaktere`, pa ndryshuar limitin e hyrjes.
+- Build-i i ri duhet të konfirmojë korrigjimin; nuk është ende përfundim testimi.

@@ -63,3 +63,9 @@ Për çdo test të ardhshëm regjistro komandën, mjedisin, rezultatin dhe logun
 - Ndryshimet e lokalizimit UI dhe zë janë në kod dhe pritet build-i i ri për verifikim.
 - Nga ky commit e tutje, një build i suksesshëm publikon `eta3-shqip-debug-apk` (APK Debug), për testim manual. Nuk garanton përditësim pa çinstalim kur certifikata ndryshon.
 - Vetëm kontrolli statik i burimeve XML nuk provon që e gjithë ndërfaqja është shqip.
+
+## 2026-11-07 — Gabim kompilimi gjatë lokalizimit
+- Logu i CI: `RootShellDeviceController.kt:329`, `Unresolved reference MAX_INPUT_TEXT_CHARSkaraktere`.
+- Shkaku: pas përkthimit, interpolimi Kotlin `$MAX_INPUT_TEXT_CHARS` u bashkua me `karaktere` dhe u interpretua si identifikues i vetëm.
+- Korrigjimi: përdor `${MAX_INPUT_TEXT_CHARS} karaktere`, pa ndryshuar limitin e hyrjes.
+- Build-i i ri duhet të konfirmojë korrigjimin; nuk është ende përfundim testimi.
