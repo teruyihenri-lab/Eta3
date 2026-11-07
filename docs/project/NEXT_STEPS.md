@@ -92,7 +92,7 @@
 - Konfirmo build-in dhe publiko APK Debug si artifact kur të kalojë CI.
 
 ## 2026-11-07 — Përkthimi i katalogëve të kontrollit të telefonit
-- Përkthyer 14 përshkrime të kontekstit dhe ekranit, 20 përshkrime gjestesh dhe 20 përshkrime të hyrjes së tekstit/sistemit. Përsëritjet e njëjta u zëvendësuan në mënyrë konsistente.
+- Përkthyer 14 përshkrime të kontekstit dhe ekranit, 15 tekste unike të gjesteve dhe 19 tekste të hyrjes së tekstit/sistemit (48 fraza unike gjithsej). Përsëritjet e njëjta u zëvendësuan në mënyrë konsistente.
 - Ruajtur emrat e mjeteve, strukturat JSON, action, index, observation_id, koordinatat dhe vlerat numerike.
 - Përditësuar kontrollet tekstuale në AgentToolCatalogTest që të verifikojnë udhëzimet shqip për të njëjtin vëzhgim, ruajtjen e pemës UI dhe drejtimet scroll.
 - Ndërtimi dhe rezultatet e testeve pas këtij ndryshimi ende duhen konfirmuar.
